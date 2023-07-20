@@ -9,7 +9,12 @@ patches:
       - op: replace
         path: /spec/storage/deviceClasses/0/deviceSelector/paths
         value:
+          - /dev/sda
+          - /dev/sdb
           - /dev/sdc
+          - /dev/sdd
+          - /dev/sde
+          - /dev/sdf
           - /dev/sdg
           - /dev/sdh
           - /dev/sdi      
