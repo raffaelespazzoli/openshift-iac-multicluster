@@ -8,7 +8,7 @@ resources:
 patches:
   - patch: |-
       - op: replace
-        path: /spec/storage/deviceClasses/0/deviceSelector/0/paths
+        path: /spec/storage/deviceClasses/0/deviceSelector/paths
         value:
           - /dev/sdc
           - /dev/sdg
