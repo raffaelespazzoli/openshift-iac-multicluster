@@ -8,7 +8,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/scForNFSPvc
-        value: "cluster-local-storage"
+        value: "lvm-vg1"
       - op: replace
         path: /spec/storageSize
         value: "200G"
