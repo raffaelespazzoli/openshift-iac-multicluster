@@ -1,0 +1,30 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: openshift-local-storage
+resources:
+  - ../../../bases/lvms-config/
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/storage/deviceClasses/0/deviceSelector/paths
+        value:
+          - /dev/sdc
+          - /dev/sdg
+          - /dev/sdh
+          - /dev/sdi      
+          - /dev/sdj 
+          - /dev/sdl
+          - /dev/sdm      
+          - /dev/sdn
+          - /dev/nvme0n1                     
+    target:
+      kind: LVMCluster
+  - patch: |-
+      - op: replace
+        path: /spec/storage/deviceClasses/0/nodeSelector/nodeSelectorTerms/0/matchExpressions/0/values
+        value:
+          - pool4-storage1.practice.redhat.com
+    target:
+      kind: LVMCluster

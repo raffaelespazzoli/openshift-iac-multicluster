@@ -9,3 +9,11 @@ spec:
   clusterConditions:
     - status: 'True'
       type: ManagedClusterConditionAvailable
+  predicates:
+    - requiredClusterSelector:
+        labelSelector:
+          matchExpressions:
+            - key: name
+              operator: NotIn
+              values:
+                - local-cluster      
