@@ -2,7 +2,7 @@
 kind: NFSProvisioner
 apiVersion: cache.jhouse.com/v1alpha1
 metadata:
-  name: nfsprovisioner-sample
+  name: nfs
   namespace: openshift-operators
 spec:
   nfsImageConfiguration:
