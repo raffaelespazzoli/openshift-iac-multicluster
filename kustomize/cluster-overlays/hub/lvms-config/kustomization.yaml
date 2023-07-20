@@ -1,16 +1,16 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: openshift-storage
+namespace: openshift-local-storage
 resources:
   - ../../../bases/lvms-config/
 
 patches:
   - patch: |-
       - op: replace
-        path: /spec/storage/deviceClasses/0/deviceSelector/paths
+        path: /spec/storage/deviceClasses/0/deviceSelector/0/paths
         value:
-          #- /dev/sdc
+          - /dev/sdc
           - /dev/sdg
           - /dev/sdh
           - /dev/sdi      
