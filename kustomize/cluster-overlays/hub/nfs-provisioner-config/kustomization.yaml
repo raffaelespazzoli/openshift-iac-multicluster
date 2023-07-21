@@ -11,6 +11,6 @@ patches:
         value: "lvms-vg1"
       - op: replace
         path: /spec/storageSize
-        value: "200G"
+        value: "5G"
     target:
       kind: NFSProvisioner

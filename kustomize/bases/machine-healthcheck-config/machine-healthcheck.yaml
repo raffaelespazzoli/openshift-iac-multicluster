@@ -1,0 +1,22 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineHealthCheck
+metadata:
+  name: worker-nodes 
+  namespace: openshift-machine-api
+  annotations:
+    machine.openshift.io/remediation-strategy: external-baremetal 
+spec:
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-machine-role: worker 
+      machine.openshift.io/cluster-api-machine-type: worker 
+      machine.openshift.io/cluster-api-machineset: pool4-dsfcw-worker-0 
+  unhealthyConditions:
+  - type:    "Ready"
+    timeout: "300s" 
+    status: "False"
+  - type:    "Ready"
+    timeout: "300s" 
+    status: "Unknown"
+  maxUnhealthy: "40%" 
+  nodeStartupTimeout: "10m"
