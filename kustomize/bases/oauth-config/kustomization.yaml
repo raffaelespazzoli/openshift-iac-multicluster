@@ -7,3 +7,6 @@ secretGenerator:
 - name: htpass-secret
   files:
   - htpasswd
+
+resources:
+  - ./oauth.yaml  
