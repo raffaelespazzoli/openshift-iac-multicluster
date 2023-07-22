@@ -33,3 +33,4 @@ patches:
           - pool4-storage1.practice.redhat.com
     target:
       kind: LVMCluster
+      name: cluster-local-storage
