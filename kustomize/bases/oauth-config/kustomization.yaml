@@ -9,7 +9,8 @@ secretGenerator:
   - htpasswd
 
 resources:
-  - ./oauth.yaml  
+  - ./oauth.yaml
+  - ./admin-role-binding.yaml
 
 generatorOptions:
  disableNameSuffixHash: true  
