@@ -10,3 +10,6 @@ secretGenerator:
 
 resources:
   - ./oauth.yaml  
+
+generatorOptions:
+ disableNameSuffixHash: true  
