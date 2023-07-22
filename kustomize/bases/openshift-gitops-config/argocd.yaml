@@ -227,16 +227,12 @@ spec:
         cpu: 250m
         memory: 512Mi
   rbac:
+    defaultPolicy: 'role:admin'
     policy: |
       g, system:cluster-admins, role:admin
       g, openshift-admins, role:admin
     scopes: "[groups]"
   repo:
-    env:
-      - name: XDG_CONFIG_HOME
-        value: /.config
-      - name: SOPS_AGE_KEY_FILE
-        value: /.config/sops/age/keys.txt
     volumes:
       - emptyDir: {}
         name: policy-generator
