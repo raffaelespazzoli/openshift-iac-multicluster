@@ -1,8 +1,8 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - ../../../bases/nfs-provisioner-config/
+resources: []
+  #- ../../../bases/nfs-provisioner-config/
 
 patches:
   - patch: |-
