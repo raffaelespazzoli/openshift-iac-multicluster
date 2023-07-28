@@ -1,43 +1,29 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources: 
-  - ../../../bases/lvms-config/
-  #- ./lvm-cluster.yaml
+resources: [] 
+  #- ../../../bases/lvms-config/
+
 
 patches:
   - patch: |-
       - op: replace
         path: /spec/storage/deviceClasses/0/deviceSelector/paths
         value:
-          # - /dev/sda
-          # - /dev/sdb
-          # - /dev/sdc
-          # - /dev/sdd
-          # - /dev/sde
-          # - /dev/sdf
-          # - /dev/sdg
-          # - /dev/sdh
-          # - /dev/sdi      
-          # - /dev/sdj 
-          # - /dev/sdl
-          # - /dev/sdm      
-          # - /dev/sdn
-          # - /dev/nvme0n1
           - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:0:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:1:0   
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:2:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:3:0 
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:4:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:5:0   
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:6:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:7:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:8:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:9:0   
-          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:10:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:11:0 
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:12:0
-          - /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:13:0                                                
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:1:0   
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:2:0
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:3:0 
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:4:0
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:5:0   
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:6:0
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:7:0
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:8:0
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:9:0   
+          ##- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:10:0
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:11:0 
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:12:0
+          #- /dev/disk/by-path/pci-0000:3c:00.0-scsi-0:0:13:0                                                
     target:
       kind: LVMCluster
       name: cluster-local-storage
