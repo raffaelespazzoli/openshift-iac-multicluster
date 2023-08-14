@@ -9,6 +9,6 @@ resources:
   - ./rook-ceph-block-sc.yaml
   - ./rook-ceph-mgr-dashboard-route.yaml
   - ./rook-ceph-nfs.yaml
-  - ./rook-ceph-block-sc.yaml
+  - ./rook-ceph-filesystem.yaml
 
 
