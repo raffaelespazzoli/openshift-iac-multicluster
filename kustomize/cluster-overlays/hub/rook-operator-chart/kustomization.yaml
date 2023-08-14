@@ -10,4 +10,5 @@ helmCharts:
     namespace: rook-ceph
     repo: https://charts.rook.io/release
     version: v1.12.1
-    valuesInline: {}
+    valuesInline: 
+      hostpathRequiresPrivileged: true
