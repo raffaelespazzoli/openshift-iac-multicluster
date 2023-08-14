@@ -48,9 +48,9 @@ spec:
     useAllDevices: false
     storageClassDeviceSets:
     - name: set1
+      placement: {}
+      resources: {}
       count: 1
-      portable: false
-      encrypted: false
       volumeClaimTemplates:
       - metadata:
           name: data
@@ -63,8 +63,8 @@ spec:
           volumeMode: Block
           accessModes:
             - ReadWriteOnce
-  monitoring:
-    enabled: false
+        status: {}    
+  monitoring: {}
   healthCheck:
     daemonHealth:
       mon:
@@ -85,4 +85,4 @@ spec:
   name: .mgr
   replicated:
     size: 1
-    requireSafeReplicaSize: false
+    #requireSafeReplicaSize: false
