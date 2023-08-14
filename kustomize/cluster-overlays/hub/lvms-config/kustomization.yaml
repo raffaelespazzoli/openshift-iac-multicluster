@@ -12,8 +12,8 @@ patches:
         value:
           - /dev/sdb
           - /dev/sdc
-          #- /dev/sdd
-          #- /dev/sde
+          - /dev/sdd
+          - /dev/sde
           #- /dev/sdf
           #- /dev/sdg
           #- /dev/sdh
