@@ -3,12 +3,3 @@ kind: Kustomization
 namespace: rook-ceph
 resources: 
   - ../../../bases/rook-operator-chart/
-
-# helmCharts:
-#   - name: rook-ceph
-#     releaseName: rook-ceph
-#     namespace: rook-ceph
-#     repo: https://charts.rook.io/release
-#     version: v1.12.1
-#     valuesInline: 
-#       hostpathRequiresPrivileged: true

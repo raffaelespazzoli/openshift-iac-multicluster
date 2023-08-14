@@ -1,43 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: rook-ceph
-resources: []
-  #- ../../../bases/rook-cluster-chart/
-
-# helmCharts:
-#   - name: rook-ceph-cluster
-#     releaseName: rook-ceph
-#     namespace: rook-ceph
-#     repo: https://charts.rook.io/release
-#     version: v1.12.1
-#     valuesInline:
-#       operatorNamespace: rook-ceph
-#       cephClusterSpec:
-#         mon:
-#           count: 1
-#           allowMultiplePerNode: false
-#           volumeClaimTemplate:
-#             spec:
-#               storageClassName: lvms-vg1
-#               resources:
-#                 requests:
-#                   storage: 10Gi
-#         storage:
-#           storageClassDeviceSets:
-#           - name: set1
-#             count: 1
-#             portable: false
-#             encrypted: false
-#             volumeClaimTemplates:
-#             - metadata:
-#                 name: data
-#               spec:
-#                 resources:
-#                   requests:
-#                     storage: 30Ti
-#                 # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)
-#                 storageClassName: lvms-vg1
-#                 volumeMode: Block
-#                 accessModes:
-#                   - ReadWriteOnce
-#           onlyApplyOSDPlacement: false
+resources:
+  - ../../../bases/rook-cluster-chart/
