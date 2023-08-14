@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./crds.yaml
   - ./operator.yaml
+  - ./common.yaml
