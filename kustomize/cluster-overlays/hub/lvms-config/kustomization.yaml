@@ -14,14 +14,14 @@ patches:
           - /dev/sdc
           - /dev/sdd
           - /dev/sde
-          #- /dev/sdf
-          #- /dev/sdg
-          #- /dev/sdh
-          #- /dev/sdi
-          #- /dev/sdj
-          #- /dev/sdk
-          #- /dev/sdl
-          #- /dev/sdm                              
+          - /dev/sdf
+          - /dev/sdg
+          - /dev/sdh
+          - /dev/sdi
+          - /dev/sdj
+          - /dev/sdk
+          - /dev/sdl
+          - /dev/sdm                              
     target:
       kind: LVMCluster
       name: cluster-local-storage
