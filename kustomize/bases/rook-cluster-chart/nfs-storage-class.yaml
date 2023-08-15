@@ -1,0 +1,20 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: rook-nfs
+provisioner: rook-ceph.nfs.csi.ceph.com # [1]
+parameters:
+  nfsCluster: my-nfs # [2]
+  server: rook-ceph-nfs-my-nfs-a # [3]
+  clusterID: rook-ceph # [4]
+  fsName: myfs # [5]
+  pool: myfs-replicated # [6]
+
+  # [7] (entire csi.storage.k8s.io/* section immediately below)
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+  csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+reclaimPolicy: Delete
