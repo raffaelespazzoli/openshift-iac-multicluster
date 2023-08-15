@@ -6,6 +6,9 @@ metadata:
   name: central
 spec:
   central:
+    declarativeConfiguration:
+      configMaps:
+        - name: acs-config
     exposure:
       loadBalancer:
         enabled: false

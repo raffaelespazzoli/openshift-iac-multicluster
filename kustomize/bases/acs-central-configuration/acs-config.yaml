@@ -1,0 +1,20 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: acs-config
+data:
+  auth-config.yaml: |
+    name: openshift
+    uiEndpoint: https://central-stackrox.apps.pool2.practice.redhat.com:443  
+    groups:
+        - key: groups
+          value: openshift-admin
+          role: admin
+        - key: userid
+          value: raffa
+          role: admin
+        - key: userid
+          value: vinny
+          role: admin          
+    openshift:
+        enable: true
