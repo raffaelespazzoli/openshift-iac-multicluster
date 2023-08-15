@@ -20,6 +20,6 @@ spec:
         name: central-tls
       patchTemplate: |
         data:
-          tls.key: {{ (index (index . 0).data "ca-key.pem") }}
-          tls.crt: {{ (index (index . 0).data "ca.pem") }}
+          tls.key: {{ (index (index . 1).data "ca-key.pem") }}
+          tls.crt: {{ (index (index . 1).data "ca.pem") }}
       patchType: application/merge-patch+json
