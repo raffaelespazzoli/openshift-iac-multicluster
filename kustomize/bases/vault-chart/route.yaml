@@ -3,7 +3,7 @@ apiVersion: route.openshift.io/v1
 metadata:
   name: vault
 spec:
-  host: vault.apps..pool2.practice.redhat.com
+  host: vault.apps.pool2.practice.redhat.com
   to:
     kind: Service
     name: vault
