@@ -16,3 +16,4 @@ resources:
   - job-create-auth-provider.yaml
   - patches-rbac.yaml
   - patches.yaml
+  - acs-ca-secret.yaml
