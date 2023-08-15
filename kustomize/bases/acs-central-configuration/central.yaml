@@ -19,11 +19,11 @@ spec:
       persistence:
         persistentVolumeClaim:
           claimName: central-db
-          storageClassName: nfs
+          storageClassName: rook-ceph-block
     persistence:
       persistentVolumeClaim:
         claimName: stackrox-db
-        storageClassName: nfs
+        storageClassName: rook-ceph-block
   egress:
     connectivityPolicy: Online
   scanner:
