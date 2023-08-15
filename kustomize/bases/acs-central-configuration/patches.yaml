@@ -1,0 +1,25 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: acs-patches
+  namespace: stackrox
+spec:
+  serviceAccountRef:
+    name: default
+  patches:
+    group-sync-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: stackrox
+        name: acs-root-ca
+      sourceObjectRefs:
+      - apiVersion: v1
+        kind: Secret
+        namespace: stackrox
+        name: central-tls
+      patchTemplate: |
+        data:
+          tls.key: {{ (index (index . 0).data "ca-key.pem") }}
+          tls.crt: {{ (index (index . 0).data "ca.pem") }}
+      patchType: application/merge-patch+json

@@ -14,3 +14,5 @@ resources:
   - create-cluster-init-bundle-job.yaml
   - secured-cluster.yaml
   - job-create-auth-provider.yaml
+  - patches-rbac.yaml
+  - patches.yaml
