@@ -6,3 +6,4 @@ resources:
   - ./crds.yaml
   - ./operator.yaml
   - ./common.yaml
+  - ./nfs-rbac.yaml
