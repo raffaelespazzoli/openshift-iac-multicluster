@@ -10,7 +10,7 @@ patches:
       name: vault-internal
     patch: |
       - op: remove
-        path: /metadata/annotations/service.beta.openshift.io~serving-cert-secret-name  
+        path: /metadata/annotations/service.beta.openshift.io~1serving-cert-secret-name  
 
 helmCharts:
   - name: vault
