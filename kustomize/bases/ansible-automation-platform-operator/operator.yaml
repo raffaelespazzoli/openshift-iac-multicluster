@@ -4,6 +4,4 @@ kind: OperatorGroup
 metadata:
   name: ansible-automation-platform-operator
   namespace: aap
-spec:
-  targetNamespaces: []
-  #  - ansible-automation-platform
+spec: {}
