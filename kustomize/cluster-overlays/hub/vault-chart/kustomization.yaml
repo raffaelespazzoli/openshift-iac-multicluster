@@ -4,6 +4,14 @@ namespace: vault
 resources:
   - ../../../bases/vault-chart/
 
+patches:
+  - target:
+      kind: Service
+      name: vault-internal
+    patch: |
+      - op: remove
+        path: /metadata/annotations/service.beta.openshift.io~serving-cert-secret-name  
+
 helmCharts:
   - name: vault
     releaseName: vault
@@ -228,5 +236,3 @@ helmCharts:
                 mountPath: /vault-root-token
               - name: plugins
                 mountPath: /usr/local/libexec/vault       
-
-patches: []
