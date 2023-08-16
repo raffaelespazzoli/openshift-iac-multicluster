@@ -4,3 +4,17 @@ kind: Kustomization
 resources:
   - ../../../bases/acs-secured-configuration/
 
+commonAnnotations:
+  argocd.argoproj.io/sync-options: Delete=false
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/clusterName
+        value: "local-cluster"
+      - op: replace
+        path: /spec/centralEndpoint
+        value: "central-stackrox.apps.pool2.practice.redhat.com:443"
+    target:
+      kind: SecuredCluster  
+
