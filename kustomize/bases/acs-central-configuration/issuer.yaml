@@ -1,0 +1,8 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: acs-ca-issuer
+  namespace: sandbox
+spec:
+  ca:
+    secretName: acs-root-ca

@@ -19,3 +19,5 @@ resources:
   - acs-ca-secret.yaml
   - link.yaml
   - acs-config.yaml
+  - issuer.yaml
+  - bundle-certificates.yaml
