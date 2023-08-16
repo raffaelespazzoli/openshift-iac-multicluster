@@ -12,7 +12,7 @@ resources:
   - create-cluster-init-bundle-sa.yaml
   - central.yaml
   #- create-cluster-init-bundle-job.yaml
-  - secured-cluster.yaml
+  #- secured-cluster.yaml
   #- job-create-auth-provider.yaml
   - patches-rbac.yaml
   - patches.yaml
