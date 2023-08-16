@@ -7,7 +7,7 @@ spec:
   serviceAccountRef:
     name: default
   patches:
-    group-sync-patch:
+    acs-root-ca-patch:
       targetObjectRef:
         apiVersion: v1
         kind: Secret
@@ -23,3 +23,39 @@ spec:
           tls.key: {{ (index (index . 1).data "ca-key.pem") }}
           tls.crt: {{ (index (index . 1).data "ca.pem") }}
       patchType: application/merge-patch+json
+    acs-admission-control-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: stackrox
+        name: admission-control-tls
+      patchTemplate: |
+        data:
+          admission-control-cert.pem: {{ (index (index . 0).data "tls.crt") }}
+          admission-control-key.pem: {{ (index (index . 0).data "tls.key") }}
+          ca.pem: {{ (index (index . 0).data "ca.crt") }}
+      patchType: application/merge-patch+json
+    acs-collector-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: stackrox
+        name: collector-tls
+      patchTemplate: |
+        data:
+          collector-cert.pem: {{ (index (index . 0).data "tls.crt") }}
+          collector-key.pem: {{ (index (index . 0).data "tls.key") }}
+          ca.pem: {{ (index (index . 0).data "ca.crt") }}
+      patchType: application/merge-patch+json
+    acs-sensor-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: stackrox
+        name: sensor-tls
+      patchTemplate: |
+        data:
+          sensor-cert.pem: {{ (index (index . 0).data "tls.crt") }}
+          sensor-key.pem: {{ (index (index . 0).data "tls.key") }}
+          ca.pem: {{ (index (index . 0).data "ca.crt") }}
+      patchType: application/merge-patch+json                  
