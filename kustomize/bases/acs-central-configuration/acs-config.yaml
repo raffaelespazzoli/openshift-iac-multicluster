@@ -9,12 +9,12 @@ data:
     groups:
     - key: groups
       value: openshift-admin
-      role: admin
+      role: Admin
     - key: userid
       value: raffa
-      role: admin
+      role: Admin
     - key: userid
       value: vinny
-      role: admin          
+      role: Admin          
     openshift:
         enable: true
