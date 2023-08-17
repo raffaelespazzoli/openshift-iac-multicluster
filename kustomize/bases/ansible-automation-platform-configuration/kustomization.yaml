@@ -4,3 +4,4 @@ namespace: aap
 resources:
   - ./aap.yaml
   - ./role-binding.yaml
+  - ./link.yaml
