@@ -16,5 +16,7 @@ patches:
         path: /spec/centralEndpoint
         value: "central-stackrox.apps.pool2.practice.redhat.com:443"
     target:
-      kind: SecuredCluster  
+      kind: SecuredCluster
+
+  - path: delete-namespace-patch.yaml        
 
