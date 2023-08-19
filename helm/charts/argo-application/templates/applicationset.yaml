@@ -105,6 +105,13 @@ spec:
         type: '{{`{{ .path.basename | splitList "-" | last }}`}}'
       {{- end }}
     spec:
+      ignoreDifferences:
+      - group: "v1"
+        kind: Secret
+        name: acs-root-ca
+        namespace: stackrox
+        jsonPointers:
+        - /data    
       destination:
         {{- if contains "bootstrap" $clusterName }}
         server: "{{`{{.server}}`}}"
