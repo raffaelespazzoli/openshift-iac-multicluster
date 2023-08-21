@@ -9,7 +9,7 @@ spec:
       debug: false
       logLevel: INFO
     imagePuller:
-      enable: true
+      enable: false
     metrics:
       enable: true
   containerRegistry: {}
