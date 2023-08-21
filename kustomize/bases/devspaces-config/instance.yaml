@@ -6,14 +6,12 @@ metadata:
   namespace: openshift-workspaces
 spec:
   devEnvironments:
-    defaultEditor: che-incubator/che-code/insiders
     defaultNamespace:
       template: <username>-workspace
     secondsOfInactivityBeforeIdling: -1
     secondsOfRunBeforeIdling: -1
     storage:
       pvcStrategy: per-user
-      workspacePVCStorageClassName: rook-cephfs
   components:
     cheServer:
       debug: false
