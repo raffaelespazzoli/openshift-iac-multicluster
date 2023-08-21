@@ -11,6 +11,7 @@ spec:
           - name: plugin-registry
             resources: 
               limits:
+                cpu: 36000
                 memory: 4Gi
     cheServer:
       debug: false
