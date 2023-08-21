@@ -1,42 +1,33 @@
----
 apiVersion: org.eclipse.che/v2
 kind: CheCluster
 metadata:
   name: devspaces
   namespace: openshift-workspaces
 spec:
-  devEnvironments:
-    defaultNamespace:
-      template: <username>-workspace
-    secondsOfInactivityBeforeIdling: -1
-    secondsOfRunBeforeIdling: -1
-    storage:
-      pvcStrategy: per-user
   components:
     cheServer:
       debug: false
       logLevel: INFO
-    dashboard: {}
-    database:
-      credentialsSecretName: postgres-credentials
-      externalDb: false
-      postgresDb: dbche
-      postgresHostName: postgres
-      postgresPort: "5432"
-      pvc:
-        claimSize: 1Gi
-    devWorkspace: {}
-    devfileRegistry: {}
     imagePuller:
-      enable: false
-      spec: {}
+      enable: true
     metrics:
       enable: true
-    pluginRegistry: {}
   containerRegistry: {}
-  networking:
-    auth:
-      gateway:
-        configLabels:
-          app: che
-          component: che-gateway-config
+  devEnvironments:
+    startTimeoutSeconds: 300
+    secondsOfRunBeforeIdling: -1
+    maxNumberOfWorkspacesPerUser: -1
+    containerBuildConfiguration:
+      openShiftSecurityContextConstraint: container-build
+    defaultNamespace:
+      autoProvision: true
+      template: <username>-workspace
+    secondsOfInactivityBeforeIdling: 1800
+    storage:
+      perUserStrategyPvcConfig:
+        storageClass: rook-cephfs
+      perWorkspaceStrategyPvcConfig:
+        storageClass: rook-cephfs
+      pvcStrategy: per-user
+  gitServices: {}
+  networking: {}
