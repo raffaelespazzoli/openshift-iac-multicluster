@@ -12,9 +12,6 @@ spec:
             resources: 
               limits:
                 memory: 4Gi
-              requests:
-                cpu: 100m
-                memory: 512Mi
     cheServer:
       debug: false
       logLevel: INFO
