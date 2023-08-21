@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: openshist-workspaces
+  name: openshift-workspaces
   annotations:
     argocd.argoproj.io/sync-options: Delete=false
   labels:
