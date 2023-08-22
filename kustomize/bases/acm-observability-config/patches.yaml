@@ -17,9 +17,13 @@ spec:
       - apiVersion: v1
         kind: Secret
         namespace: open-cluster-management-observability
-        name: acm-observability-bucket        
+        name: acm-observability-bucket
+      - apiVersion: v1
+        kind: ConfigMap
+        namespace: open-cluster-management-observability
+        name: acm-observability-bucket                
       patchTemplate: |
-        {{ $content := print "type: s3\n" "config:\n" "  bucket: thanos-bkt\n" "  endpoint:  http://rook-ceph-rgw-my-store.rook-ceph.svc.cluster.local:8080\n" "  insecure: true\n" "  access_key: " (index (index . 1).data "AWS_ACCESS_KEY_ID") "\n" "  secret_key: " (index (index . 1).data "AWS_SECRET_ACCESS_KEY") }}
+        {{ $content := print "type: s3\n" "config:\n" "  bucket: " (index (index . 2).data "BUCKET_NAME") "\n" "  endpoint:  " (index (index . 2).data "BUCKET_HOST") "\n" "  insecure: true\n" "  access_key: " (index (index . 1).data "AWS_ACCESS_KEY_ID") "\n" "  secret_key: " (index (index . 1).data "AWS_SECRET_ACCESS_KEY") }}
         data:
           thanos.yaml: {{ $content | b64enc }}
       patchType: application/merge-patch+json

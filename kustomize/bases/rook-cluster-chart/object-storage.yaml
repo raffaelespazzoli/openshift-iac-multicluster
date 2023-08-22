@@ -47,7 +47,7 @@ spec:
     # A reference to the secret in the rook namespace where the ssl certificate is stored
     # sslCertificateRef:
     # The port that RGW pods will listen on (http)
-    port: 8080
+    port: 80
     # The port that RGW pods will listen on (https). An ssl certificate is required.
     # securePort: 443
     # The number of pods in the rgw deployment
