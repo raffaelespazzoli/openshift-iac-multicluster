@@ -1,0 +1,25 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: acs-patches
+  namespace: open-cluster-management-observability
+spec:
+  serviceAccountRef:
+    name: default
+  patches:
+    thanos-bucket-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: open-cluster-management-observability
+        name: thanos-object-storage
+      sourceObjectRefs:
+      - apiVersion: v1
+        kind: Secret
+        namespace: open-cluster-management-observability
+        name: acm-observability-bucket        
+      patchTemplate: |
+        $content= {{ print "type: s3\n" "config:\n" "  bucket: thanos-bkt\n" "  endpoint:  http://rook-ceph-rgw-my-store.rook-ceph.svc.cluster.local:8080\n" "  insecure: true\n" "  access_key: " (index (index . 1).data "AWS_ACCESS_KEY_ID") "\n" "  secret_key: " (index (index . 1).data "AWS_SECRET_ACCESS_KEY") }}
+        data:
+          thanos.yaml: {{ $content | base64enc }}
+      patchType: application/merge-patch+json
