@@ -10,3 +10,4 @@ resources:
   - ./redis-deployment.yaml
   - ./redis-service.yaml
   - ./route.yaml
+  - ./link.yaml
