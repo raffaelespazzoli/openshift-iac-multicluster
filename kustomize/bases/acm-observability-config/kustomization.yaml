@@ -8,3 +8,4 @@ resources:
   - ./patches.yaml
   - ./storage-secret.yaml
   - ./bucket-claim.yaml
+  - ./multicluster-observability.yaml
