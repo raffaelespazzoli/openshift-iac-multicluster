@@ -13,5 +13,6 @@ resources:
   - ./file-storage-class.yaml
   - ./nfs-storage-class.yaml
   - ./object-storage.yaml
+  - ./object-storage-storage-class.yaml
 
 
