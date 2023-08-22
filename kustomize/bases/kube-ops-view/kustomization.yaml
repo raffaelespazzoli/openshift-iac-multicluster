@@ -8,4 +8,5 @@ resources:
   - ./rbac.yaml
   - ./service.yaml
   - ./redis-deployment.yaml
-  - ./redis-service.yaml  
+  - ./redis-service.yaml
+  - ./route.yaml
