@@ -35,7 +35,7 @@ subjects:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: kube-ops-view
+  name: kube-ops-view-scc
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

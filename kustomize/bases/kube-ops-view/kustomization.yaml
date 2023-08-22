@@ -4,8 +4,8 @@ namespace: kube-ops-view
 
 resources:
   - ./namespace.yaml
-  - deployment.yaml
-  - rbac.yaml
-  - service.yaml
-  - redis-deployment.yaml
-  - redis-service.yaml  
+  - ./deployment.yaml
+  - ./rbac.yaml
+  - ./service.yaml
+  - ./redis-deployment.yaml
+  - ./redis-service.yaml  
