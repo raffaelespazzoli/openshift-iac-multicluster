@@ -38,3 +38,9 @@ spec:
           runAsNonRoot: true
           # we need to use the "redis" uid
           runAsUser: 999
+      volumeMounts:
+      - mountPath: /data
+        name: cache-volume          
+  volumes:
+  - name: cache-volume
+    emptyDir: {}          
