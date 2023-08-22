@@ -42,5 +42,5 @@ roleRef:
   name: system:openshift:scc:nonroot-v2
 subjects:
 - kind: ServiceAccount
-  name: kube-ops-view
-  namespace: default  
+  name: default
+  namespace: kube-ops-view  
