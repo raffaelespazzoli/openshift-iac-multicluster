@@ -21,5 +21,5 @@ spec:
       patchTemplate: |
         {{ $content := print "type: s3\n" "config:\n" "  bucket: thanos-bkt\n" "  endpoint:  http://rook-ceph-rgw-my-store.rook-ceph.svc.cluster.local:8080\n" "  insecure: true\n" "  access_key: " (index (index . 1).data "AWS_ACCESS_KEY_ID") "\n" "  secret_key: " (index (index . 1).data "AWS_SECRET_ACCESS_KEY") }}
         data:
-          thanos.yaml: {{ $content | base64enc }}
+          thanos.yaml: {{ $content | b64enc }}
       patchType: application/merge-patch+json
