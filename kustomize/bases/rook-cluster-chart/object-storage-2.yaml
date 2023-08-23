@@ -141,7 +141,7 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: rook-ceph-rgw-my-store # We recommend name to be the same as the service name below, but it is not required
+  name: rook-ceph-rgw-my-store-2 # We recommend name to be the same as the service name below, but it is not required
   namespace: rook-ceph # namespace:cluster
 spec:
   port:
