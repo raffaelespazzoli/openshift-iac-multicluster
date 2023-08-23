@@ -7,7 +7,7 @@
 apiVersion: ceph.rook.io/v1
 kind: CephObjectStore
 metadata:
-  name: my-store
+  name: my-store-2
   namespace: rook-ceph # namespace:cluster
 spec:
   # The pool spec used to create the metadata pools. Must use replication.
