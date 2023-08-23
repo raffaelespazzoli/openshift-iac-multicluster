@@ -14,10 +14,10 @@ spec:
   metadataPool:
     failureDomain: host
     replicated:
-      size: 2
+      size: 1
       # Disallow setting pool with replica 1, this could lead to data loss without recovery.
       # Make sure you're *ABSOLUTELY CERTAIN* that is what you want
-      requireSafeReplicaSize: true
+      requireSafeReplicaSize: false
     parameters:
       # Inline compression mode for the data pool
       # Further reference: https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#inline-compression
@@ -29,10 +29,10 @@ spec:
   dataPool:
     failureDomain: host
     replicated:
-      size: 2
+      size: 1
       # Disallow setting pool with replica 1, this could lead to data loss without recovery.
       # Make sure you're *ABSOLUTELY CERTAIN* that is what you want
-      requireSafeReplicaSize: true
+      requireSafeReplicaSize: false
     parameters:
       # Inline compression mode for the data pool
       # Further reference: https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#inline-compression
