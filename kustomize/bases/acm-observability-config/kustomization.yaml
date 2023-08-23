@@ -9,3 +9,4 @@ resources:
   - ./storage-secret.yaml
   - ./bucket-claim.yaml
   - ./multicluster-observability.yaml
+  - ./link.yaml
