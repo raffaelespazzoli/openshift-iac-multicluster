@@ -7,4 +7,4 @@ provisioner: rook-ceph.ceph.rook.io/bucket
 reclaimPolicy: Delete
 parameters:
   objectStoreName: my-store
-  objectStoreNamespace: rook-ceph
+  objectStoreNamespace: rook-ceph-2
