@@ -14,10 +14,10 @@ spec:
   metadataPool:
     failureDomain: host
     replicated:
-      size: 1
+      size: 2
       # Disallow setting pool with replica 1, this could lead to data loss without recovery.
       # Make sure you're *ABSOLUTELY CERTAIN* that is what you want
-      requireSafeReplicaSize: false
+      requireSafeReplicaSize: true
     parameters:
       # Inline compression mode for the data pool
       # Further reference: https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#inline-compression
@@ -29,10 +29,10 @@ spec:
   dataPool:
     failureDomain: host
     replicated:
-      size: 1
+      size: 2
       # Disallow setting pool with replica 1, this could lead to data loss without recovery.
       # Make sure you're *ABSOLUTELY CERTAIN* that is what you want
-      requireSafeReplicaSize: false
+      requireSafeReplicaSize: true
     parameters:
       # Inline compression mode for the data pool
       # Further reference: https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#inline-compression
@@ -75,10 +75,10 @@ spec:
     #  podAffinity:
     #  podAntiAffinity:
     # A key/value list of annotations
-    annotations: {}
+    #annotations: {}
     #  key: value
     # A key/value list of labels
-    labels: {}
+    #labels: {}
     #  key: value
     resources: {}
     # The requests and limits set here, allow the object store gateway Pod(s) to use half of one CPU core and 1 gigabyte of memory
@@ -99,10 +99,10 @@ spec:
   # service endpoint healthcheck
   healthCheck:
     # Configure the pod probes for the rgw daemon
-    startupProbe:
-      disabled: false
-    readinessProbe:
-      disabled: false
+    startupProbe: {}
+    #  disabled: false
+    readinessProbe: {}
+    #  disabled: false
   # security oriented settings
   # security:
   # To enable the KMS configuration properly don't forget to uncomment the Secret at the end of the file
