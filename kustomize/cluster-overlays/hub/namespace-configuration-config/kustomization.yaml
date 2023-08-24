@@ -56,13 +56,13 @@ patches:
           apiVersion: redhatcop.redhat.io/v1alpha1
           kind: SecretEngineMount
           metadata:
-            name: static-secrets
+            name: static-secrets-{{ .Labels.app }}
             namespace: vault-admin
           spec:
             authentication: 
               path: kubernetes
               role: kv-engine-admin
-            type: /root/hub/applications/{{ .Labels.cmdbID }}/{{ .Name }}/{{ .Labels.app }}
+            type: /root/hub/applications/{{ .Labels.cmdbID }}/{{ .Name }}
             path: test-vault-config-operator        
     target:
       kind: NamespaceConfig
