@@ -29,7 +29,7 @@ spec:
               name: default            
           policy: |
             # Read permission on the secrets
-            path "/root/<cluster>/applications/{{ .Labels.cmdbID }}/{{ {{ }} identity.entity.aliases.${auth/<cluster>/kubernetes/@accessor}.metadata.service_account_namespace {{ }} }}/*" {
+            path "/root/<cluster>/applications/{{ .Labels.cmdbID }}/{{ "{{" }} identity.entity.aliases.${auth/<cluster>/kubernetes/@accessor}.metadata.service_account_namespace {{ "}}" }}/*" {
                 capabilities = ["read", "list"]
             }
       excludedPaths:
