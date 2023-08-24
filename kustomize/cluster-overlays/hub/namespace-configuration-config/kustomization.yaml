@@ -79,8 +79,8 @@ patches:
             authentication: 
               path: kubernetes
               role: policy-admin
-            type: /root/hub/applications/{{ .Labels.cmdbID }}/{{ .Name }}
-            path: test-vault-config-operator        
+            type: kv
+            path: /root/hub/applications/{{ .Labels.cmdbID }}/{{ .Name }}       
     target:
       kind: NamespaceConfig
       name: tenant-secret-mounts           
