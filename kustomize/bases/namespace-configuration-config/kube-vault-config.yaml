@@ -1,0 +1,36 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: NamespaceConfig
+metadata:
+  name: okta-vault-configs
+spec:
+  labelSelector:
+    matchExpressions:
+      - key: cmdbID
+        operator: Exists
+      - key: app
+        operator: Exists        
+      - key: environment
+        operator: In
+        values:
+        - dev     
+  templates:     
+    - objectTemplate: |
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: Policy
+        metadata:
+          name: secret-writer-{{ .Labels.cmdbID }}
+          namespace: vault-admin
+        spec:
+          # Add fields here
+          authentication: 
+            path: kubernetes
+            role: policy-admin
+          policy: |
+            # Read permission on the secrets
+            path "/root/<cluster>/applications/{{ .Labels.cmdbID }}/{{identity.entity.aliases.${auth/<cluster>/kubernetes/@accessor}.metadata.service_account_namespace}}/*" {
+                capabilities = ["read", "list"]
+            }
+      excludedPaths:
+        - .metadata
+        - .status
+        - .spec.replicas

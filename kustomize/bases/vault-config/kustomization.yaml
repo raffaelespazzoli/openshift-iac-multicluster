@@ -1,0 +1,10 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./namespace.yaml
+  - ./kube-auth-engine-config.yaml
+  - ./kube-auth-engine-mount.yaml
+  - ./okta-auth-engine-mount.yaml
+  - ./okta-auth-engine-config.yaml
+  - ./okta-auth-engine-role.yaml  

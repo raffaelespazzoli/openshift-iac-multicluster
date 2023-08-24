@@ -1,0 +1,72 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: NamespaceConfig
+metadata:
+  name: okta-vault-configs
+spec:
+  labelSelector:
+    matchExpressions:
+      - key: cmdbID
+        operator: Exists
+      - key: app
+        operator: Exists        
+      - key: environment
+        operator: In
+        values:
+        - dev     
+  templates:     
+    - objectTemplate: |
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: Policy
+        metadata:
+          name: secret-writer-{{ .Labels.cmdbID }}
+          namespace: vault-admin
+        spec:
+          # Add fields here
+          authentication: 
+            path: kubernetes
+            role: policy-admin
+          policy: |
+            # Write permission on the secrets
+            path "/root/<cluster>/applications/{{ .Labels.cmdbID }}/*" {
+                capabilities = ["list", "create", "update", "delete"]
+            }
+      excludedPaths:
+        - .metadata
+        - .status
+        - .spec.replicas
+    - objectTemplate: |
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: Group
+        metadata:
+          name: prefix.{{ .Labels.cmdbID }}.secretsetter
+          namespace: vault-admin
+        spec:
+          authentication: 
+            path: kubernetes
+            role: policy-admin
+          type: external
+          metadata: 
+            cmdbID: {{ .Labels.cmdbID }}
+            app: {{ .Labels.app }}
+          policies: 
+          - secret-writer-{{ .Labels.cmdbID }}
+      excludedPaths:
+        - .metadata
+        - .status
+        - .spec.replicas
+    - objectTemplate: |
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: GroupAlias
+        metadata:
+          name: prefix.{{ .Labels.cmdbID }}.secretsetter
+          namespace: vault-admin
+        spec:
+          authentication: 
+            path: kubernetes
+            role: policy-admin
+          authEngineMountPath: <cluster>/okta
+          groupName: prefix.{{ .Labels.cmdbID }}.secretsetter
+      excludedPaths:
+        - .metadata
+        - .status
+        - .spec.replicas                  

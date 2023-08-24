@@ -1,0 +1,16 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: JWTOIDCAuthEngineConfig
+metadata:
+  name: okta
+spec:
+  authentication: 
+    path: kubernetes
+    role: policy-admin
+  path: <cluster>
+  OIDCClientID: "0oaau92rizgjZ2l935d7"
+  OIDCCredentials:
+    secret: 
+      name: oktacredentials
+    usernameKey: okta_client_id
+    passwordKey: okta_client_secret
+  OIDCDiscoveryURL: "<okta-server>"
