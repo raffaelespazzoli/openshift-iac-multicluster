@@ -21,7 +21,7 @@ patches:
               role: policy-admin
             policy: |
               # Read permission on the secrets
-              path "/root/hub/applications/{{ .Labels.cmdbID }}/{{identity.entity.aliases.${auth/hub/kubernetes/@accessor}.metadata.service_account_namespace}}/*" {
+              path "/root/hub/applications/{{ .Labels.cmdbID }}/{{ {{ }} identity.entity.aliases.${auth/hub/kubernetes/@accessor}.metadata.service_account_namespace {{ }} }}/*" {
                   capabilities = ["read", "list"]
               }        
     target:
