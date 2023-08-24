@@ -4,5 +4,4 @@ kind: OperatorGroup
 metadata:
   name: vault-config-operator 
   namespace: vault-config-operator 
-spec: 
-  targetNamespaces: []
+spec: {}

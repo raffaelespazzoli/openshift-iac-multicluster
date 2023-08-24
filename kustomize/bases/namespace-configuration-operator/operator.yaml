@@ -4,5 +4,4 @@ kind: OperatorGroup
 metadata:
   name: namespace-configuration-operator 
   namespace: namespace-configuration-operator 
-spec: 
-  targetNamespaces: []
+spec: {}
