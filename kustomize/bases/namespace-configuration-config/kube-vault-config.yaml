@@ -25,6 +25,8 @@ spec:
           authentication: 
             path: kubernetes
             role: policy-admin
+            serviceAccount:
+              name: default            
           policy: |
             # Read permission on the secrets
             path "/root/<cluster>/applications/{{ .Labels.cmdbID }}/{{ {{ }} identity.entity.aliases.${auth/<cluster>/kubernetes/@accessor}.metadata.service_account_namespace {{ }} }}/*" {

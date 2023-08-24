@@ -19,6 +19,8 @@ patches:
             authentication: 
               path: kubernetes
               role: policy-admin
+              serviceAccount:
+                name: default              
             policy: |
               # Read permission on the secrets
               path "/root/hub/applications/{{ .Labels.cmdbID }}/{{ {{ }} identity.entity.aliases.${auth/hub/kubernetes/@accessor}.metadata.service_account_namespace {{ }} }}/*" {
@@ -41,6 +43,8 @@ patches:
             authentication: 
               path: kubernetes
               role: policy-admin
+              serviceAccount:
+                name: default              
             policy: |
               # Write permission on the secrets
               path "/root/hub/applications/{{ .Labels.cmdbID }}/*" {
@@ -58,6 +62,8 @@ patches:
             authentication: 
               path: kubernetes
               role: policy-admin
+              serviceAccount:
+                name: default              
             authEngineMountPath: hub/okta
             groupName: prefix.{{ .Labels.cmdbID }}.secretsetter                
 

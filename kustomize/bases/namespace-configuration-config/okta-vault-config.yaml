@@ -25,6 +25,8 @@ spec:
           authentication: 
             path: kubernetes
             role: policy-admin
+            serviceAccount:
+              name: default            
           policy: |
             # Write permission on the secrets
             path "/root/<cluster>/applications/{{ .Labels.cmdbID }}/*" {
@@ -44,6 +46,8 @@ spec:
           authentication: 
             path: kubernetes
             role: policy-admin
+            serviceAccount:
+              name: default            
           type: external
           metadata: 
             cmdbID: {{ .Labels.cmdbID }}
@@ -64,6 +68,8 @@ spec:
           authentication: 
             path: kubernetes
             role: policy-admin
+            serviceAccount:
+              name: default            
           authEngineMountPath: <cluster>/okta
           groupName: prefix.{{ .Labels.cmdbID }}.secretsetter
       excludedPaths:
