@@ -12,7 +12,7 @@ patches:
           apiVersion: redhatcop.redhat.io/v1alpha1
           kind: Policy
           metadata:
-            name: secret-writer-{{ .Labels.cmdbID }}
+            name: secret-reader-{{ .Labels.cmdbID }}
             namespace: vault-admin
           spec:
             # Add fields here
