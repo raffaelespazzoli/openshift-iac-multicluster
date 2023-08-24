@@ -85,6 +85,8 @@ patches:
             authentication: 
               path: kubernetes
               role: policy-admin
+              serviceAccount:
+                name: default              
             type: kv
             path: /root/hub/applications/{{ .Labels.cmdbID }}/{{ .Name }}       
     target:
