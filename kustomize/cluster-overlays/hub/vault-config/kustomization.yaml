@@ -19,7 +19,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/path
-        value: okta/hub
+        value: hub/okta
       - op: replace
         path: /spec/OIDCDiscoveryURL
         value: "https://dev-98921715.okta.com"        
