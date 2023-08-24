@@ -48,7 +48,7 @@ patches:
               }        
     target:
       kind: NamespaceConfig
-      name: kube-vault-configs
+      name: okta-vault-configs
   - patch: |-
       - op: replace
         path: /spec/templates/0/objectTemplate
