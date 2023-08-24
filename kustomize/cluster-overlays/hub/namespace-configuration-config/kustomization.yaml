@@ -21,7 +21,7 @@ patches:
               role: policy-admin
             policy: |
               # Read permission on the secrets
-              path "/root/hub/applications/{{ .Labels.cmdbID }}/{{identity.entity.aliases.${auth/<cluster>/kubernetes/@accessor}.metadata.service_account_namespace}}/*" {
+              path "/root/hub/applications/{{ .Labels.cmdbID }}/{{identity.entity.aliases.${auth/hub/kubernetes/@accessor}.metadata.service_account_namespace}}/*" {
                   capabilities = ["read", "list"]
               }        
     target:
@@ -45,7 +45,24 @@ patches:
               # Write permission on the secrets
               path "/root/hub/applications/{{ .Labels.cmdbID }}/*" {
                   capabilities = ["list", "create", "update", "delete"]
-              }        
+              }
+      - op: replace
+        path: /spec/templates/2/objectTemplate
+        value: |
+          apiVersion: redhatcop.redhat.io/v1alpha1
+          kind: GroupAlias
+          metadata:
+            name: prefix.{{ .Labels.cmdbID }}.secretsetter
+            namespace: vault-admin
+          spec:
+            authentication: 
+              path: kubernetes
+              role: policy-admin
+            authEngineMountPath: hub/okta
+            groupName: prefix.{{ .Labels.cmdbID }}.secretsetter                
+
+
+                   
     target:
       kind: NamespaceConfig
       name: okta-vault-configs
@@ -61,7 +78,7 @@ patches:
           spec:
             authentication: 
               path: kubernetes
-              role: kv-engine-admin
+              role: policy-admin
             type: /root/hub/applications/{{ .Labels.cmdbID }}/{{ .Name }}
             path: test-vault-config-operator        
     target:
