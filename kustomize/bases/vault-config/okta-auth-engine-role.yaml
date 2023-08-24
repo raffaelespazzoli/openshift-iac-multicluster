@@ -7,7 +7,8 @@ spec:
     path: kubernetes
     role: policy-admin
   path: <cluster>/okta
-  boundAudiences: "0oaau92rizgjZ2l935d7"
+  boundAudiences: 
+  - "0oaau92rizgjZ2l935d7"
   name: vault-developer
   userClaim: "sub"
   allowedRedirectURIs: 
