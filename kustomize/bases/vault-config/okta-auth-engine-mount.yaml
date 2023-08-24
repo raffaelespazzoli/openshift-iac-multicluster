@@ -8,3 +8,4 @@ spec:
     role: policy-admin
   type: oidc
   path: <cluster>
+  local: false
