@@ -11,3 +11,9 @@ patches:
         value: alpha
     target:
       kind: Subscription
+  - patch: |-
+      - op: replace
+        path: /spec/config/env/0/value
+        value: https://vault.vault.svc:8200
+    target:
+      kind: Subscription      

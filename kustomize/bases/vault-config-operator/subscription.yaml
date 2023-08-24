@@ -10,4 +10,11 @@ spec:
   name: vault-config-operator 
   source: community-operators
   sourceNamespace: openshift-marketplace
+  config:
+    env:
+    - name: VAULT_ADDR
+      value: <vault-addr>
+    - name: VAULT_SKIP_VERIFY
+      value: "true"
+
 
