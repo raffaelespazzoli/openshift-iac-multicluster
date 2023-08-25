@@ -16,7 +16,3 @@ spec:
       matchLabels:	
         infraenvs.agent-install.openshift.io: pool4
   cpuArchitecture: x86_64
-status:
-  agentLabelSelector:
-    matchLabels:
-      'agentclusterinstalls.extensions.hive.openshift.io/location': vinny-lab
