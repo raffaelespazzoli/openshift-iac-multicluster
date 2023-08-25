@@ -19,7 +19,6 @@ spec:
         namespace: openshift-config
         name: pull-secret                
       patchTemplate: |
-        {{ $content := print "type: s3\n" "config:\n" "  bucket: " (index (index . 2).data "BUCKET_NAME") "\n" "  endpoint:  " (index (index . 2).data "BUCKET_HOST") "\n" "  insecure: true\n" "  access_key: " ((index (index . 1).data "AWS_ACCESS_KEY_ID") | b64dec) "\n" "  secret_key: " ((index (index . 1).data "AWS_SECRET_ACCESS_KEY") | b64dec) }}
         data:
           .dockerconfigjson: {{ (index (index . 1).data ".dockerconfigjson") }}
       patchType: application/merge-patch+json
