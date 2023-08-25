@@ -8,3 +8,4 @@ resources:
   - ./patches.yaml
   - ./pull-secret.yaml
   - ./role.yaml
+  - ./baremetal-hosts.yaml

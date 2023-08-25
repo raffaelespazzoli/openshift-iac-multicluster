@@ -4,8 +4,8 @@ Requirements
 
 - secrets will be organized in this fashion `/root/<cluster>/applications/<cmdbid>/<namespace>/static-secrets/<secret-name>`
 - openshift namespace naming convention: `<application>-<environment>`
-- okta group for openshift: prefix.<cmdbid>.<environment>.<role>
-- okta group for vault: prefix.<cmdbid>.<role>
+- okta group for openshift: `prefix.<cmdbid>.<environment>.<role>`
+- okta group for vault: `prefix.<cmdbid>.<role>`
 
 
 ## Create Okta configuration in Vault

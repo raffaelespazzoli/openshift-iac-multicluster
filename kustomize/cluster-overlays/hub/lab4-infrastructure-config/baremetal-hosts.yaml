@@ -1,0 +1,95 @@
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  annotations:
+    bmac.agent-install.openshift.io/hostname: pool4-controller1.practice.redhat.com
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: pool4
+  name: pool4-controller1.practice.redhat.com
+  namespace: pool4
+spec:
+  automatedCleaningMode: disabled
+  bmc:
+    address: "10.1.177.41"
+    credentialsName: poll4-drac-credentials
+    disableCertificateVerification: true
+  bootMACAddress: E4:43:4B:4F:45:C9
+  online: false
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  annotations:
+    bmac.agent-install.openshift.io/hostname: pool4-controller2.practice.redhat.com
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: pool4
+  name: pool4-controller2.practice.redhat.com
+  namespace: pool4
+spec:
+  automatedCleaningMode: disabled
+  bmc:
+    address: "10.1.177.42"
+    credentialsName: poll4-drac-credentials
+    disableCertificateVerification: true
+  bootMACAddress: E4:43:4B:4E:3B:D5
+  online: false
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  annotations:
+    bmac.agent-install.openshift.io/hostname: pool4-controller3.practice.redhat.com
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: pool4
+  name: pool4-controller3.practice.redhat.com
+  namespace: pool4
+spec:
+  automatedCleaningMode: disabled
+  bmc:
+    address: "10.1.177.43"
+    credentialsName: poll4-drac-credentials
+    disableCertificateVerification: true
+  bootMACAddress: E4:43:4B:4E:3F:8D
+  online: false
+---  
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  annotations:
+    bmac.agent-install.openshift.io/hostname: pool4-compute1.practice.redhat.com
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: pool4
+  name: pool4-compute1.practice.redhat.com
+  namespace: pool4
+spec:
+  automatedCleaningMode: disabled
+  bmc:
+    address: "10.1.177.44"
+    credentialsName: poll4-drac-credentials
+    disableCertificateVerification: true
+  bootMACAddress: E4:43:4B:4E:40:35
+  online: false
+---  
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  annotations:
+    bmac.agent-install.openshift.io/hostname: pool4-compute2.practice.redhat.com
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: pool4
+  name: pool4-compute2.practice.redhat.com
+  namespace: pool4
+spec:
+  automatedCleaningMode: disabled
+  bmc:
+    address: "idrac://10.1.177.45"
+    credentialsName: poll4-drac-credentials
+    disableCertificateVerification: true
+  bootMACAddress: E4:43:4B:4E:3B:D5
+  online: false  
