@@ -25,7 +25,28 @@ patches:
               # Read permission on the secrets
               path "/root/hub/applications/{{ .Labels.cmdbID }}/{{ "{{" }} identity.entity.aliases.${auth/hub/kubernetes/@accessor}.metadata.service_account_namespace {{ "}}" }}/*" {
                   capabilities = ["read", "list"]
-              }        
+              }
+  - patch: |-
+      - op: replace
+        path: /spec/templates/1/objectTemplate
+        value: | 
+          apiVersion: redhatcop.redhat.io/v1alpha1
+          kind: KubernetesAuthEngineRole
+          metadata:
+            name: secret-reader-{{ .Labels.cmdbID }}
+          spec:
+            authentication: 
+              path: kubernetes
+              role: policy-admin
+            path: hub/kubernetes
+            policies:
+              - secret-reader-{{ .Labels.cmdbID }}
+            targetNamespaces:
+              targetNamespaceSelector:
+                matchLabels:
+                  cmdbID: {{ .Labels.cmdbID }}
+            targetServiceAccounts:
+            - "*"        
     target:
       kind: NamespaceConfig
       name: kube-vault-configs      

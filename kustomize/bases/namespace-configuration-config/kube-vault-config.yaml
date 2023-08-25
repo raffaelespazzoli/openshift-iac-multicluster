@@ -36,3 +36,25 @@ spec:
         - .metadata
         - .status
         - .spec.replicas
+    - objectTemplate: |
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: KubernetesAuthEngineRole
+        metadata:
+          name: secret-reader-{{ .Labels.cmdbID }}
+        spec:
+          authentication: 
+            path: kubernetes
+            role: policy-admin
+          path: <cluster>/kubernetes
+          policies:
+            - secret-reader-{{ .Labels.cmdbID }}
+          targetNamespaces:
+            targetNamespaceSelector:
+              matchLabels:
+                cmdbID: {{ .Labels.cmdbID }}
+          targetServiceAccounts:
+          - "*"                
+      excludedPaths:
+        - .metadata
+        - .status
+        - .spec.replicas        
