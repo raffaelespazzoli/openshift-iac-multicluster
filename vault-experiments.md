@@ -187,3 +187,4 @@ vault kv get -mount=/root/${CLUSTER}/applications/${CMDBID}/${ns}/static-secrets
 
 # this should fail
 vault kv put -mount=/root/${CLUSTER}/applications/${CMDBID}/${ns}/static-secrets-${APPLICATION} foo bar=baz
+```
