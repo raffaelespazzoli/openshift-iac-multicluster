@@ -12,7 +12,7 @@ metadata:
 spec:
   automatedCleaningMode: disabled
   bmc:
-    address: "10.1.177.41"
+    address: "idrac://10.1.177.41"
     credentialsName: poll4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4F:45:C9
@@ -31,7 +31,7 @@ metadata:
 spec:
   automatedCleaningMode: disabled
   bmc:
-    address: "10.1.177.42"
+    address: "idrac://10.1.177.42"
     credentialsName: poll4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: 78:AC:44:38:30:FD
@@ -50,7 +50,7 @@ metadata:
 spec:
   automatedCleaningMode: disabled
   bmc:
-    address: "10.1.177.43"
+    address: "idrac://10.1.177.43"
     credentialsName: poll4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:3F:8D
@@ -69,7 +69,7 @@ metadata:
 spec:
   automatedCleaningMode: disabled
   bmc:
-    address: "10.1.177.44"
+    address: "idrac://10.1.177.44"
     credentialsName: poll4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:40:35
