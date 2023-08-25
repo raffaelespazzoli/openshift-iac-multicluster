@@ -26,7 +26,6 @@ patches:
               path "/root/hub/applications/{{ .Labels.cmdbID }}/{{ "{{" }} identity.entity.aliases.${auth/hub/kubernetes/@accessor}.metadata.service_account_namespace {{ "}}" }}/*" {
                   capabilities = ["read", "list"]
               }
-  - patch: |-
       - op: replace
         path: /spec/templates/1/objectTemplate
         value: | 
