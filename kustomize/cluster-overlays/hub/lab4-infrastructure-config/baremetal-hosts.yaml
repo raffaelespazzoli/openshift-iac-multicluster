@@ -34,7 +34,7 @@ spec:
     address: "10.1.177.42"
     credentialsName: poll4-drac-credentials
     disableCertificateVerification: true
-  bootMACAddress: E4:43:4B:4E:3B:D5
+  bootMACAddress: 78:AC:44:38:30:FD
   online: false
 ---
 apiVersion: metal3.io/v1alpha1
