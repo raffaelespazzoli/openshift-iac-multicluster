@@ -150,3 +150,40 @@ vault kv get -mount=/root/${CLUSTER}/applications/${CMDBID}/${APPLICATION}-${ENV
 # this should fail
 vault kv put -mount=/root/${CLUSTER}/applications/${CMDBID}/${APPLICATION}-${ENVIRONMENT}/static-secrets foo bar=baz
 ```
+
+
+# Test IaC
+
+developer
+
+```sh
+export VAULT_ADDR=https://$(oc get route vault -n vault -o jsonpath="{.spec.host}")
+export VAULT_SKIP_VERIFY=true
+export CLUSTER=hub
+export ENVIRONMENT=dev
+export APPLICATION=app1
+export CMDBID=cmdb1
+vault login -method=oidc -path=/${CLUSTER}/okta role="vault-developer"
+vault kv put -mount=/root/${CLUSTER}/applications/${CMDBID}/${APPLICATION}-${ENVIRONMENT}/static-secrets-${APPLICATION} foo bar=baz
+
+# this should fail:
+vault kv get -mount=/root/${CLUSTER}/applications/${CMDBID}/${APPLICATION}-${ENVIRONMENT}/static-secrets-${APPLICATION} foo
+```
+
+service account
+
+```sh
+export VAULT_ADDR=https://$(oc get route vault -n vault -o jsonpath="{.spec.host}")
+export VAULT_SKIP_VERIFY=true
+export CLUSTER=hub
+export ENVIRONMENT=dev
+export APPLICATION=app1
+export CMDBID=cmdb1
+export ns=${APPLICATION}-${ENVIRONMENT}
+oc create sa -n "${ns}" "${ns}" 2>/dev/null || oc get sa -n "${ns}" "${ns}"
+export JWT_TOKEN=$(oc create token ${ns} -n ${ns})
+export VAULT_TOKEN=$(vault write -format json auth/${CLUSTER}/kubernetes/login role=secret-reader-${CMDBID} jwt=${JWT_TOKEN} | jq -r .auth.client_token)
+vault kv get -mount=/root/${CLUSTER}/applications/${CMDBID}/${ns}/static-secrets-${APPLICATION} foo
+
+# this should fail
+vault kv put -mount=/root/${CLUSTER}/applications/${CMDBID}/${ns}/static-secrets-${APPLICATION} foo bar=baz
