@@ -11,7 +11,7 @@ spec:
       targetObjectRef:
         apiVersion: v1
         kind: Secret
-        namespace: lab4
+        namespace: pool4
         name: pullsecret-pool4
       sourceObjectRefs:
       - apiVersion: v1
