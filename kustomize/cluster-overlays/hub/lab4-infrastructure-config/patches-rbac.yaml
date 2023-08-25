@@ -1,8 +1,8 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: acm-observability-patches-rbac
-  namespace: stackrox
+  name: lab4-pullsecret-patches-rbac
+  namespace: lab4
 subjects:
   - kind: ServiceAccount
     name: default
