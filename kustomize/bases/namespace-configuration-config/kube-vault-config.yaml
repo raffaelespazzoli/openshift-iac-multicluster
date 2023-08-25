@@ -41,6 +41,7 @@ spec:
         kind: KubernetesAuthEngineRole
         metadata:
           name: secret-reader-{{ .Labels.cmdbID }}
+          namespace: vault-admin
         spec:
           authentication: 
             path: kubernetes
