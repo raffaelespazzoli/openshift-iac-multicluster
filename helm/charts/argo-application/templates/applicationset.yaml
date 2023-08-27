@@ -106,7 +106,7 @@ spec:
       {{- end }}
     spec:
       ignoreDifferences:
-      - group: "v1"
+      - group: ""
         kind: Secret
         jsonPointers:
         - /data    
