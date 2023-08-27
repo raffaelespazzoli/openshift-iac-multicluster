@@ -1,0 +1,11 @@
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  labels:
+    cloud: BareMetal
+    vendor: OpenShift
+    name: 'pool4'
+    cluster.open-cluster-management.io/clusterset: 'default'
+  name: 'pool4'
+spec:
+  hubAcceptsClient: true

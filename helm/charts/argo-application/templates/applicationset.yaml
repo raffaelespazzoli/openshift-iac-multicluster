@@ -108,8 +108,6 @@ spec:
       ignoreDifferences:
       - group: "v1"
         kind: Secret
-        name: acs-root-ca
-        namespace: stackrox
         jsonPointers:
         - /data    
       destination:

@@ -1,0 +1,23 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  annotations:
+    agentBareMetal-agentSelector/autoSelect: "true"
+    agentBareMetal-cpuArchitecture: x86_64
+  labels:
+    "cluster.open-cluster-management.io/clusterset": 'default'
+  name: 'pool4'
+  namespace: 'pool4'
+spec:
+  baseDomain: practice.redhat.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: 'pool4'
+    version: v1beta1
+  clusterName: 'pool4'
+  platform:
+    agentBareMetal:
+      agentSelector: {}
+  pullSecretRef:
+    name: pullsecret-pool4

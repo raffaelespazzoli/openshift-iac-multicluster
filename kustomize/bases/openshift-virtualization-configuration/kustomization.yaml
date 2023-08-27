@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - ./hyperconverged.yaml
+  - ./storage-profile-patches.yaml  

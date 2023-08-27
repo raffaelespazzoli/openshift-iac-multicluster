@@ -1,0 +1,20 @@
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: 'pool4'
+  namespace: 'pool4'
+spec:
+  clusterDeploymentRef:
+    name: 'pool4'
+  holdInstallation: true
+  provisionRequirements:
+    workerAgents: 0
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: 'img4.13.9-multi-appsub'
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
