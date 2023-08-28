@@ -109,7 +109,12 @@ spec:
       - group: ""
         kind: Secret
         jsonPointers:
-        - /data    
+        - /data
+      - group: metal3.io
+        kind: BareMetalHost
+        jsonPointers:
+        - /spec/automatedCleaningMode
+        - /spec/online      
       destination:
         {{- if contains "bootstrap" $clusterName }}
         server: "{{`{{.server}}`}}"

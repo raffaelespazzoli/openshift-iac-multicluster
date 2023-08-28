@@ -18,6 +18,8 @@ spec:
   clusterName: 'pool4'
   platform:
     agentBareMetal:
-      agentSelector: {}
+      agentSelector: 
+        matchLabels:
+          cluster-name: pool4
   pullSecretRef:
     name: pullsecret-pool4

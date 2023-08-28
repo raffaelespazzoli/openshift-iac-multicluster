@@ -4,8 +4,10 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-controller1.practice.redhat.com
+    bmac.agent-install.openshift.io/role: master
   labels:
     infraenvs.agent-install.openshift.io: pool4
+    cluster-name: pool4
   name: pool4-controller1.practice.redhat.com
   namespace: pool4
 spec:
@@ -22,8 +24,10 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-controller2.practice.redhat.com
+    bmac.agent-install.openshift.io/role: master
   labels:
     infraenvs.agent-install.openshift.io: pool4
+    cluster-name: pool4
   name: pool4-controller2.practice.redhat.com
   namespace: pool4
 spec:
@@ -40,8 +44,10 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-controller3.practice.redhat.com
+    bmac.agent-install.openshift.io/role: master
   labels:
     infraenvs.agent-install.openshift.io: pool4
+    cluster-name: pool4
   name: pool4-controller3.practice.redhat.com
   namespace: pool4
 spec:
@@ -58,8 +64,10 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-compute1.practice.redhat.com
+    bmac.agent-install.openshift.io/role: worker
   labels:
     infraenvs.agent-install.openshift.io: pool4
+    cluster-name: pool4
   name: pool4-compute1.practice.redhat.com
   namespace: pool4
 spec:
@@ -76,8 +84,10 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-compute2.practice.redhat.com
+    bmac.agent-install.openshift.io/role: worker
   labels:
     infraenvs.agent-install.openshift.io: pool4
+    cluster-name: pool4
   name: pool4-compute2.practice.redhat.com
   namespace: pool4
 spec:
