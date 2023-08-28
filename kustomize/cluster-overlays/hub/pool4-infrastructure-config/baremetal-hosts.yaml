@@ -11,7 +11,7 @@ metadata:
 spec:
   automatedCleaningMode: metadata
   bmc:
-    address: "idrac://10.1.177.41"
+    address: "idrac-virtualmedia://10.1.177.41"
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4F:45:C9
@@ -29,7 +29,7 @@ metadata:
 spec:
   automatedCleaningMode: metadata
   bmc:
-    address: "idrac://10.1.177.42"
+    address: "idrac-virtualmedia://10.1.177.42"
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: 78:AC:44:38:30:FD
@@ -47,7 +47,7 @@ metadata:
 spec:
   automatedCleaningMode: metadata
   bmc:
-    address: "idrac://10.1.177.43"
+    address: "idrac-virtualmedia://10.1.177.43"
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:3F:8D
@@ -65,7 +65,7 @@ metadata:
 spec:
   automatedCleaningMode: metadata
   bmc:
-    address: "idrac://10.1.177.44"
+    address: "idrac-virtualmedia://10.1.177.44"
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:40:35
@@ -83,7 +83,7 @@ metadata:
 spec:
   automatedCleaningMode: metadata
   bmc:
-    address: "idrac://10.1.177.45"
+    address: "idrac-virtualmedia://10.1.177.45"
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:3B:D5
