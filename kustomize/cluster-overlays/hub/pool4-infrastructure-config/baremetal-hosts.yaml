@@ -4,13 +4,12 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-controller1.practice.redhat.com
-    inspect.metal3.io: disabled
   labels:
     infraenvs.agent-install.openshift.io: pool4
   name: pool4-controller1.practice.redhat.com
   namespace: pool4
 spec:
-  automatedCleaningMode: disabled
+  automatedCleaningMode: metadata
   bmc:
     address: "idrac://10.1.177.41"
     credentialsName: pool4-drac-credentials
@@ -23,13 +22,12 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-controller2.practice.redhat.com
-    inspect.metal3.io: disabled
   labels:
     infraenvs.agent-install.openshift.io: pool4
   name: pool4-controller2.practice.redhat.com
   namespace: pool4
 spec:
-  automatedCleaningMode: disabled
+  automatedCleaningMode: metadata
   bmc:
     address: "idrac://10.1.177.42"
     credentialsName: pool4-drac-credentials
@@ -42,13 +40,12 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-controller3.practice.redhat.com
-    inspect.metal3.io: disabled
   labels:
     infraenvs.agent-install.openshift.io: pool4
   name: pool4-controller3.practice.redhat.com
   namespace: pool4
 spec:
-  automatedCleaningMode: disabled
+  automatedCleaningMode: metadata
   bmc:
     address: "idrac://10.1.177.43"
     credentialsName: pool4-drac-credentials
@@ -61,13 +58,12 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-compute1.practice.redhat.com
-    inspect.metal3.io: disabled
   labels:
     infraenvs.agent-install.openshift.io: pool4
   name: pool4-compute1.practice.redhat.com
   namespace: pool4
 spec:
-  automatedCleaningMode: disabled
+  automatedCleaningMode: metadata
   bmc:
     address: "idrac://10.1.177.44"
     credentialsName: pool4-drac-credentials
@@ -80,13 +76,12 @@ kind: BareMetalHost
 metadata:
   annotations:
     bmac.agent-install.openshift.io/hostname: pool4-compute2.practice.redhat.com
-    inspect.metal3.io: disabled
   labels:
     infraenvs.agent-install.openshift.io: pool4
   name: pool4-compute2.practice.redhat.com
   namespace: pool4
 spec:
-  automatedCleaningMode: disabled
+  automatedCleaningMode: metadata
   bmc:
     address: "idrac://10.1.177.45"
     credentialsName: pool4-drac-credentials
