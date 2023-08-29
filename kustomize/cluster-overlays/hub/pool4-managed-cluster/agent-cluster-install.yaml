@@ -20,5 +20,6 @@ spec:
     - 172.30.0.0/16
     machineNetwork:
     - cidr: 10.1.196.41/27
+    userManagedNetworking: false
   ingressVIP: 10.1.196.48
   apiVIP: 10.1.196.49  
