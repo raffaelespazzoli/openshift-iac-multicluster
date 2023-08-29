@@ -20,8 +20,8 @@ spec:
       hostPrefix: 23
     serviceNetwork:
     - 172.30.0.0/16
-    machineNetwork:
-    - cidr: 10.1.196.41/27
+    # machineNetwork:
+    # - cidr: 10.1.196.41/27
     userManagedNetworking: true
   ingressVIP: 10.1.196.48
   apiVIP: 10.1.196.49  
