@@ -3,6 +3,8 @@ kind: AgentClusterInstall
 metadata:
   name: 'pool4'
   namespace: 'pool4'
+  labels:
+    agentclusterinstalls.extensions.hive.openshift.io/location: vinny-lab
 spec:
   clusterDeploymentRef:
     name: 'pool4'
