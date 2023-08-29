@@ -19,6 +19,6 @@ spec:
     serviceNetwork:
     - 172.30.0.0/16
     machineNetwork:
-    - 10.1.196.41/29
+    - cidr: 10.1.196.41/29
   ingressVIP: 10.1.196.48
   apiVIP: 10.1.196.49  
