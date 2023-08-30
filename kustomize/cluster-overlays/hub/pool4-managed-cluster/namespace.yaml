@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: pool4-infra
+  name: pool4-cluster
   annotations:
     argocd.argoproj.io/sync-options: Delete=false,ServerSideApply=true
   labels:

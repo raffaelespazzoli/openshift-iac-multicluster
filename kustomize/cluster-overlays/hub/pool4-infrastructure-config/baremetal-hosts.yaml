@@ -9,7 +9,6 @@ metadata:
     infraenvs.agent-install.openshift.io: pool4
     cluster-name: pool4
   name: pool4-controller1.practice.redhat.com
-  namespace: pool4
 spec:
   automatedCleaningMode: metadata
   bmc:
@@ -29,7 +28,6 @@ metadata:
     infraenvs.agent-install.openshift.io: pool4
     cluster-name: pool4
   name: pool4-controller2.practice.redhat.com
-  namespace: pool4
 spec:
   automatedCleaningMode: metadata
   bmc:
@@ -49,7 +47,6 @@ metadata:
     infraenvs.agent-install.openshift.io: pool4
     cluster-name: pool4
   name: pool4-controller3.practice.redhat.com
-  namespace: pool4
 spec:
   automatedCleaningMode: metadata
   bmc:
@@ -69,7 +66,6 @@ metadata:
     infraenvs.agent-install.openshift.io: pool4
     cluster-name: pool4
   name: pool4-compute1.practice.redhat.com
-  namespace: pool4
 spec:
   automatedCleaningMode: metadata
   bmc:
@@ -89,7 +85,6 @@ metadata:
     infraenvs.agent-install.openshift.io: pool4
     cluster-name: pool4
   name: pool4-compute2.practice.redhat.com
-  namespace: pool4
 spec:
   automatedCleaningMode: metadata
   bmc:

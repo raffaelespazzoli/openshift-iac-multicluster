@@ -2,7 +2,6 @@ apiVersion: agent-install.openshift.io/v1beta1
 kind: InfraEnv
 metadata:
   name: pool4
-  namespace: pool4
   labels:
     agentclusterinstalls.extensions.hive.openshift.io/location: vinny-lab
     networkType: dhcp

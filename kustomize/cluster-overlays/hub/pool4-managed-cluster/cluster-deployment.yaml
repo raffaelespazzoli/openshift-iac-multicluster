@@ -7,7 +7,6 @@ metadata:
   labels:
     "cluster.open-cluster-management.io/clusterset": 'default'
   name: 'pool4'
-  namespace: 'pool4'
 spec:
   baseDomain: practice.redhat.com
   clusterInstallRef:

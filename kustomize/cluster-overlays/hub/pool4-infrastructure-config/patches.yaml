@@ -1,13 +1,12 @@
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: Patch
 metadata:
-  name: acs-patches
-  namespace: open-cluster-management-observability
+  name: pool4-pull-secret-patch
 spec:
   serviceAccountRef:
     name: default
   patches:
-    thanos-bucket-patch:
+    pull-secret-patch:
       targetObjectRef:
         apiVersion: v1
         kind: Secret

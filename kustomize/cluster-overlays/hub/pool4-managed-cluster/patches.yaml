@@ -1,0 +1,29 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: acs-patches
+spec:
+  serviceAccountRef:
+    name: default
+  patches:
+    agents-patch:
+      targetObjectRef:
+        apiVersion: agent-install.openshift.io/v1beta1
+        kind: Agent
+        namespace: pool4
+        labelSelector:
+          matchExpressions:
+            - key: agent-install.openshift.io/bmh
+              operator: In
+              values:
+              - pool4-compute1.practice.redhat.com
+              - pool4-compute2.practice.redhat.com
+              - pool4-controller1.practice.redhat.com
+              - pool4-controller2.practice.redhat.com
+              - pool4-controller3.practice.redhat.com
+      patchTemplate: |
+        spec:
+          clusterDeployment:
+            name: pool4
+            namespace: pool4-cluster
+      patchType: application/merge-patch+json
