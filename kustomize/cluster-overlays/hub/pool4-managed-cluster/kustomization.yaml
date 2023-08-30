@@ -7,3 +7,5 @@ resources:
   - ./klusterlet-config.yaml
   - ./managed-cluster.yaml
   - ./patches.yaml
+  - ./patches-rbac.yaml
+  - ./namespace.yaml
