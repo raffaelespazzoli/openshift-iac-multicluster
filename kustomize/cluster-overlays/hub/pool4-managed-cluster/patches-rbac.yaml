@@ -5,7 +5,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: pool4-cluster # namespace:operator
+    namespace: pool4 # namespace:operator
 roleRef:
   kind: ClusterRole
   name: edit

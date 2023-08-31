@@ -25,13 +25,13 @@ spec:
         spec:
           clusterDeploymentName:
             name: pool4
-            namespace: pool4-cluster
+            namespace: pool4
       patchType: application/merge-patch+json
     pull-secret-patch:
       targetObjectRef:
         apiVersion: v1
         kind: Secret
-        namespace: pool4-cluster
+        namespace: pool4
         name: pullsecret-pool4
       sourceObjectRefs:
       - apiVersion: v1

@@ -6,7 +6,7 @@ metadata:
     agentBareMetal-cpuArchitecture: x86_64
   labels:
     "cluster.open-cluster-management.io/clusterset": 'default'
-  name: 'pool4'
+  name: 'pool4-cluster'
 spec:
   baseDomain: practice.redhat.com
   clusterInstallRef:
