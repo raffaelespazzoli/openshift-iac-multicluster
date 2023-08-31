@@ -9,3 +9,4 @@ resources:
   - ./patches.yaml
   - ./patches-rbac.yaml
   - ./namespace.yaml
+  - ./pull-secret.yaml
