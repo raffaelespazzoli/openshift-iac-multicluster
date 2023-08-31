@@ -27,3 +27,18 @@ spec:
             name: pool4
             namespace: pool4-cluster
       patchType: application/merge-patch+json
+    pull-secret-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: pool4-cluster
+        name: pullsecret-pool4
+      sourceObjectRefs:
+      - apiVersion: v1
+        kind: Secret
+        namespace: openshift-config
+        name: pull-secret                
+      patchTemplate: |
+        data:
+          .dockerconfigjson: {{ (index (index . 1).data ".dockerconfigjson") }}
+      patchType: application/merge-patch+json      
