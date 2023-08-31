@@ -23,7 +23,7 @@ spec:
               - pool4-controller3.practice.redhat.com
       patchTemplate: |
         spec:
-          clusterDeployment:
+          clusterDeploymentName:
             name: pool4-cluster
             namespace: pool4-cluster
       patchType: application/merge-patch+json
