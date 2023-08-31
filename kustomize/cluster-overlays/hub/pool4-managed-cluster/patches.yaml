@@ -24,6 +24,6 @@ spec:
       patchTemplate: |
         spec:
           clusterDeploymentName:
-            name: pool4-cluster
+            name: pool4
             namespace: pool4-cluster
       patchType: application/merge-patch+json
