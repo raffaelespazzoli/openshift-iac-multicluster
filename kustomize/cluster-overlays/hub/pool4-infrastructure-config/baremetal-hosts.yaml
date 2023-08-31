@@ -16,7 +16,7 @@ spec:
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4F:45:C9
-  online: false
+  online: true
 ---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
@@ -35,7 +35,7 @@ spec:
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: 78:AC:44:38:30:FD
-  online: false
+  online: true
 ---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
@@ -54,7 +54,7 @@ spec:
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:3F:8D
-  online: false
+  online: true
 ---  
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
@@ -73,7 +73,7 @@ spec:
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:40:35
-  online: false
+  online: true
 ---  
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
@@ -92,4 +92,4 @@ spec:
     credentialsName: pool4-drac-credentials
     disableCertificateVerification: true
   bootMACAddress: E4:43:4B:4E:3B:D5
-  online: false  
+  online: true  
