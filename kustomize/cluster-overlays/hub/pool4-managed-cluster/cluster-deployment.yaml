@@ -12,7 +12,7 @@ spec:
   clusterInstallRef:
     group: extensions.hive.openshift.io
     kind: AgentClusterInstall
-    name: 'pool4-cluster'
+    name: 'pool4'
     version: v1beta1
   clusterName: 'pool4'
   platform:

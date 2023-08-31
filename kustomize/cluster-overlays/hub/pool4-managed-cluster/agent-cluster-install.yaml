@@ -7,7 +7,7 @@ metadata:
 spec:
   clusterDeploymentRef:
     name: 'pool4'
-  holdInstallation: true
+  holdInstallation: false
   provisionRequirements:
     workerAgents: 2
     controlPlaneAgents: 3
