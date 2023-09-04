@@ -1,0 +1,26 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: pull-secret-patch-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "infra-env.labels" . | nindent 4 }}    
+spec:
+  serviceAccountRef:
+    name: default
+  patches:
+    pull-secret-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: {{ .Release.Namespace }}
+        name: pull-secret-{{ .Release.Name }}
+      sourceObjectRefs:
+      - apiVersion: v1
+        kind: Secret
+        namespace: openshift-config
+        name: pull-secret                
+      patchTemplate: |
+        data:
+          .dockerconfigjson: {{ "{{" }} (index (index . 1).data ".dockerconfigjson") {{ "}}" }}
+      patchType: application/merge-patch+json
