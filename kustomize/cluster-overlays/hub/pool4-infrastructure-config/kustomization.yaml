@@ -25,7 +25,7 @@ helmCharts:
 
       servers:
       - hostname: pool4-controller1.practice.redhat.com
-        role: worker
+        role: master
         bmcAddress: idrac-virtualmedia://10.1.177.41/redfish/v1/Systems/System.Embedded.1
         bootMACAddress: E4:43:4B:4F:45:C9
         labels: 
@@ -34,7 +34,7 @@ helmCharts:
           enabled: false
 
       - hostname: pool4-controller2.practice.redhat.com
-        role: worker
+        role: master
         bmcAddress: idrac-virtualmedia://10.1.177.42/redfish/v1/Systems/System.Embedded.1
         bootMACAddress: 78:AC:44:38:30:FD
         labels: 
@@ -43,7 +43,7 @@ helmCharts:
           enabled: false
 
       - hostname: pool4-controller3.practice.redhat.com
-        role: worker
+        role: master
         bmcAddress: idrac-virtualmedia://10.1.177.43/redfish/v1/Systems/System.Embedded.1
         bootMACAddress: E4:43:4B:4E:3F:8D
         labels: 
