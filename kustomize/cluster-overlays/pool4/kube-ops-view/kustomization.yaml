@@ -8,6 +8,6 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/href
-        value: "https://kube-ops-view-kube-ops-view.apps.pool2.practice.redhat.com/"
+        value: "https://kube-ops-view-kube-ops-view.apps.pool4.practice.redhat.com/"
     target:
-      kind: Link
+      kind: Link  

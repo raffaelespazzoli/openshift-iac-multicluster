@@ -6,8 +6,7 @@ metadata:
     vendor: OpenShift
     name: {{ .Release.Name }}
     cluster.open-cluster-management.io/clusterset: 'default'
-  name: {{ .Release.Name }}
-  labels:
-    {{- include "cluster-registration.labels" . | nindent 4 }}  
+    {{- include "cluster-registration.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}  
 spec:
   hubAcceptsClient: true

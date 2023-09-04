@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Name }}
   labels:
-    {{- include "cluster-deployment.labels" . | nindent 4 }}  
+    {{- include "cluster-registration.labels" . | nindent 4 }}  
 spec:
   clusterName: {{ .Release.Name }}
   clusterNamespace: {{ .Release.Name }}
