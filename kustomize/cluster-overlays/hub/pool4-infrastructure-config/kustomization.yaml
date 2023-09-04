@@ -1,12 +1,70 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: pool4-infra
-resources:  
-  - ./namespace.yaml
-  - ./infra-env.yaml
-  - ./patches-rbac.yaml
-  - ./patches.yaml
-  - ./pull-secret.yaml
-  - ./role.yaml
-  - ./baremetal-hosts.yaml
+resources: []  
+  #- ./namespace.yaml
+  #- ./infra-env.yaml
+  #- ./patches-rbac.yaml
+  #- ./patches.yaml
+  #- ./pull-secret.yaml
+  #- ./role.yaml
+  #- ./baremetal-hosts.yaml
   #- ./drac-credentials-secret.yaml
+
+helmGlobals:
+  chartHome: ../../../../helm/charts
+
+helmCharts:
+  - name: infra-env
+    releaseName: pool4-infra
+    namespace: pool4-infra
+    valuesInline:
+      
+      location: vinny-lab
+      sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCWVnOEYFaN6tp/CXn5aBgD5YZbbwJHhUYbAahoGz3IbP8YZZwyBvJvgy9CujKTaIpZHweYRwMEtvPaX65g8AQDd8t6Gqc+JVJue6HTqrawH2wvq8Qdhip9L09fK2WqtP7UbVF+fgiwm9kebajkAqtlOttcdHipeRy5TGVE2hbV1zqc6UjTo6lKzxflm2Jd5EMc4TZCleSFApBod+jgFZoke/8Q/GHWyQs7YaoE3h/JND7z6aye5HoAPQBT18y/4Amwj7h2hIcIsSJ8JAHsOZ0NB4gz1qwpkG/dYAYV1iARM/+qnZ7EJAt4DofqUAS1/0BdXK+1RL8uI0db4r8U3pTe+oFGORQHRNa+ehDoX1PdOU+o59OmjEaJpcq0YRB3NqOwfZzATUfOqcZswH0xC6WKi/UknBFPgJv6JfD0+dee/kWTmgFrzT6Ie9hRql2bA+qjSoPfWzPk+Gv1Wuf6UGdC2DpKPO+vOhVzRtog/cvwjGSJv5p2X6biRGiYy8a0bX0= rspazzol@rspazzol
+
+      servers:
+      - hostname: pool4-controller1.practice.redhat.com
+        role: worker
+        bmcAddress: idrac-virtualmedia://10.1.177.41/redfish/v1/Systems/System.Embedded.1
+        bootMACAddress: E4:43:4B:4F:45:C9
+        labels: 
+          cluster-name: pool4
+        nmstate:
+          enabled: false
+
+      - hostname: pool4-controller2.practice.redhat.com
+        role: worker
+        bmcAddress: idrac-virtualmedia://10.1.177.42/redfish/v1/Systems/System.Embedded.1
+        bootMACAddress: 78:AC:44:38:30:FD
+        labels: 
+          cluster-name: pool4
+        nmstate:
+          enabled: false
+
+      - hostname: pool4-controller3.practice.redhat.com
+        role: worker
+        bmcAddress: idrac-virtualmedia://10.1.177.43/redfish/v1/Systems/System.Embedded.1
+        bootMACAddress: E4:43:4B:4E:3F:8D
+        labels: 
+          cluster-name: pool4
+        nmstate:
+          enabled: false                    
+
+      - hostname: pool4-compute1.practice.redhat.com
+        role: worker
+        bmcAddress: idrac-virtualmedia://10.1.177.44/redfish/v1/Systems/System.Embedded.1
+        bootMACAddress: E4:43:4B:4E:40:35
+        labels: 
+          cluster-name: pool4
+        nmstate:
+          enabled: false
+
+      - hostname: pool4-compute2.practice.redhat.com
+        role: worker
+        bmcAddress: idrac-virtualmedia://10.1.177.45/redfish/v1/Systems/System.Embedded.1
+        bootMACAddress: E4:43:4B:4E:3B:D5
+        labels: 
+          cluster-name: pool4
+        nmstate:
+          enabled: false                    
