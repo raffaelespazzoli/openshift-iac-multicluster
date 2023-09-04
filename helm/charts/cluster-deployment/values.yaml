@@ -5,7 +5,6 @@ ingressVIP: 10.1.196.48
 apiVIP: 10.1.196.49
 clusterSet: default
 baseDomain: practice.redhat.com
-infrastructureName: myinfra
 automaticHostBinding: true
 
 hostNames:

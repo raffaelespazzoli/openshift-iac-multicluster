@@ -1,12 +1,41 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: pool4
-resources:  
-  - ./agent-cluster-install.yaml
-  - ./cluster-deployment.yaml
-  - ./klusterlet-config.yaml
-  - ./managed-cluster.yaml
-  - ./patches.yaml
-  - ./patches-rbac.yaml
-  - ./namespace.yaml
-  - ./pull-secret.yaml
+resources: []
+  # - ./agent-cluster-install.yaml
+  # - ./cluster-deployment.yaml
+  # - ./klusterlet-config.yaml
+  # - ./managed-cluster.yaml
+  # - ./patches.yaml
+  # - ./patches-rbac.yaml
+  # - ./namespace.yaml
+  # - ./pull-secret.yaml
+
+helmGlobals:
+  chartHome: ../../../../helm/charts
+
+helmCharts:
+  - name: cluster-deployment
+    releaseName: pool4
+    namespace: pool4
+    valuesInline:  
+      location: vinny-lab
+      workers: 2
+      masters: 3
+      ingressVIP: 10.1.196.48
+      apiVIP: 10.1.196.49
+      clusterSet: default
+      baseDomain: practice.redhat.com
+      automaticHostBinding: true
+      hostNames:
+      - pool4-compute1.practice.redhat.com
+      - pool4-compute2.practice.redhat.com
+      - pool4-controller1.practice.redhat.com
+      - pool4-controller2.practice.redhat.com
+      - pool4-controller3.practice.redhat.com
+  - name: cluster-registration
+    releaseName: pool4
+    namespace: pool4
+    valuesInline: 
+      clusterSet: default
+      repoURL: https://github.com/raffaelespazzoli/openshift-iac-multicluster.git          
