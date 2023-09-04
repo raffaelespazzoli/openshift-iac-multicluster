@@ -44,5 +44,5 @@ spec:
         name: pull-secret                
       patchTemplate: |
         data:
-          .dockerconfigjson: {{ "{{" }} (index (index . 1).data ".dockerconfigjson") {{ ""}}" }}
+          .dockerconfigjson: {{ "{{" }} (index (index . 1).data ".dockerconfigjson") {{ "}}" }}
       patchType: application/merge-patch+json    
