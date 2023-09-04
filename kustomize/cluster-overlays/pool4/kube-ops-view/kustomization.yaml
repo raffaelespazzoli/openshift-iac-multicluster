@@ -10,4 +10,4 @@ patches:
         path: /spec/href
         value: "https://kube-ops-view-kube-ops-view.apps.pool4.practice.redhat.com/"
     target:
-      kind: Link  
+      kind: ConsoleLink  
