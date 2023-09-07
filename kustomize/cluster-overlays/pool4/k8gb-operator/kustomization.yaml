@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: k8gb
 resources: 
 - ./namespace.yaml
+- ./rbac.yaml
 
 
 helmCharts:

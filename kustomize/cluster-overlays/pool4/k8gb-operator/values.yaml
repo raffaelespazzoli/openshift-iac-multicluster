@@ -41,12 +41,12 @@ k8gb:
   splitBrainCheck: false
   # -- Metrics server address
   metricsAddress: "0.0.0.0:8080"
-  securityContext: {}
+  securityContext:
     # -- For more options consult https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#securitycontext-v1-core
-    # runAsNonRoot: true
-    # readOnlyRootFilesystem: true
-    # allowPrivilegeEscalation: false
-    # runAsUser: 1000
+    runAsNonRoot: true
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    runAsUser: 1000
   # -- Exposing metrics
   exposeMetrics: false
   # -- enable ServiceMonitor
