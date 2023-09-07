@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: k8gb-coredns
+  name: k8gb
   annotations:
     argocd.argoproj.io/sync-options: Delete=false,ServerSideApply=true
   labels:
