@@ -5,7 +5,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:nonroot-v2
+  name: system:openshift:scc:nonroot-v2
 subjects:
 - kind: ServiceAccount
   name: k8gb
