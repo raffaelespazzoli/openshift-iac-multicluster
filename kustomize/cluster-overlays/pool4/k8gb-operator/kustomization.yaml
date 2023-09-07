@@ -1,9 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources: 
-- ./k8gb-coredns-namespace.yaml
-- ./coredns-namespace.yaml
+namespace: k8gb
 
 helmCharts:
   - name: k8gb
