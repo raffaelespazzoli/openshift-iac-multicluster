@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources: []
+
+helmCharts:
+  - name: k8gb
+    releaseName: k8gb
+    repo: https://www.k8gb.io
+    namespace: k8gb
+    valuesFile: values.yaml
