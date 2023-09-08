@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ./ipaddress-pool.yaml
   - ./l2advertisement.yaml
+  - ./metallb.yaml
