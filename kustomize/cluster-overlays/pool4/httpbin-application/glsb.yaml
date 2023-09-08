@@ -9,7 +9,7 @@ spec:
       http: # This section mirrors the same structure as that of an Ingress resource and will be used verbatim when creating the corresponding Ingress resource that will match the GSLB host
         paths:
         - path: /
-          pathType: prefix
+          pathType: Prefix
           backend:
             service:
               name: httpbin
