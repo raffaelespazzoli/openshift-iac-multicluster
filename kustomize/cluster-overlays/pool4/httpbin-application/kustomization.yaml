@@ -6,4 +6,5 @@ resources:
   - httpbin.yaml
   - glsb.yaml
   - namespace.yaml
+  - rbac.yaml
 
