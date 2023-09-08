@@ -9,9 +9,11 @@ spec:
       http: # This section mirrors the same structure as that of an Ingress resource and will be used verbatim when creating the corresponding Ingress resource that will match the GSLB host
         paths:
         - path: /
+          pathType: prefix
           backend:
             service:
               name: httpbin
               port:
                 name: http
-  strategy: roundRobin # Use a round robin load balancing strategy, when deciding which downstream clusters to route clients too
+  strategy: 
+    type: roundRobin # Use a round robin load balancing strategy, when deciding which downstream clusters to route clients too
