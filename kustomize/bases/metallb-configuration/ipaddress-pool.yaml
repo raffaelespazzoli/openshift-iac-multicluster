@@ -4,7 +4,7 @@ metadata:
   namespace: metallb-system
   name: main
   labels: 
-    zone: <replace>
+    zone: main
 spec:
   addresses:
   - <replace>
