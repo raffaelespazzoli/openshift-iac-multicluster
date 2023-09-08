@@ -84,6 +84,7 @@ coredns:
   serviceAccount:
     create: true
     name: coredns
+  serviceType: LoadBalancer  
 
 infoblox:
   # -- infoblox provider enabled
