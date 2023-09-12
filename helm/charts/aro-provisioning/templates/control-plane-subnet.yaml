@@ -6,8 +6,6 @@ metadata:
     {{- include "aro-provisioning.labels" . | nindent 4 }}    
 spec:
   forProvider:
-    privateLinkServiceNetworkPoliciesEnabled: false
-    enforcePrivateLinkServiceNetworkPolicies: false
     addressPrefixes:
       - {{ .Values.controlPlaneSubnet }}
     resourceGroupName: {{ .Values.resourceGroup }}
