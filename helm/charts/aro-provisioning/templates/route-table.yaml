@@ -19,6 +19,7 @@ spec:
   forProvider:
     addressPrefix: 0.0.0.0/0
     nextHopType: VirtualAppliance
+    nextHopInIpAddress: 10.0.2.4
     resourceGroupName: {{ .Values.resourceGroup }}
     routeTableName: {{ .Release.Name }}-aro-udr
 ---
