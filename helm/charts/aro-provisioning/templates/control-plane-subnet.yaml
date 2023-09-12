@@ -1,0 +1,13 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: {{ .Release.Name }}-control-plane-subnet
+  labels:
+    {{- include "aro-provisioning.labels" . | nindent 4 }}    
+spec:
+  forProvider:
+    privateLinkServiceNetworkPoliciesEnabled: false
+    addressPrefixes:
+      - {{ .Values.controlPlaneSubnet }}
+    resourceGroupName: {{ .Values.ResourceGroup }}
+    virtualNetworkName: {{ .Release.Name }}-aro-vnet-{{ .Values.location }}

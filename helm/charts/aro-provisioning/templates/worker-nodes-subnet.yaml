@@ -1,0 +1,12 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: {{ .Release.Name }}-worker-nodes-subnet
+  labels:
+    {{- include "aro-provisioning.labels" . | nindent 4 }}    
+spec:
+  forProvider:
+    addressPrefixes:
+      - {{ .Values.workerNodesSubnet }}
+    resourceGroupName: {{ .Values.ResourceGroup }}
+    virtualNetworkName: {{ .Release.Name }}-aro-vnet-{{ .Values.location }}

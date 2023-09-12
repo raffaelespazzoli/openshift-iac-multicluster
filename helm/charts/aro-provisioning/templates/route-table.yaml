@@ -1,0 +1,58 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: {{ .Release.Name }}-aro-udr
+  labels:
+    {{- include "aro-provisioning.labels" . | nindent 4 }}   
+spec:
+  forProvider:
+    location: {{ .Values.location }}
+    resourceGroupName: {{ .Values.ResourceGroup }}
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Route
+metadata:
+  name: {{ .Release.Name }}-aro-udr
+  labels:
+    {{- include "aro-provisioning.labels" . | nindent 4 }}  
+spec:
+  forProvider:
+    addressPrefix: 0.0.0.0/0
+    nextHopType: VirtualAppliance
+    resourceGroupName: {{ .Values.ResourceGroup }}
+    routeTableName: {{ .Release.Name }}-aro-udr
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Route
+metadata:
+  name: {{ .Release.Name }}-aro-vnet
+  labels:
+    {{- include "aro-provisioning.labels" . | nindent 4 }}  
+spec:
+  forProvider:
+    addressPrefix: 10.0.0.0/16
+    nextHopType: VirtualNetworkGateway
+    resourceGroupName: {{ .Values.ResourceGroup }}
+    routeTableName: {{ .Release.Name }}-aro-udr
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  name: {{ .Release.Name }}-control-plane-subnet-association
+spec:
+  forProvider:
+    routeTableIdRef:
+      name: {{ .Release.Name }}-aro-udr
+    subnetIdRef:
+      name: {{ .Release.Name }}-control-plane-subnet     
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  name: {{ .Release.Name }}-worker-nodes-subnet-association
+spec:
+  forProvider:
+    routeTableIdRef:
+      name: {{ .Release.Name }}-aro-udr
+    subnetIdRef:
+      name: {{ .Release.Name }}-worker-nodes-subnet             
