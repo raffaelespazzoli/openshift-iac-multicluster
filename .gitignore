@@ -1,3 +1,4 @@
 kustomize/cluster-overlays/hub/vault-chart/charts/
 
 vault-experiments-secrets.sh
+kustomize/cluster-overlays/hub/crossplane-azure-provider/azure-credentials.json
