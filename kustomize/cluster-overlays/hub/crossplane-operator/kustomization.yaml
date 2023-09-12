@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: crossplane-system
 resources: 
 - ./namespace.yaml
+- ./rbac.yaml
 
 
 
