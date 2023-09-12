@@ -24,7 +24,7 @@ spec:
     location: {{ .Values.location }}
     resourceGroupName: {{ .Values.resourceGroup }}   
     sku: Standard
-    allocationMethod: Dynamic
+    allocationMethod: Static
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Firewall
