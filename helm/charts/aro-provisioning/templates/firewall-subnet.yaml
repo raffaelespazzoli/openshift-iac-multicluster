@@ -2,7 +2,7 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
-  name: {{ .Release.Name }}-firewall-subnet
+  name: AzureFirewallSubnet
   labels:
     {{- include "aro-provisioning.labels" . | nindent 4 }}    
 spec:
