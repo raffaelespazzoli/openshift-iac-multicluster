@@ -7,6 +7,6 @@ roleRef:
   kind: ClusterRole
   name: system:openshift:scc:nonroot-v2
 subjects:
-- kind: Groups
+- kind: Group
   apiGroup: rbac.authorization.k8s.io
   name: system:serviceaccounts:crossplane-system
