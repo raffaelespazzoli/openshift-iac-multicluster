@@ -7,7 +7,7 @@ metadata:
 spec:
   forProvider:
     privateLinkServiceNetworkPoliciesEnabled: false
-    enforcePrivateLinkServiceNetworkPolicies: true
+    enforcePrivateLinkServiceNetworkPolicies: false
     addressPrefixes:
       - {{ .Values.controlPlaneSubnet }}
     resourceGroupName: {{ .Values.resourceGroup }}
