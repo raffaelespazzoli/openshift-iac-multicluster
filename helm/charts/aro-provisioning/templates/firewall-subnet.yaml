@@ -1,3 +1,4 @@
+---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -42,64 +43,25 @@ spec:
     location: {{ .Values.location }}
     resourceGroupName: {{ .Values.ResourceGroup }}
 ---
-# apiVersion: network.azure.upbound.io/v1beta1
-# kind: FirewallNetworkRuleCollection
-# metadata:
-#   name: {{ .Release.Name }}-aro-private
-#   labels:
-#     {{- include "aro-provisioning.labels" . | nindent 4 }}  
-# spec:
-#   forProvider:
-#     action: Allow
-#     azureFirewallName: {{ .Release.Name }}-aro-private
-#     priority: 100
-#     resourceGroupName: {{ .Values.ResourceGroup }}
-#     rule:
-#       - destinationAddresses:
-#           - "*"
-#         destinationPorts:
-#           - 1-65535
-#         name: allow-all
-#         protocols:
-#           - Any
-#         sourceAddresses:
-#           - "*"  
-# ---
-# apiVersion: network.azure.upbound.io/v1beta1
-# kind: FirewallApplicationRuleCollection
-# metadata:
-#   name: {{ .Release.Name }}-aro-private
-#   labels:
-#     {{- include "aro-provisioning.labels" . | nindent 4 }}    
-# spec:
-#   forProvider:
-#     action: Allow
-#     azureFirewallName: {{ .Release.Name }}-aro-private
-#     priority: 100
-#     resourceGroupName: {{ .Values.ResourceGroup }}
-#     rule:
-#       - name: Allow_Egress
-#         protocol:
-#           - port: 443
-#             type: Https
-#           - port: 80
-#             type: Http            
-#         sourceAddresses:
-#           - "*"
-#         targetFqdns:
-#           - "*.google.com"     
-#           - '*.bing.com'
-#       - name: Docker
-#         protocol:
-#           - port: 443
-#             type: Https
-#           - port: 80
-#             type: Http            
-#         sourceAddresses:
-#           - "*"
-#         targetFqdns:          
-#           - '*cloudflare.docker.com' 
-#           - '*registry-1.docker.io' 
-#           - 'apt.dockerproject.org' 
-#           - 'auth.docker.io'
-'               
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallNetworkRuleCollection
+metadata:
+  name: {{ .Release.Name }}-aro-private
+  labels:
+    {{- include "aro-provisioning.labels" . | nindent 4 }}  
+spec:
+  forProvider:
+    action: Allow
+    azureFirewallName: {{ .Release.Name }}-aro-private
+    priority: 100
+    resourceGroupName: {{ .Values.ResourceGroup }}
+    rule:
+      - destinationAddresses:
+          - "*"
+        destinationPorts:
+          - 1-65535
+        name: allow-all
+        protocols:
+          - Any
+        sourceAddresses:
+          - "*"         
