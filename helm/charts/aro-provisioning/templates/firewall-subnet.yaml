@@ -7,7 +7,6 @@ metadata:
     {{- include "aro-provisioning.labels" . | nindent 4 }}    
 spec:
   forProvider:
-    privateLinkServiceNetworkPoliciesEnabled: false
     addressPrefixes:
       - {{ .Values.firewallSubnet }}
     resourceGroupName: {{ .Values.resourceGroup }}
