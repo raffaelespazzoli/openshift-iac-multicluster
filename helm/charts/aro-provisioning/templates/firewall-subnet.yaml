@@ -25,6 +25,7 @@ spec:
     location: {{ .Values.location }}
     resourceGroupName: {{ .Values.ResourceGroup }}   
     sku: Standard
+    allocationMethod: Dynamic
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Firewall
@@ -42,6 +43,9 @@ spec:
           name: {{ .Release.Name }}-firewall-subnet
     location: {{ .Values.location }}
     resourceGroupName: {{ .Values.ResourceGroup }}
+    skuTier: Standard
+    skuName: AZFW_VNet
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: FirewallNetworkRuleCollection
