@@ -126,7 +126,7 @@ openshift:
   enabled: true
 
 rfc2136:
-  enabled: true
+  enabled: false
   rfc2136Opts:
     - host: host.k3d.internal
     - port: 1053
