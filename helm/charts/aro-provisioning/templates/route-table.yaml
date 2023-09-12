@@ -7,7 +7,7 @@ metadata:
 spec:
   forProvider:
     location: {{ .Values.location }}
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Route
@@ -19,7 +19,7 @@ spec:
   forProvider:
     addressPrefix: 0.0.0.0/0
     nextHopType: VirtualAppliance
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
     routeTableName: {{ .Release.Name }}-aro-udr
 ---
 apiVersion: network.azure.upbound.io/v1beta1
@@ -32,7 +32,7 @@ spec:
   forProvider:
     addressPrefix: 10.0.0.0/16
     nextHopType: VirtualNetworkGateway
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
     routeTableName: {{ .Release.Name }}-aro-udr
 ---
 apiVersion: network.azure.upbound.io/v1beta1

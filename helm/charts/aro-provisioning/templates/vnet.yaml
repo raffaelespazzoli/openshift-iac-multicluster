@@ -9,4 +9,4 @@ spec:
     addressSpace:
       - {{ .Values.subnet }}
     location: {{ .Values.location }}
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}

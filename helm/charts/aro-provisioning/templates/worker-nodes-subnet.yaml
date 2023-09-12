@@ -8,5 +8,5 @@ spec:
   forProvider:
     addressPrefixes:
       - {{ .Values.workerNodesSubnet }}
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
     virtualNetworkName: {{ .Release.Name }}-aro-vnet-{{ .Values.location }}

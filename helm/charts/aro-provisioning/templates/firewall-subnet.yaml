@@ -10,7 +10,7 @@ spec:
     privateLinkServiceNetworkPoliciesEnabled: false
     addressPrefixes:
       - {{ .Values.firewallSubnet }}
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
     virtualNetworkNameRef:
       name: {{ .Release.Name }}-aro-vnet-{{ .Values.location }}
 ---
@@ -23,7 +23,7 @@ metadata:
 spec:
   forProvider:
     location: {{ .Values.location }}
-    resourceGroupName: {{ .Values.ResourceGroup }}   
+    resourceGroupName: {{ .Values.resourceGroup }}   
     sku: Standard
     allocationMethod: Dynamic
 ---
@@ -42,7 +42,7 @@ spec:
         subnetIdRef:
           name: {{ .Release.Name }}-firewall-subnet
     location: {{ .Values.location }}
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
     skuTier: Standard
     skuName: AZFW_VNet
 
@@ -58,7 +58,7 @@ spec:
     action: Allow
     azureFirewallName: {{ .Release.Name }}-aro-private
     priority: 100
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
     rule:
       - destinationAddresses:
           - "*"

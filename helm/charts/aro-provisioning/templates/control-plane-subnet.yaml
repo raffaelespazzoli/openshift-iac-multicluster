@@ -9,5 +9,5 @@ spec:
     privateLinkServiceNetworkPoliciesEnabled: false
     addressPrefixes:
       - {{ .Values.controlPlaneSubnet }}
-    resourceGroupName: {{ .Values.ResourceGroup }}
+    resourceGroupName: {{ .Values.resourceGroup }}
     virtualNetworkName: {{ .Release.Name }}-aro-vnet-{{ .Values.location }}
