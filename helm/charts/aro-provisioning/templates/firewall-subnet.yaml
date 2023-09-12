@@ -2,7 +2,9 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
-  name: AzureFirewallSubnet
+  name: {{ .Release.Name }}-firewall-subnet
+  annotations:
+    crossplane.io/external-name: AzureFirewallSubnet
   labels:
     {{- include "aro-provisioning.labels" . | nindent 4 }}    
 spec:
@@ -39,7 +41,7 @@ spec:
         publicIpAddressIdRef:
           name: {{ .Release.Name }}-fw-ip
         subnetIdRef:
-          name: AzureFirewallSubnet
+          name: {{ .Release.Name }}-firewall-subnet
     location: {{ .Values.location }}
     resourceGroupName: {{ .Values.resourceGroup }}
     skuTier: Standard
