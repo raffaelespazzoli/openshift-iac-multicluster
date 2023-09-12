@@ -21,7 +21,8 @@ spec:
     nextHopType: VirtualAppliance
     nextHopInIpAddress: 10.0.2.4
     resourceGroupName: {{ .Values.resourceGroup }}
-    routeTableName: {{ .Release.Name }}-aro-udr
+    routeTableNameRef: 
+      name: {{ .Release.Name }}-aro-udr
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Route
@@ -34,7 +35,8 @@ spec:
     addressPrefix: 10.0.0.0/16
     nextHopType: VirtualNetworkGateway
     resourceGroupName: {{ .Values.resourceGroup }}
-    routeTableName: {{ .Release.Name }}-aro-udr
+    routeTableNameRef: 
+      name: {{ .Release.Name }}-aro-udr
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetRouteTableAssociation
