@@ -39,7 +39,7 @@ spec:
         publicIpAddressIdRef:
           name: {{ .Release.Name }}-fw-ip
         subnetIdRef:
-          name: {{ .Release.Name }}-firewall-subnet
+          name: AzureFirewallSubnet
     location: {{ .Values.location }}
     resourceGroupName: {{ .Values.resourceGroup }}
     skuTier: Standard
