@@ -1,0 +1,16 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  # Note that unlike most provider configs this one supports an array of
+  # credentials. This is because each Terraform workspace uses a single
+  # Crossplane provider config, but could use multiple Terraform providers each
+  # with their own credentials.
+  credentials:
+    - filename: azure-credentials.json
+      source: Secret
+      secretRef:
+        namespace: crossplane-system
+        name: azure-secret
+        key: creds
