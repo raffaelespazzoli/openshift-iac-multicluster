@@ -343,23 +343,23 @@ spec:
           # Variables can be specified inline as a list of key-value pairs or as an json object, or loaded from a ConfigMap or Secret.
           vars:
           - key: name
-            value: 
+            value: ""
           - key: location
-            value: 
+            value: ""
           - key: resource_group_id
-            value: 
+            value: ""
           - key: client_id
-            value:    
+            value: ""   
           - key: client_secret
-            value:          
+            value: ""         
           - key: master_subnet_id
-            value:
+            value: ""
           - key: worker_subnet_id
-            value:
+            value: ""
           - key: api_server_visibility
-            value: 
+            value: ""
           - key: ingress_visibility
-            value:
+            value: ""
           varFiles:
           - secretKeyRef:
               key: key
@@ -377,15 +377,7 @@ spec:
 
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.namespace"
-      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"              
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "metadata.name"
-      toFieldPath: "spec.forProvider.vars[0].value" 
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "metadata.name"
-      toFieldPath: "spec.forProvider.vars[0].value"             
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"            
 
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.name"
