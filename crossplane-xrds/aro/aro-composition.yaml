@@ -91,7 +91,7 @@ spec:
             matchControllerRef: true
     patches:
       - type: FromCompositeFieldPath
-        fromFieldPath: "spec.workerNodesSubnet"
+        fromFieldPath: "spec.workerNodeSubnet"
         toFieldPath: "spec.forProvider.addressPrefixes[0]"
       - type: PatchSet
         patchSetName: resourceGroup
