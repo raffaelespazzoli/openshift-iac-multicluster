@@ -373,7 +373,7 @@ spec:
       toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.key"
 
     - type: FromCompositeFieldPath
-      fromFieldPath: "metadata.namespace"
+      fromFieldPath: "metadata.labels.['crossplane.io/claim-namespace']"
       toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"            
 
     - type: FromCompositeFieldPath
