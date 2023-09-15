@@ -1,7 +1,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata: 
-  name: xaro.crossplane.redhat-cop.com
+  name: xaros.crossplane.redhat-cop.com
 spec:
   group: crossplane.redhat-cop.com
   defaultCompositeDeletePolicy: Foreground
