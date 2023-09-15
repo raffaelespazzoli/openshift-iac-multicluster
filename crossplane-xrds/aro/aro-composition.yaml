@@ -347,10 +347,6 @@ spec:
           - key: location
             value: ""
           - key: resource_group_id
-            value: ""
-          - key: client_id
-            value: ""   
-          - key: client_secret
             value: ""         
           - key: master_subnet_id
             value: ""
@@ -389,28 +385,23 @@ spec:
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.resourceGroup"
       toFieldPath: "spec.forProvider.vars[2].value"
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.clientID"
-      toFieldPath: "spec.forProvider.vars[3].value"
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.clientSecret"
-      toFieldPath: "spec.forProvider.vars[4].value"
+
     - type: FromCompositeFieldPath
       fromFieldPath: "status.subnets.controlPlaneSubnetId"
-      toFieldPath: "spec.forProvider.vars[5].value"
+      toFieldPath: "spec.forProvider.vars[3].value"
       policy:
         fromFieldPath: Required
     - type: FromCompositeFieldPath
       fromFieldPath: "status.subnets.workerNodeSubnetId"
-      toFieldPath: "spec.forProvider.vars[6].value"
+      toFieldPath: "spec.forProvider.vars[4].value"
       policy:
         fromFieldPath: Required      
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.apiServerVisibility"      
-      toFieldPath: "spec.forProvider.vars[7].value"
+      toFieldPath: "spec.forProvider.vars[5].value"
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.ingressVisibility"
-      toFieldPath: "spec.forProvider.vars[8].value"
+      toFieldPath: "spec.forProvider.vars[6].value"
     readinessChecks:	
       - matchCondition:	
           status: 'True'	
