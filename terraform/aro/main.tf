@@ -102,8 +102,8 @@ resource "azapi_resource" "aro_cluster" {
         #serviceCidr          = var.service_cidr
       }
       servicePrincipalProfile = {
-        clientId             = var.client_id
-        clientSecret         = var.client_secret
+        clientId             = var.clientId
+        clientSecret         = var.clientSecret
       }
       masterProfile = {
         #vmSize               = var.master_node_vm_size

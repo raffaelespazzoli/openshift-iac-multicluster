@@ -364,7 +364,8 @@ spec:
           - secretKeyRef:
               key: key
               name: name
-              namespace: namespace    
+              namespace: namespace
+            source: SecretKey      
     patches:
 
     - type: FromCompositeFieldPath

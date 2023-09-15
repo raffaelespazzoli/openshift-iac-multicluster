@@ -4,5 +4,8 @@ metadata:
   name: aro-decl
 spec:
   resourceGroup: openenv-9fbg6
-  location: eastus 
+  location: eastus
+  servicePrincipalSecret:
+    secretName: azure-secret
+    key: creds 
 

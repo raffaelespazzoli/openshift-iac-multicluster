@@ -37,12 +37,12 @@ variable service_cidr {
   default = ""
 }
 
-variable client_id {
+variable clientId {
   type = string
   sensitive = true
 }
 
-variable client_secret {
+variable clientSecret {
   type = string
   sensitive = true
 }
