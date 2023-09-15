@@ -4,6 +4,7 @@ namespace: aro-decl
 
 resources:
 - ./namespace.yaml
+- ./aro.yaml
 
 # helmGlobals:
 #   chartHome: ../../../../helm/charts
