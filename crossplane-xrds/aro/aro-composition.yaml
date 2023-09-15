@@ -361,7 +361,8 @@ spec:
               key: key
               name: name
               namespace: namespace
-            source: SecretKey      
+            source: SecretKey
+            format: json      
     patches:
 
     - type: FromCompositeFieldPath
