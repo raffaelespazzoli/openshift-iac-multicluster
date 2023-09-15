@@ -339,7 +339,7 @@ spec:
         forProvider:
           # Use any module source supported by terraform init -from-module.
           source: Remote
-          module: https://github.com/raffaelespazzoli/openshift-iac-multicluster/terraform/aro
+          module: git::https://github.com/raffaelespazzoli/openshift-iac-multicluster//terraform/aro
           # Variables can be specified inline as a list of key-value pairs or as an json object, or loaded from a ConfigMap or Secret.
           vars:
           - key: name
