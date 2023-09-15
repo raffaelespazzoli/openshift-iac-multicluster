@@ -5,7 +5,7 @@ metadata:
 spec:
   compositeTypeRef:
     apiVersion: crossplane.redhat-cop.com/v1alpha1
-    kind: aro
+    kind: xAro
   patchSets:
   - name: resourceGroup
     patches:
