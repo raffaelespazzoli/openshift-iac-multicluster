@@ -83,41 +83,41 @@ data "azurerm_resource_group" "resource_group" {
 }
 
 resource "azapi_resource" "aro_cluster" {
-  name      = "${var.resource_prefix != "" ? var.resource_prefix : random_string.resource_prefix.result}Aro"
+  name      = var.name
   location  = var.location
-  parent_id = data.azurerm_resource_group.resource_group.id
+  parent_id = var.resource_group_id
   type      = "Microsoft.RedHatOpenShift/openShiftClusters@2022-04-01"
-  tags      = var.tags
+  #tags      = var.tags
   
   body = jsonencode({
     properties = {
       clusterProfile = {
-        domain               = var.domain
-        fipsValidatedModules = var.fips_validated_modules
+        #domain               = var.domain
+        #fipsValidatedModules = var.fips_validated_modules
         resourceGroupId      = var.resource_group_id
-        pullSecret           = var.pull_secret
+        #pullSecret           = var.pull_secret
       }
       networkProfile = {
-        podCidr              = var.pod_cidr
-        serviceCidr          = var.service_cidr
+        #podCidr              = var.pod_cidr
+        #serviceCidr          = var.service_cidr
       }
       servicePrincipalProfile = {
-        clientId             = var.aro_cluster_aad_sp_client_id
-        clientSecret         = var.aro_cluster_aad_sp_client_secret
+        clientId             = var.client_id
+        clientSecret         = var.client_secret
       }
       masterProfile = {
-        vmSize               = var.master_node_vm_size
-        subnetId             = azurerm_subnet.master_subnet.id
-        encryptionAtHost     = var.master_encryption_at_host
+        #vmSize               = var.master_node_vm_size
+        subnetId             = var.master_subnet_id
+        #encryptionAtHost     = var.master_encryption_at_host
       }
       workerProfiles = [
         {
-          name               = var.worker_profile_name
-          vmSize             = var.worker_node_vm_size
-          diskSizeGB         = var.worker_node_vm_disk_size
-          subnetId           = azurerm_subnet.worker_subnet.id
-          count              = var.worker_node_count
-          encryptionAtHost   = var.worker_encryption_at_host
+          #name               = var.worker_profile_name
+          #vmSize             = var.worker_node_vm_size
+          #diskSizeGB         = var.worker_node_vm_disk_size
+          subnetId           = var.worker_subnet_id
+          #count              = var.worker_node_count
+          #encryptionAtHost   = var.worker_encryption_at_host
         }
       ]
       apiserverProfile = {
@@ -125,7 +125,7 @@ resource "azapi_resource" "aro_cluster" {
       }
       ingressProfiles = [
         {
-          name               = var.ingress_profile_name
+          #name               = var.ingress_profile_name
           visibility         = var.ingress_visibility
         }
       ]

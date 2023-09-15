@@ -1,0 +1,41 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata: 
+  name: xaro.crossplane.redhat-cop.com
+spec:
+  group: crossplane.redhat-cop.com
+  defaultCompositeDeletePolicy: Foreground
+  defaultCompositionUpdatePolicy: Automatic
+  names:
+    kind: xAro
+    plural: xaros
+  claimNames:
+    kind: Aro
+    plural: aros    
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true  
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              location:
+                type: string
+              resourceGroup:
+                type: string
+              controlPlaneSubnet:
+                type: string
+              subnet:
+                type: string
+              workerNodeSubnet:        
+                type: string
+              firewallSubnet:
+                type: string
+              apiServerVisibility:
+                type: string
+              ingress_visibility:
+                type: string    

@@ -1,7 +1,7 @@
 apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
-  name: aro
+  name: {{ .Release.Name }}-aro
   annotations:
     crossplane.io/external-name: myworkspace
 spec:
@@ -11,20 +11,24 @@ spec:
     module: https://github.com/raffaelespazzoli/openshift-iac-multicluster/terraform/aro
     # Variables can be specified inline as a list of key-value pairs or as an json object, or loaded from a ConfigMap or Secret.
     vars:
-    - key: region
-      value: us-west-1
-    varmap:
-      account:
-        region: us-west-1
-        owners:
-        - example-owner-1
-        - example-owner-2
-    varFiles:
-    - source: SecretKey
-      secretKeyRef:
-        namespace: default
-        name: terraform
-        key: example.tfvar.json
+    - key: name
+      value: {{ .Release.Name }}-aro
+    - key: location
+      value: {{ .Values.location }}
+    - key: resource_group_id
+      value: 
+    - key: client_id
+      value:    
+    - key: client_secret
+      value:          
+    - key: master_subnet_id
+      value:
+    - key: worker_subnet_id
+      value:
+    - key: api_server_visibility
+      value: {{ .Values.api_server_visibility }}
+    - key: ingress_visibility
+      value: {{ .Values.ingress_visibility }}
   # All Terraform outputs are written to the connection secret.
   writeConnectionSecretToRef:
     namespace: default

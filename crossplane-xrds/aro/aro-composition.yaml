@@ -1,0 +1,246 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: aro
+spec:
+  compositeTypeRef:
+    apiVersion: crossplane.redhat-cop.com/v1alpha1
+    kind: aro
+  patchSets:
+  - name: resourceGroup
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.resourceGroup"
+      toFieldPath: "spec.forProvider.resourceGroupName"
+  - name: location
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.location"
+      toFieldPath: "spec.forProvider.location"      
+  resources:
+  - name: vnet
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: VirtualNetwork
+      metadata:
+        name: aro-vnet  
+      spec:
+        forProvider:
+          addressSpace:
+            - replace
+          location: {{ .Values.location }}
+          resourceGroupName: {{ .Values.resourceGroup }}
+    patches:
+      - type: FromCompositeFieldPath
+        fromFieldPath: "spec.subnet"
+        toFieldPath: "spec.forProvider.addressSpace[0]"
+      - type: PatchSet
+        patchSetName: location
+      - type: PatchSet
+        patchSetName: resourceGroup                     
+  - name: control-plane-subnet
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: control-plane-subnet  
+        labels:
+          control-plane-subnet: ""
+      spec:
+        forProvider:
+          addressPrefixes:
+            - replace
+          resourceGroupName: replace
+          virtualNetworkNameSelector:
+            matchControllerRef: true
+    patches:
+      - type: FromCompositeFieldPath
+        fromFieldPath: "spec.controlPlaneSubnet"
+        toFieldPath: "spec.forProvider.addressPrefixes[0]"
+      - type: PatchSet
+        patchSetName: resourceGroup        
+  - name: worker-node-subnet
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: worker-node-subnet 
+        labels:
+          worker-node-subnet: ""   
+      spec:
+        forProvider:
+          addressPrefixes:
+            - replace
+          resourceGroupName: replace
+          virtualNetworkNameSelector:
+            matchControllerRef: true
+    patches:
+      - type: FromCompositeFieldPath
+        fromFieldPath: "spec.workerNodesSubnet"
+        toFieldPath: "spec.forProvider.addressPrefixes[0]"
+      - type: PatchSet
+        patchSetName: resourceGroup        
+  - name: firewall-subnet
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: firewall-subnet
+        labels:
+          firewall-subnet: ""
+        annotations:
+          crossplane.io/external-name: AzureFirewallSubnet   
+      spec:
+        forProvider:
+          addressPrefixes:
+            - replace
+          resourceGroupName: replace
+          virtualNetworkNameSelector:
+            matchControllerRef: true
+    patches:
+      - type: FromCompositeFieldPath
+        fromFieldPath: "spec.firewallSubnet"
+        toFieldPath: "spec.forProvider.addressPrefixes[0]"
+      - type: PatchSet
+        patchSetName: resourceGroup
+  - name: firewall-public-ip
+    base: 
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: PublicIP
+      metadata:
+        name: firewall-ip   
+      spec:
+        forProvider:
+          location: replace
+          resourceGroupName: replace   
+          sku: Standard
+          allocationMethod: Static
+    patches:
+      - type: PatchSet
+        patchSetName: location
+      - type: PatchSet
+        patchSetName: resourceGroup
+  - name: firewall
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: Firewall
+      metadata:
+        name: firewall  
+      spec:
+        forProvider:
+          ipConfiguration:
+            - name: fw-config
+              publicIpAddressIdSelector:
+                matchControllerRef: true
+              subnetIdSelector:
+                matchLabels: 
+                  firewall-subnet: ""
+          location: replace
+          resourceGroupName: replace
+          skuTier: Standard
+          skuName: AZFW_VNet
+    patches:
+      - type: PatchSet
+        patchSetName: location
+      - type: PatchSet
+        patchSetName: resourceGroup
+  - name: firewall-rule-collection
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: FirewallNetworkRuleCollection
+      metadata:
+        name: firewall-rule-collection
+      spec:
+        forProvider:
+          action: Allow
+          azureFirewallNameSelector: 
+            matchControllerRef: true
+          priority: 100
+          resourceGroupName: replace
+          rule:
+            - destinationAddresses:
+                - "*"
+              destinationPorts:
+                - 1-65535
+              name: allow-all
+              protocols:
+                - Any
+              sourceAddresses:
+                - "*"
+    patches:
+      - type: PatchSet
+        patchSetName: resourceGroup
+  - name: route-table
+    base:    
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: RouteTable
+      metadata:
+        name: route-table   
+      spec:
+        forProvider:
+          location: replace
+          resourceGroupName: replace
+    patches:
+      - type: PatchSet
+        patchSetName: location
+      - type: PatchSet
+        patchSetName: resourceGroup
+  - name: egress-route
+    base:   
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: Route
+      metadata:
+        name: egress-route
+      spec:
+        forProvider:
+          addressPrefix: 0.0.0.0/0
+          nextHopType: VirtualAppliance
+          nextHopInIpAddress: ???
+          resourceGroupName: replace
+          routeTableNameSelector: 
+            matchControllerRef: true
+    patches:
+      - type: PatchSet
+        patchSetName: resourceGroup
+  - name: vnet-route
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: Route
+      metadata:
+        name: vnet-route  
+      spec:
+        forProvider:
+          addressPrefix: 10.0.0.0/16
+          nextHopType: VirtualNetworkGateway
+          resourceGroupName: replace
+          routeTableNameSelector: 
+            matchControllerRef: true
+    patches:
+      - type: PatchSet
+        patchSetName: resourceGroup
+  - name: control-plane-subnet-route-table-association
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: SubnetRouteTableAssociation
+      metadata:
+        name: control-plane-subnet-association
+      spec:
+        forProvider:
+          routeTableNameSelector: 
+            matchControllerRef: true
+          subnetIdSelector:
+            matchLabels: 
+              control-plane-subnet: ""
+  - name: worker-node-subnet-route-table-association
+    base:
+      apiVersion: network.azure.upbound.io/v1beta1
+      kind: SubnetRouteTableAssociation
+      metadata:
+        name: worker-nodes-subnet-association
+      spec:
+        forProvider:
+          routeTableNameSelector: 
+            matchControllerRef: true
+          subnetIdSelector:
+            matchLabels: 
+              worker-node-subnet: ""                                                                                                                                                                                                                       
