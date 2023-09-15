@@ -92,23 +92,23 @@ resource "azapi_resource" "aro_cluster" {
   body = jsonencode({
     properties = {
       clusterProfile = {
-        #domain               = var.domain
-        #fipsValidatedModules = var.fips_validated_modules
+        domain               = var.domain
+        fipsValidatedModules = var.fips_validated_modules
         resourceGroupId      = var.resource_group_id
-        #pullSecret           = var.pull_secret
+        pullSecret           = var.pull_secret
       }
       networkProfile = {
-        #podCidr              = var.pod_cidr
-        #serviceCidr          = var.service_cidr
+        podCidr              = var.pod_cidr
+        serviceCidr          = var.service_cidr
       }
       servicePrincipalProfile = {
         clientId             = var.clientId
         clientSecret         = var.clientSecret
       }
       masterProfile = {
-        #vmSize               = var.master_node_vm_size
+        vmSize               = var.master_node_vm_size
         subnetId             = var.master_subnet_id
-        #encryptionAtHost     = var.master_encryption_at_host
+        encryptionAtHost     = var.master_encryption_at_host
       }
       workerProfiles = [
         {
