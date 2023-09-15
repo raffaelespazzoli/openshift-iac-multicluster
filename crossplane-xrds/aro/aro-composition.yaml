@@ -28,8 +28,8 @@ spec:
         forProvider:
           addressSpace:
             - replace
-          location: {{ .Values.location }}
-          resourceGroupName: {{ .Values.resourceGroup }}
+          location: replace
+          resourceGroupName: replace
     patches:
       - type: FromCompositeFieldPath
         fromFieldPath: "spec.subnet"
