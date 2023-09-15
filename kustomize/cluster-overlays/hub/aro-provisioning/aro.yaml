@@ -3,6 +3,6 @@ kind: Aro
 metadata: 
   name: aro-decl
 spec:
-  resourceGroup: openenv-hcp4p
+  resourceGroup: openenv-9fbg6
   location: eastus 
 
