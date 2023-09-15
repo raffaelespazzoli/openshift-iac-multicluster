@@ -1,4 +1,4 @@
-apiVersion: crossplane.redhat-cop.com
+apiVersion: crossplane.redhat-cop.com/v1alpha1
 kind: Aro
 metadata: 
   name: aro-decl
