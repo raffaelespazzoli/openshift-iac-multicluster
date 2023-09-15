@@ -155,6 +155,11 @@ spec:
         patchSetName: location
       - type: PatchSet
         patchSetName: resourceGroup
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition        
   - name: firewall
     base:
       apiVersion: network.azure.upbound.io/v1beta1
