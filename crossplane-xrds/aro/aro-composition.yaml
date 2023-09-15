@@ -144,6 +144,11 @@ spec:
         patchSetName: location
       - type: PatchSet
         patchSetName: resourceGroup
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.ipConfiguration[0].privateIpAddress
+        toFieldPath: status.firewall.privateIpAddress
+        policy:
+          fromFieldPath: Optional        
   - name: firewall-rule-collection
     base:
       apiVersion: network.azure.upbound.io/v1beta1
@@ -195,13 +200,18 @@ spec:
         forProvider:
           addressPrefix: 0.0.0.0/0
           nextHopType: VirtualAppliance
-          nextHopInIpAddress: ???
+          nextHopInIpAddress: replace
           resourceGroupName: replace
           routeTableNameSelector: 
             matchControllerRef: true
     patches:
       - type: PatchSet
         patchSetName: resourceGroup
+      - type: FromCompositeFieldPath
+        fromFieldPath: "status.firewall.privateIpAddress"
+        toFieldPath: "spec.forProvider.nextHopInIpAddress"
+        policy:
+          fromFieldPath: Required                
   - name: vnet-route
     base:
       apiVersion: network.azure.upbound.io/v1beta1

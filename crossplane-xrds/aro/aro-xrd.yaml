@@ -38,4 +38,12 @@ spec:
               apiServerVisibility:
                 type: string
               ingress_visibility:
-                type: string    
+                type: string  
+          status:
+            description: A Status represents the observed state
+            properties:
+              firewall:
+                description: Freeform field containing status information for eks
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+            type: object                  
