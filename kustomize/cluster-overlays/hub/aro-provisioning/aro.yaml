@@ -1,0 +1,8 @@
+apiVersion: crossplane.redhat-cop.com
+kind: Aro
+metadata: 
+  name: aro-decl
+spec:
+  resourceGroup: openenv-hcp4p
+  location: eastus 
+

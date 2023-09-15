@@ -359,8 +359,34 @@ spec:
           - key: api_server_visibility
             value: 
           - key: ingress_visibility
-            value: 
+            value:
+          varFiles:
+          - secretKeyRef:
+              key: key
+              name: name
+              namespace: namespace    
     patches:
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.servicePrincipalSecret.secretName"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.name"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.servicePrincipalSecret.key"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.key"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.namespace"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"              
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.name"
+      toFieldPath: "spec.forProvider.vars[0].value" 
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.name"
+      toFieldPath: "spec.forProvider.vars[0].value"             
+
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.name"
       toFieldPath: "spec.forProvider.vars[0].value"    

@@ -24,25 +24,55 @@ spec:
             type: object
             properties:
               location:
+                description: "Azure region"
                 type: string
               resourceGroup:
-                type: string
-              controlPlaneSubnet:
+                description: "Azure resource group in which all of the Azure resources will be created."
                 type: string
               subnet:
+                description: "the CIDR for the vnet used by ARO"
                 type: string
-              workerNodeSubnet:        
+                default: 10.0.0.0/20
+              controlPlaneSubnet:
+                description: "the subnet for the master nodes"
                 type: string
+                default: 10.0.0.0/24                
+              workerNodeSubnet:
+                description: "the subnet for the worked nodes"        
+                type: string
+                default: 10.0.1.0/24
               firewallSubnet:
+                description: "the subnet for the firewall TODO: better understand what this is"
                 type: string
+                default: 10.0.2.0/24
               apiServerVisibility:
+                description: "api server visibility, can be Private or Public"
                 type: string
+                default: Private
+                enum:
+                - Private
+                - Public
               ingressVisibility:
+                description: "ingress visibility can be Private or Public"
                 type: string
-              clientID:
-                type: string
-              clientSecret:
-                type: string    
+                default: Private
+                enum:
+                - Private
+                - Public                
+              servicePrincipalSecret:
+                type: object
+                description: "a reference to a secret containing a terraform-consumable configuration file that contains two values: client_id and client_secret. These are the service principal credentials used to spin up ARO"
+                properties:
+                  secretName:
+                    type: string
+                  key:
+                    type: string 
+                required:
+                - secretName
+                - key       
+            required: 
+              - location 
+              - resourceGroup                    
           status:
             description: A Status represents the observed state
             properties:
