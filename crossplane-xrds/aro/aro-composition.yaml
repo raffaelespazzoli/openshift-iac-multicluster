@@ -58,7 +58,12 @@ spec:
         fromFieldPath: "spec.controlPlaneSubnet"
         toFieldPath: "spec.forProvider.addressPrefixes[0]"
       - type: PatchSet
-        patchSetName: resourceGroup        
+        patchSetName: resourceGroup
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.controlPlaneSubnetId"
+        policy:
+          fromFieldPath: Optional                 
   - name: worker-node-subnet
     base:
       apiVersion: network.azure.upbound.io/v1beta1
@@ -79,7 +84,12 @@ spec:
         fromFieldPath: "spec.workerNodesSubnet"
         toFieldPath: "spec.forProvider.addressPrefixes[0]"
       - type: PatchSet
-        patchSetName: resourceGroup        
+        patchSetName: resourceGroup
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.workerNodeSubnetId"
+        policy:
+          fromFieldPath: Optional                
   - name: firewall-subnet
     base:
       apiVersion: network.azure.upbound.io/v1beta1
@@ -103,6 +113,11 @@ spec:
         toFieldPath: "spec.forProvider.addressPrefixes[0]"
       - type: PatchSet
         patchSetName: resourceGroup
+      - type: ToCompositeFieldPath
+        fromFieldPath: "status.atProvider.id"
+        toFieldPath: "status.subnets.firewallSubnetId"
+        policy:
+          fromFieldPath: Optional        
   - name: firewall-public-ip
     base: 
       apiVersion: network.azure.upbound.io/v1beta1
@@ -253,4 +268,68 @@ spec:
             matchControllerRef: true
           subnetIdSelector:
             matchLabels: 
-              worker-node-subnet: ""                                                                                                                                                                                                                       
+              worker-node-subnet: ""
+  - name: aro
+    base:
+      apiVersion: tf.upbound.io/v1beta1
+      kind: Workspace
+      metadata:
+        name: aro
+      spec:
+        forProvider:
+          # Use any module source supported by terraform init -from-module.
+          source: Remote
+          module: https://github.com/raffaelespazzoli/openshift-iac-multicluster/terraform/aro
+          # Variables can be specified inline as a list of key-value pairs or as an json object, or loaded from a ConfigMap or Secret.
+          vars:
+          - key: name
+            value: 
+          - key: location
+            value: 
+          - key: resource_group_id
+            value: 
+          - key: client_id
+            value:    
+          - key: client_secret
+            value:          
+          - key: master_subnet_id
+            value:
+          - key: worker_subnet_id
+            value:
+          - key: api_server_visibility
+            value: 
+          - key: ingress_visibility
+            value: 
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.name"
+      toFieldPath: "spec.forProvider.vars[0].value"    
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.location"
+      toFieldPath: "spec.forProvider.vars[1].value"
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.resourceGroup"
+      toFieldPath: "spec.forProvider.vars[2].value"
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.clientID"
+      toFieldPath: "spec.forProvider.vars[3].value"
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.clientSecret"
+      toFieldPath: "spec.forProvider.vars[4].value"
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.controlPlaneSubnetId"
+      toFieldPath: "spec.forProvider.vars[5].value"
+      policy:
+        fromFieldPath: Required
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.workerNodeSubnetId"
+      toFieldPath: "spec.forProvider.vars[6].value"
+      policy:
+        fromFieldPath: Required      
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.apiServerVisibility"      
+      toFieldPath: "spec.forProvider.vars[7].value"
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.ingressVisibility"
+      toFieldPath: "spec.forProvider.vars[8].value"
+                                        
