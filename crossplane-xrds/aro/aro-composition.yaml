@@ -301,7 +301,7 @@ spec:
         name: control-plane-subnet-association
       spec:
         forProvider:
-          routeTableNameSelector: 
+          routeTableIdSelector: 
             matchControllerRef: true
           subnetIdSelector:
             matchLabels: 
@@ -319,7 +319,7 @@ spec:
         name: worker-nodes-subnet-association
       spec:
         forProvider:
-          routeTableNameSelector: 
+          routeTableIdSelector: 
             matchControllerRef: true
           subnetIdSelector:
             matchLabels: 
