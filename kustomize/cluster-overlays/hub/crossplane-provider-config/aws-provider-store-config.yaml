@@ -1,4 +1,4 @@
-apiVersion: aws.upbound.io/v1beta1
+apiVersion: aws.upbound.io/v1alpha1
 kind: StoreConfig
 metadata:
   name: vault
