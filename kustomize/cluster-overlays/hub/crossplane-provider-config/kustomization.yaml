@@ -7,5 +7,4 @@ resources:
   - ./terraform-provider-config.yaml
   - ./aws-provider-store-config.yaml
   - ./azure-provider-store-config.yaml
-  - ./terraform-provider-store-config.yaml
-  - ./vault-config.yaml  
+  - ./terraform-provider-store-config.yaml  

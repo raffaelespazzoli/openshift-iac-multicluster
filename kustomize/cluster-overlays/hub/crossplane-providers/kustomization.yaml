@@ -7,3 +7,4 @@ resources:
   - ./aws-provider.yaml
   - ./controller-config.yaml
   - ./store-config.yaml
+  - ./vault-config.yaml
