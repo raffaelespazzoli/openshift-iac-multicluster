@@ -14,3 +14,4 @@ spec:
         namespace: crossplane-system
         name: azure-secret
         key: creds
+        

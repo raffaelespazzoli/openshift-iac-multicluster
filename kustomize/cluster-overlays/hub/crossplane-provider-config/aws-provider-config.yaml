@@ -9,3 +9,4 @@ spec:
       namespace: crossplane-system
       name: aws-secret
       key: creds
+      

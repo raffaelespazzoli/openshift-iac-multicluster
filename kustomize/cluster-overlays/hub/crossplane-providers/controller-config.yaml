@@ -1,0 +1,6 @@
+kind: ControllerConfig
+metadata:
+  name: vault-config
+spec:
+  args:
+    - --enable-external-secret-stores"

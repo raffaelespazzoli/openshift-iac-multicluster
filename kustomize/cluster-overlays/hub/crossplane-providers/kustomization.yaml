@@ -5,3 +5,6 @@ resources:
   - ./provider-azure-network.yaml
   - ./terraform-provider.yaml
   - ./aws-provider.yaml
+  - ./controller-config.yaml
+  - ./store-config.yaml
+  - ./vault-config.yaml

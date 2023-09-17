@@ -5,3 +5,6 @@ resources:
   - ./aws-provider-config.yaml
   - ./azure-provider-config.yaml
   - ./terraform-provider-config.yaml
+  - ./aws-provider-store-config.yaml
+  - ./azure-provider-store-config.yaml
+  - ./terraform-provider-store-config.yaml  
