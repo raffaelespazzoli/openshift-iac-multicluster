@@ -4,3 +4,4 @@ namespace: crossplane-system
 resources:
   - ./provider-azure-network.yaml
   - ./terraform-provider.yaml
+  - ./aws-provider.yaml

@@ -4,3 +4,4 @@ vault-experiments-secrets.sh
 kustomize/cluster-overlays/hub/crossplane-azure-provider/azure-credentials.json
 kustomize/cluster-overlays/hub/crossplane-providers/azure-credentials.json_back
 kustomize/cluster-overlays/hub/crossplane-providers/azure-credentials.json
+kustomize/cluster-overlays/hub/crossplane-providers/aws-credentials.txt
