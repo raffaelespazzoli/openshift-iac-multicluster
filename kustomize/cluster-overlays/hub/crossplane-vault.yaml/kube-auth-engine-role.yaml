@@ -1,0 +1,18 @@
+        apiVersion: redhatcop.redhat.io/v1alpha1
+        kind: KubernetesAuthEngineRole
+        metadata:
+          name: crossplane
+          namespace: vault-admin
+        spec:
+          authentication: 
+            path: kubernetes
+            role: policy-admin
+          path: kubernetes
+          policies:
+            - crossplane-secrets
+          targetNamespaces:
+            targetNamespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: crossplane-system
+          targetServiceAccounts:
+          - "*"

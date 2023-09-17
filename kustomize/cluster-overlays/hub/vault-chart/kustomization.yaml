@@ -28,7 +28,7 @@ helmCharts:
         enabled: true
 
       injector:
-        enabled: false
+        enabled: true
         image:
           repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
           tag: "1.2.0-ubi"
