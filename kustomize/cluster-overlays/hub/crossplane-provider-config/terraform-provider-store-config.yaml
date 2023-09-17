@@ -10,4 +10,4 @@ spec:
     configRef:
       apiVersion: secrets.crossplane.io/v1alpha1
       kind: VaultConfig
-      name: vault
+      name: Vault
