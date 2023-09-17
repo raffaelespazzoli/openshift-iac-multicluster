@@ -6,7 +6,8 @@ resources:
 - ./namespace.yaml
 - ./rbac.yaml
 
-
+helmGlobals:
+  chartHome: ../../../../helm/charts
 
 helmCharts:
   - name: crossplane
@@ -17,6 +18,6 @@ helmCharts:
 
   - name: ess-plugin-vault
     releaseName: ess-plugin-vault
-    repo: oci://xpkg.upbound.io/crossplane-contrib/ess-plugin-vault
+    #repo: oci://xpkg.upbound.io/crossplane-contrib/ess-plugin-vault
     namespace: crossplane-system
     valuesFile: ess-values.yaml    
