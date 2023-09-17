@@ -15,7 +15,7 @@ patches:
 helmCharts:
   - name: vault
     releaseName: vault
-    namespace: hashicorp
+    namespace: vault
     repo: https://helm.releases.hashicorp.com
     version: 0.25.0
     valuesInline:
