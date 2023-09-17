@@ -4,4 +4,4 @@ metadata:
   name: vault-config
 spec:
   args:
-    - --enable-external-secret-stores"
+    - --enable-external-secret-stores
