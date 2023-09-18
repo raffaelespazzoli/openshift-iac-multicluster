@@ -11,10 +11,10 @@ variable "resource_group_name" {
   type = string
 }
 
-# variable "tags" {
-#   type = map(string)
-#   default = null
-# }
+variable "tags" {
+  type = map
+  default = {}
+}
 
 variable "resource_prefix" {
   type = string
