@@ -10,5 +10,8 @@ spec:
       token:
         source: Filesystem
         fs:
-          path: /vault/secrets/token  
+          path: /vault/secrets/token
+    server: https://vault.vault.svc:8200
+    mountPath: crossplane-secrets/
+    version: v2     
   defaultScope: ""
