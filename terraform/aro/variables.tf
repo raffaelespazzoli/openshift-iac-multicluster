@@ -59,7 +59,7 @@ variable master_node_vm_size {
   default = "Standard_D8s_v3"
 }
 
-variable master_subnet_name {
+variable master_subnet_id {
   type = string
 }
 

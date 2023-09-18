@@ -40,61 +40,8 @@ resource "random_string" "domain" {
   numeric  = true
 }
 
-# resource "azurerm_virtual_network" "virtual_network" {
-#   name                = "${var.resource_prefix != "" ? var.resource_prefix : random_string.resource_prefix.result}VNet"
-#   address_space       = var.virtual_network_address_space
-#   location            = var.location
-#   resource_group_name = var.resource_group_name
-#   tags                = var.tags
-  
-#   lifecycle {
-#     ignore_changes = [
-#         tags
-#     ]
-#   }
-# }
-
-# resource "azurerm_subnet" "master_subnet" {
-#   name                                           = var.master_subnet_name
-#   resource_group_name                            = var.resource_group_name
-#   virtual_network_name                           = azurerm_virtual_network.virtual_network.name
-#   address_prefixes                               = var.master_subnet_address_space
-#   private_link_service_network_policies_enabled  = false
-#   service_endpoints                              = ["Microsoft.ContainerRegistry"]
-# }
-
-# resource "azurerm_subnet" "worker_subnet" {
-#   name                                           = var.worker_subnet_name
-#   resource_group_name                            = var.resource_group_name
-#   virtual_network_name                           = azurerm_virtual_network.virtual_network.name
-#   address_prefixes                               = var.worker_subnet_address_space
-#   service_endpoints                              = ["Microsoft.ContainerRegistry"]
-# }
-
-# resource "azurerm_role_assignment" "aro_cluster_service_principal_network_contributor" {
-#   scope                = azurerm_virtual_network.virtual_network.id
-#   role_definition_name = "Contributor"
-#   principal_id         = var.aro_cluster_aad_sp_object_id
-#   skip_service_principal_aad_check = true
-# }
-
-# resource "azurerm_role_assignment" "aro_resource_provider_service_principal_network_contributor" {
-#   scope                = azurerm_virtual_network.virtual_network.id
-#   role_definition_name = "Contributor"
-#   principal_id         = var.aro_rp_aad_sp_object_id
-#   skip_service_principal_aad_check = true
-# }
-
 data "azurerm_resource_group" "resource_group" {
   name                = var.resource_group_name
-}
-
-data "azurerm_subnet" "master_subnet" {
-  name                = var.master_subnet_name
-}
-
-data "azurerm_subnet" "worker_subnet" {
-  name                = var.master_subnet_name
 }
 
 resource "azapi_resource" "aro_cluster" {
@@ -122,7 +69,7 @@ resource "azapi_resource" "aro_cluster" {
       }
       masterProfile = {
         vmSize               = var.master_node_vm_size
-        subnetId             = data.azurerm_subnet.master_subnet.id
+        subnetId             = var.master_subnet.id
         encryptionAtHost     = var.master_encryption_at_host
       }
       workerProfiles = [
@@ -130,7 +77,7 @@ resource "azapi_resource" "aro_cluster" {
           name               = var.worker_profile_name
           vmSize             = var.worker_node_vm_size
           diskSizeGB         = var.worker_node_vm_disk_size
-          subnetId           = data.azurerm_subnet.master_subnet.id
+          subnetId           = var.worker_subnet.id
           count              = var.worker_node_count
           encryptionAtHost   = var.worker_encryption_at_host
         }
