@@ -1,3 +1,5 @@
+# header
+
 variable "name" {
   type = string
 }
@@ -6,12 +8,15 @@ variable "location" {
   type = string
 }
 
-variable domain {
+variable resource_group_name {
   type = string
 }
 
-variable resource_group_id {
+#clusterProfile
+
+variable domain {
   type = string
+  nullable = true
 }
 
 variable fips_validated_modules {
@@ -22,7 +27,10 @@ variable fips_validated_modules {
 variable pull_secret {
   type = string
   sensitive = true
+  nullable = true  
 }
+
+# networkProfile
 
 variable pod_cidr {
   type = string
@@ -31,6 +39,8 @@ variable pod_cidr {
 variable service_cidr {
   type = string
 }
+
+# servicePrincipalProfile
 
 variable clientId {
   type = string
@@ -42,30 +52,38 @@ variable clientSecret {
   sensitive = true
 }
 
+#masterProfile
+
 variable master_node_vm_size {
   type = string
+  default = "Standard_D8s_v3"
 }
 
-variable master_subnet_id {
+variable master_subnet_name {
   type = string
 }
 
 variable master_encryption_at_host {
-  type = bool
-  default = false
+  type = string
+  default = "Disabled"
 }
+
+#workerProfile
 
 variable worker_profile_name {
   type = string
+  default = "worker"
 }
 
 variable worker_node_vm_size {
   type = string
+  default = "Standard_D4s_v3"
 }
 
 # size in GB
 variable worker_node_vm_disk_size {
   type = number
+  default = 128
 }
 
 variable worker_subnet_id {
@@ -73,19 +91,26 @@ variable worker_subnet_id {
 }
 
 variable worker_encryption_at_host {
-  type = bool
-  default = false
+  type = string
+  default = "Disabled"
 }
+
+#apiServerProfile
 
 variable api_server_visibility {
   type = string
+  default = "Private"
 }
+
+#ingressProfile
 
 variable ingress_profile_name {
   type =string
+  default = "default"
 }
 
 variable ingress_visibility {
   type = string
+  default = "Private"
 }
 
