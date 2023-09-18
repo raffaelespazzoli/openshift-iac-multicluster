@@ -346,7 +346,7 @@ spec:
             value: ""
           - key: location
             value: ""
-          - key: resource_group_id
+          - key: resource_group_name
             value: ""         
           - key: master_subnet_id
             value: ""

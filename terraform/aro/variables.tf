@@ -34,10 +34,12 @@ variable pull_secret {
 
 variable pod_cidr {
   type = string
+  default = "10.128.0.0/14"
 }
 
 variable service_cidr {
   type = string
+  default = "172.30.0.0/16"
 }
 
 # servicePrincipalProfile
