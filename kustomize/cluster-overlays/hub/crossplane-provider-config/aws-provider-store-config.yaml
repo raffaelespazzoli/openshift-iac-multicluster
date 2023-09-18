@@ -4,7 +4,7 @@ metadata:
   name: vault
 spec:
   type: Plugin
-  defaultScope: crossplane-system
+  defaultScope: ""
   plugin:
     endpoint: ess-plugin-vault.crossplane-system:4040
     configRef:
