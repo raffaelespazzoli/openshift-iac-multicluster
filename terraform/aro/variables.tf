@@ -27,7 +27,8 @@ variable fips_validated_modules {
 variable pull_secret {
   type = string
   sensitive = true
-  nullable = true  
+  nullable = true
+  default = null 
 }
 
 # networkProfile
