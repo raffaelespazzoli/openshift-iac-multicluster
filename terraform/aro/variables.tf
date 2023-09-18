@@ -2,7 +2,7 @@ variable "name" {
   type = string
 }
 
-# header
+
 variable "location" {
   type = string
 }
@@ -16,7 +16,7 @@ variable "tags" {
   default = null
 }
 
-#clusterProfile
+
 
 variable domain {
   type = string
@@ -35,7 +35,7 @@ variable pull_secret {
   default = null 
 }
 
-# networkProfile
+
 
 variable pod_cidr {
   type = string
@@ -47,7 +47,7 @@ variable service_cidr {
   default = "172.30.0.0/16"
 }
 
-# servicePrincipalProfile
+
 
 variable clientId {
   type = string
@@ -59,7 +59,7 @@ variable clientSecret {
   sensitive = true
 }
 
-#masterProfile
+
 
 variable master_node_vm_size {
   type = string
@@ -75,7 +75,7 @@ variable master_encryption_at_host {
   default = "Disabled"
 }
 
-#workerProfile
+
 
 variable worker_profile_name {
   type = string
@@ -87,7 +87,7 @@ variable worker_node_vm_size {
   default = "Standard_D4s_v3"
 }
 
-# size in GB
+
 variable worker_node_vm_disk_size {
   type = number
   default = 128
@@ -102,14 +102,14 @@ variable worker_encryption_at_host {
   default = "Disabled"
 }
 
-#apiServerProfile
+
 
 variable api_server_visibility {
   type = string
   default = "Private"
 }
 
-#ingressProfile
+
 
 variable ingress_profile_name {
   type =string
