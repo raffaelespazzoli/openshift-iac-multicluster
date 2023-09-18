@@ -49,7 +49,7 @@ resource "azapi_resource" "aro_cluster" {
   location  = var.location
   parent_id = data.azurerm_resource_group.resource_group.id
   type      = "Microsoft.RedHatOpenShift/openShiftClusters@2022-04-01"
-  tags      = var.tags
+  #tags      = var.tags
   
   body = jsonencode({
     properties = {

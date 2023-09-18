@@ -11,10 +11,10 @@ variable "resource_group_name" {
   type = string
 }
 
-variable "tags" {
-  type = map(string)
-  default = null
-}
+# variable "tags" {
+#   type = map(string)
+#   default = null
+# }
 
 variable "resource_prefix" {
   type = string
@@ -122,7 +122,7 @@ variable "api_server_visibility" {
 
 
 variable "ingress_profile_name" {
-  type =string
+  type = string
   default = "default"
 }
 
