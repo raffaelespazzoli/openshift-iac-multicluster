@@ -16,11 +16,16 @@ variable "tags" {
   default = null
 }
 
+variable "resource_prefix" {
+  type = string
+  default = ""
+}
 
 
 variable domain {
   type = string
   nullable = true
+  default = ""
 }
 
 variable fips_validated_modules {
@@ -100,6 +105,11 @@ variable worker_subnet_id {
 variable worker_encryption_at_host {
   type = string
   default = "Disabled"
+}
+
+variable "worker_node_count" {
+  type = number
+  default = 3
 }
 
 

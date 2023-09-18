@@ -69,7 +69,7 @@ resource "azapi_resource" "aro_cluster" {
       }
       masterProfile = {
         vmSize               = var.master_node_vm_size
-        subnetId             = var.master_subnet.id
+        subnetId             = var.master_subnet_id
         encryptionAtHost     = var.master_encryption_at_host
       }
       workerProfiles = [
@@ -77,7 +77,7 @@ resource "azapi_resource" "aro_cluster" {
           name               = var.worker_profile_name
           vmSize             = var.worker_node_vm_size
           diskSizeGB         = var.worker_node_vm_disk_size
-          subnetId           = var.worker_subnet.id
+          subnetId           = var.worker_subnet_id
           count              = var.worker_node_count
           encryptionAtHost   = var.worker_encryption_at_host
         }

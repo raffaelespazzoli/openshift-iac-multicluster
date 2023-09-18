@@ -5,3 +5,7 @@ kustomize/cluster-overlays/hub/crossplane-azure-provider/azure-credentials.json
 kustomize/cluster-overlays/hub/crossplane-providers/azure-credentials.json_back
 kustomize/cluster-overlays/hub/crossplane-providers/azure-credentials.json
 kustomize/cluster-overlays/hub/crossplane-providers/aws-credentials.txt
+terraform/aro/.terraform/providers/registry.terraform.io/azure/azapi/1.9.0/linux_amd64/terraform-provider-azapi_v1.9.0
+terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.73.0/linux_amd64/terraform-provider-azurerm_v3.73.0_x5
+terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/random/3.5.1/linux_amd64/terraform-provider-random_v3.5.1_x5
+terraform/aro/.terraform.lock.hcl
