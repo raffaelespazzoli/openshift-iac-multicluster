@@ -15,7 +15,7 @@ spec:
   - name: name-tag
     patches:
     - type: FromCompositeFieldPath
-      fromFieldPath: "metadata-name"
+      fromFieldPath: "metadata.name"
       toFieldPath: "spec.forProvider.tags.Name"            
   resources:
   - name: vpc
