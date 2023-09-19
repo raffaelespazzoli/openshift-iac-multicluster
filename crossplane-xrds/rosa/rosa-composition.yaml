@@ -1,0 +1,340 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: rosa
+spec:
+  compositeTypeRef:
+    apiVersion: crossplane.redhat-cop.com/v1alpha1
+    kind: xRosa
+  patchSets:
+  - name: region
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.region"
+      toFieldPath: "spec.forProvider.location"
+  - name: name-tag
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata-name"
+      toFieldPath: "spec.forProvider.tags.Name"            
+  resources:
+  - name: vpc
+    base:
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: VPC
+      metadata:
+        name: rosa-vpc
+      spec:
+        forProvider:
+          cidrBlock: 10.0.0.0/16
+          enableDnsHostnames: true
+          enableDnsSupport: true
+          region: replace
+          tags:
+            Name: replace
+    patches:
+      # - type: ToCompositeFieldPath
+      #   fromFieldPath: status.atProvider.id
+      #   toFieldPath: "status.vpcid"
+      #   policy:
+      #     fromFieldPath: Optional
+      - type: PatchSet
+        patchSetName: region
+      - type: PatchSet
+        patchSetName: name-tag
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: public-egress-subnet
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: rosa-public-egress
+        labels:
+          public-subnet: ""
+      spec:
+        forProvider:
+          cidrBlock: 10.0.128.0/17
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+    patches:
+      - type: CombineFromComposite
+        combine:
+          variables:
+            - fromFieldPath: metadata.name
+          strategy: string
+          string:
+            fmt: "%s-public-egress"
+        toFieldPath: spec.forProvider.tags.Name    
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: private-internal-subnet
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: rosa-private-internal
+      spec:
+        forProvider:
+          cidrBlock: 10.0.0.0/17
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+    patches:
+      - type: CombineFromComposite
+        combine:
+          variables:
+            - fromFieldPath: metadata.name
+          strategy: string
+          string:
+            fmt: "%s-private-internal"
+        toFieldPath: spec.forProvider.tags.Name    
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: internet-gateway
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: InternetGateway
+      metadata:
+        name: rosa-internet-gateway
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace
+          vpcIdSelector:
+            matchControllerRef: true
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: public-route-table
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTable
+      metadata:
+        name: public-rosa-route-table
+      labels:
+        public-route-table: ""        
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace
+          vpcIdSelector:
+            matchControllerRef: true
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition        
+  - name: egress-route
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Route
+      metadata:
+        name: rosa-egress-route
+      spec:
+        forProvider:
+          destinationCidrBlock: 0.0.0.0/0
+          gatewayIdSelector:
+            matchControllerRef: true
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              public-route-table: ""              
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: public-route-table-association
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: public-rosa-route-table-association
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              public-route-table: ""
+          subnetIdSelector:
+            matchLabels:
+              public-subnet: ""
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: elastic-ip
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: EIP
+      metadata:
+        name: rosa-elastic-ip
+      spec:
+        forProvider:
+          tags:
+            Name: replace        
+          region: replace
+          vpc: true
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: nat-gateway
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: NATGateway
+      metadata:
+        name: rosa-nat-gateway
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          subnetIdSelector:
+            matchLabels:
+              public-subnet: ""
+          allocationIdSelector:
+            matchControllerRef: true              
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: private-route-table
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTable
+      metadata:
+        name: private-rosa-route-table
+      labels:
+        private-route-table: ""        
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace
+          vpcIdSelector:
+            matchControllerRef: true
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition        
+  - name: nat-egress-route
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Route
+      metadata:
+        name: rosa-nat-egress-route
+      spec:
+        forProvider:
+          destinationCidrBlock: 0.0.0.0/0
+          natGatewayIdSelector:
+            matchControllerRef: true
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              private-route-table: ""
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: private-route-table-association
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: private-rosa-route-table-association
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              private-route-table: ""
+          subnetIdSelector:
+            matchLabels:
+              private-subnet: ""
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition                                                                                                  

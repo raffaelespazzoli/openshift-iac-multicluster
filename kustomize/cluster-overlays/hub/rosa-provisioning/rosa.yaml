@@ -1,0 +1,7 @@
+apiVersion: crossplane.redhat-cop.com/v1alpha1
+kind: Aro
+metadata: 
+  name: aro-decl
+spec:
+  region: us-east-1 
+
