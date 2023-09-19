@@ -11,7 +11,7 @@ spec:
     patches:
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.region"
-      toFieldPath: "spec.forProvider.location"
+      toFieldPath: "spec.forProvider.region"
   - name: name-tag
     patches:
     - type: FromCompositeFieldPath
