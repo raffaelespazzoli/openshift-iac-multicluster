@@ -1,7 +1,6 @@
 apiVersion: crossplane.redhat-cop.com/v1alpha1
-kind: Aro
+kind: Rosa
 metadata: 
-  name: aro-decl
+  name: rosa-decl
 spec:
   region: us-east-1 
-
