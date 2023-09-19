@@ -138,8 +138,8 @@ spec:
       kind: RouteTable
       metadata:
         name: public-rosa-route-table
-      labels:
-        public-route-table: ""        
+        labels:
+          public-route-table: ""        
       spec:
         forProvider:
           region: replace
@@ -265,8 +265,8 @@ spec:
       kind: RouteTable
       metadata:
         name: private-rosa-route-table
-      labels:
-        private-route-table: ""        
+        labels:
+          private-route-table: ""        
       spec:
         forProvider:
           region: replace
