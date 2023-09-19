@@ -5,3 +5,4 @@ metadata:
 spec:
   args:
     - --enable-external-secret-stores
+    - -d
