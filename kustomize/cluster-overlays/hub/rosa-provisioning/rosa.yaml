@@ -3,4 +3,14 @@ kind: Rosa
 metadata: 
   name: rosa-decl
 spec:
-  region: us-east-1 
+  region: us-east-1
+  availabilityZones:
+  - us-east-1a
+  - us-east-1b
+  - us-east-1c
+  OCMTokenSecret:
+    name: ocm-token
+    key: token
+  adminSecret:
+    name: cluster-admin
+    key: admin-json   

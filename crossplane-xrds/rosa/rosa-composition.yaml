@@ -334,4 +334,101 @@ spec:
       - matchCondition:	
           status: 'True'	
           type: Ready	
-        type: MatchCondition                                                                                                  
+        type: MatchCondition
+  - name: aro
+    base:
+      apiVersion: tf.upbound.io/v1beta1
+      kind: Workspace
+      metadata:
+        name: aro
+      spec:
+        forProvider:
+          # Use any module source supported by terraform init -from-module.
+          source: Remote
+          module: git::https://github.com/raffaelespazzoli/openshift-iac-multicluster//terraform/rosa
+          # Variables can be specified inline as a list of key-value pairs or as an json object, or loaded from a ConfigMap or Secret.
+          vars:
+          - key: operator_role_prefix
+            value: ""
+          - key: account_role_prefix
+            value: ""
+          - key: name
+            value: ""         
+          - key: region
+            value: ""
+          - key: availability_zones
+            value: ""
+          - secretKeyRef:
+              key: key
+              name: name
+              namespace: namespace
+            source: SecretKey
+            format: JSON
+          - secretKeyRef:
+              key: key
+              name: name
+              namespace: namespace
+            source: SecretKey
+            format: JSON                
+    patches: 
+
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: metadata.name
+        strategy: string
+        string:
+          fmt: "%s-operator"
+      toFieldPath: spec.forProvider.vars[0].value
+
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: metadata.name
+        strategy: string
+        string:
+          fmt: "%s-account"
+      toFieldPath: spec.forProvider.vars[1].value
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.name"
+      toFieldPath: "spec.forProvider.vars[2].value"      
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.region"
+      toFieldPath: "spec.forProvider.vars[3].value"    
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.availabilityZones"
+      toFieldPath: "spec.forProvider.vars[3].value"              
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.OCMSecret.secretName"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.name"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.OCMSecret.key"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.key"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.adminSecret.secretName"
+      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.name"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.adminSecret.key"
+      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.key"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
+      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.namespace"      
+
+
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition                                                                                                                      
