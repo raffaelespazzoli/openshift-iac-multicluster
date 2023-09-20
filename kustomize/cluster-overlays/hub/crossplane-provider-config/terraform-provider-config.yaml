@@ -14,4 +14,11 @@ spec:
         namespace: crossplane-system
         name: azure-secret
         key: creds
+    - filename: aws-credentials.json
+      source: Secret
+      secretRef:
+        namespace: crossplane-system
+        name: aws-secret
+        key: creds        
+
         
