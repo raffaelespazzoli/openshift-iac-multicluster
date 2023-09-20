@@ -9,8 +9,8 @@ spec:
   - us-east-1b
   - us-east-1c
   OCMTokenSecret:
-    name: ocm-token
+    secretName: ocm-token
     key: token
   adminSecret:
-    name: cluster-admin
+    secretName: cluster-admin
     key: admin-json   
