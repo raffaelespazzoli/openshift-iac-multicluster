@@ -14,9 +14,13 @@ terraform {
 
 provider "azurerm" {
   features {}
+  client_id = var.clientId
+  client_secret = var.clientSecret
 }
 
 provider "azapi" {
+  client_id = var.clientId
+  client_secret = var.clientSecret
 }
 
 data "azurerm_client_config" "current" {
