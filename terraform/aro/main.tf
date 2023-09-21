@@ -16,12 +16,16 @@ provider "azurerm" {
   features {}
   client_id = var.clientId
   client_secret = var.clientSecret
+  subscription_id = var.subscriptionId
+  tenant_id = var.tenantId
   use_cli = false
 }
 
 provider "azapi" {
   client_id = var.clientId
   client_secret = var.clientSecret
+  subscription_id = var.subscriptionId
+  tenant_id = var.tenantId
   use_cli = false
 }
 

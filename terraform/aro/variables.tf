@@ -56,7 +56,14 @@ variable "service_cidr" {
 
 variable "clientId" {
   type = string
-  sensitive = true
+}
+
+variable "tenantId" {
+  type = string
+}
+
+variable "subscriptionId" {
+  type = string
 }
 
 variable "clientSecret" {
