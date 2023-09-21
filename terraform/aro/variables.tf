@@ -29,8 +29,8 @@ variable "domain" {
 }
 
 variable "fips_validated_modules" {
-  type = bool
-  default = false
+  type = string
+  default = "Disabled"
 }
 
 variable "pull_secret" {
