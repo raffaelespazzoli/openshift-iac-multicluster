@@ -10,7 +10,12 @@ terraform {
       version = ">=1.0.0"
     }
   }
+  backend "kubernetes" {
+    secret_suffix    = "state"
+    in_cluster_config = true
+  }  
 }
+
 
 provider "azurerm" {
   features {}
@@ -28,6 +33,8 @@ provider "azapi" {
   tenant_id = var.tenantId
   use_cli = false
 }
+
+
 
 data "azurerm_client_config" "current" {
 }
