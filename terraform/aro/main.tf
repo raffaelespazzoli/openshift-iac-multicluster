@@ -16,11 +16,13 @@ provider "azurerm" {
   features {}
   client_id = var.clientId
   client_secret = var.clientSecret
+  use_cli = false
 }
 
 provider "azapi" {
   client_id = var.clientId
   client_secret = var.clientSecret
+  use_cli = false
 }
 
 data "azurerm_client_config" "current" {
