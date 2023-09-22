@@ -358,6 +358,7 @@ spec:
             value: ""
           - key: availability_zones
             value: ""
+          varFiles:  
           - secretKeyRef:
               key: key
               name: name
