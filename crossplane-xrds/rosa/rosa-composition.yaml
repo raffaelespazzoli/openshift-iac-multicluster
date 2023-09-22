@@ -401,7 +401,7 @@ spec:
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.availabilityZones"
-      toFieldPath: "spec.forProvider.vars[3].value"              
+      toFieldPath: "spec.forProvider.vars[4].value"              
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.OCMSecret.secretName"
