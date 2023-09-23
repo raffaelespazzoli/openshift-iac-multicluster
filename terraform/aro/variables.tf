@@ -24,7 +24,6 @@ variable "resource_prefix" {
 
 variable "domain" {
   type = string
-  nullable = true
   default = ""
 }
 

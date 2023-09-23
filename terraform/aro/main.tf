@@ -41,7 +41,7 @@ data "azurerm_client_config" "current" {
 }
 
 locals {
-  resource_group_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/aro-${var.domain}-${var.location}"
+  resource_group_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/aro-${var.name}"
 }
 
 resource "random_string" "resource_prefix" {
@@ -55,7 +55,7 @@ resource "random_string" "domain" {
   length  = 8
   special = false
   upper   = false
-  numeric  = true
+  numeric  = false
 }
 
 data "azurerm_resource_group" "resource_group" {
@@ -63,7 +63,7 @@ data "azurerm_resource_group" "resource_group" {
 }
 
 resource "azapi_resource" "aro_cluster" {
-  name      = "${var.resource_prefix != "" ? var.resource_prefix : random_string.resource_prefix.result}Aro"
+  name      = var.name
   location  = var.location
   parent_id = data.azurerm_resource_group.resource_group.id
   type      = "Microsoft.RedHatOpenShift/openShiftClusters@2022-04-01"

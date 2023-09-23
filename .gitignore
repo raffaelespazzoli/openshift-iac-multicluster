@@ -10,3 +10,5 @@ terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.73.
 terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/random/3.5.1/linux_amd64/terraform-provider-random_v3.5.1_x5
 terraform/aro/.terraform.lock.hcl
 kustomize/cluster-overlays/hub/crossplane-providers/ocm-token.json
+terraform/aro/terraform.tfstate
+terraform/aro/vars.json
