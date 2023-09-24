@@ -12,6 +12,14 @@ terraform {
   }  
 }
 
+provider "azapi" {
+  client_id = var.clientId
+  client_secret = var.clientSecret
+  subscription_id = var.subscriptionId
+  tenant_id = var.tenantId
+  use_cli = false
+}
+
 
 
 data "azurerm_client_config" "current" {
@@ -59,8 +67,8 @@ resource "azapi_resource" "aro_cluster" {
         serviceCidr          = var.service_cidr
       }
       servicePrincipalProfile = {
-        clientId             = var.clientId
-        clientSecret         = var.clientSecret
+        clientId             = var.spClientId
+        clientSecret         = var.spClientSecret
       }
       masterProfile = {
         vmSize               = var.master_node_vm_size

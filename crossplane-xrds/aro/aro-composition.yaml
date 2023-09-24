@@ -358,7 +358,13 @@ spec:
               key: ""
               name: ""
               namespace: ""
-            source: SecretKey                  
+            source: SecretKey
+          - format: JSON
+            secretKeyRef:
+              key: creds
+              name: azure-secret
+              namespace: crossplane-system
+            source: SecretKey                              
     patches:          
 
     - type: FromCompositeFieldPath

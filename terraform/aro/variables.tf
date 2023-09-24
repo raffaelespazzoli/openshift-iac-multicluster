@@ -51,13 +51,28 @@ variable "service_cidr" {
   default = "172.30.0.0/16"
 }
 
+variable "tenantId" {
+  type = string
+}
 
+variable "subscriptionId" {
+  type = string
+}
 
 variable "clientId" {
   type = string
 }
 
 variable "clientSecret" {
+  type = string
+  sensitive = true
+}
+
+variable "spClientId" {
+  type = string
+}
+
+variable "spClientSecret" {
   type = string
   sensitive = true
 }
