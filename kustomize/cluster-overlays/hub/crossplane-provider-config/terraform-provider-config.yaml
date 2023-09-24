@@ -31,12 +31,12 @@ spec:
 
     provider "azurerm" {
       features {}
-      client_secret_file_path = azure-credentials.json
+      client_secret_file_path = "azure-credentials.json"
       use_cli = false
     }
 
     provider "azapi" {
-      client_secret_file_path = azure-credentials.json
+      client_secret_file_path = "azure-credentials.json"
       use_cli = false
     }               
 
