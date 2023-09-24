@@ -58,7 +58,18 @@ spec:
                 default: Private
                 enum:
                 - Private
-                - Public       
+                - Public
+              servicePrincipalSecret:
+                type: object
+                description: "a reference to a secret containing a terraform-consumable configuration file that contains two values: clientId and clientSecret. These are the service principal credentials used to spin up ARO"
+                properties:
+                  secretName:
+                    type: string
+                  key:
+                    type: string 
+                required:
+                - secretName
+                - key                       
             required: 
               - location 
               - resourceGroup                    

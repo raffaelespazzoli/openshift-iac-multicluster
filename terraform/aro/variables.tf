@@ -57,14 +57,6 @@ variable "clientId" {
   type = string
 }
 
-variable "tenantId" {
-  type = string
-}
-
-variable "subscriptionId" {
-  type = string
-}
-
 variable "clientSecret" {
   type = string
   sensitive = true

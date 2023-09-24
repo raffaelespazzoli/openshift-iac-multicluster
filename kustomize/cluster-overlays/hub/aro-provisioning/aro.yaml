@@ -6,6 +6,6 @@ spec:
   resourceGroup: openenv-ql2j5
   location: eastus
   servicePrincipalSecret:
-    secretName: azure-secret
+    secretName: azure-sp
     key: creds 
 

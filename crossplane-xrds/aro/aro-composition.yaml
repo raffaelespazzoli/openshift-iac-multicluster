@@ -355,11 +355,24 @@ spec:
           varFiles:  
           - format: JSON
             secretKeyRef:
-              key: creds
-              name: azure-secret
-              namespace: crossplane-system
+              key: ""
+              name: ""
+              namespace: ""
             source: SecretKey                  
-    patches:            
+    patches:          
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.servicePrincipalSecret.secretName"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.name"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.servicePrincipalSecret.key"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.key"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"     
+
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.name"
       toFieldPath: "spec.forProvider.vars[0].value"    
