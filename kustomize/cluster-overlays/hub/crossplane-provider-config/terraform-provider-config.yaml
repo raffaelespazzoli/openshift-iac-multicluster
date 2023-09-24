@@ -21,13 +21,13 @@ spec:
         name: aws-secret
         key: creds
   configuration: |
-    terraform {
-      backend "kubernetes" {
-        secret_suffix    = "state"
-        in_cluster_config = true
-        namespace = "crossplane-system"
-      }  
-    }
+    # terraform {
+    #   backend "kubernetes" {
+    #     secret_suffix    = "state"
+    #     in_cluster_config = true
+    #     namespace = "crossplane-system"
+    #   }  
+    # }
 
     provider "azurerm" {
       features {}

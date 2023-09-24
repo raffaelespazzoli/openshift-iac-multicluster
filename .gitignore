@@ -14,3 +14,5 @@ terraform/aro/terraform.tfstate
 terraform/aro/vars.json
 kustomize/cluster-overlays/hub/rosa-provisioning/azure-credentials.json
 kustomize/cluster-overlays/hub/aro-provisioning/azure-credentials.json
+kustomize/cluster-overlays/hub/crossplane-provider-config/terraform-provider-config.yaml
+terraform/aro/crossplane-provider-config.tf
