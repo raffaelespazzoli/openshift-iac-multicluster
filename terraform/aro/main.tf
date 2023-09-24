@@ -10,11 +10,11 @@ terraform {
       version = ">=1.0.0"
     }
   }
-  backend "kubernetes" {
-    secret_suffix    = "state"
-    in_cluster_config = true
-    namespace = "crossplane-system"
-  }  
+  # backend "kubernetes" {
+  #   secret_suffix    = "state"
+  #   in_cluster_config = true
+  #   namespace = "crossplane-system"
+  # }  
 }
 
 
