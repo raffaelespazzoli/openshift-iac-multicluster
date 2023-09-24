@@ -31,8 +31,19 @@ spec:
 
     provider "azurerm" {
       features {}
-      client_secret_file_path = "azure-credentials.json"
+      client_id = var.clientId
+      client_secret = var.clientSecret
+      subscription_id = var.subscriptionId
+      tenant_id = var.tenantId
       use_cli = false
-    }               
+    }
+
+    provider "azapi" {
+      client_id = var.clientId
+      client_secret = var.clientSecret
+      subscription_id = var.subscriptionId
+      tenant_id = var.tenantId
+      use_cli = false
+    }              
 
         

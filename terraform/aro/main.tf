@@ -12,15 +12,6 @@ terraform {
   }  
 }
 
-provider "azapi" {
-  client_id = var.clientId
-  client_secret = var.clientSecret
-  subscription_id = var.subscriptionId
-  tenant_id = var.tenantId
-  use_cli = false
-}
-
-
 
 data "azurerm_client_config" "current" {
 }
