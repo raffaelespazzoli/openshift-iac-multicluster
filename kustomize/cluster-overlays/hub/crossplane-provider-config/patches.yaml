@@ -17,10 +17,10 @@ spec:
         kind: Secret
         namespace: openshift-config
         name: pull-secret                
-      patchTemplate: |
+      patchTemplate: |        
         {{- $pullsecret:= (index (index . 1).data ".dockerconfigjson") | b64dec }}
-        {{- $pullsecretjson:=$pullsecret | printf "{\"pullsecret\":\"%s\"}" }}
+        {{- $pullsecretDict := dict "pullsecret" $pullsecret }}
         data:
           .dockerconfigjson: {{ (index (index . 1).data ".dockerconfigjson") }}
-          pullsecret: {{ $pullsecretjson | b64enc }}
+          pullsecret: {{ $pullsecretDict | toJson | b64enc }}
       patchType: application/merge-patch+json
