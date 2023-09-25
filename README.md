@@ -15,3 +15,6 @@ oc apply -f boostrap/argocd.yaml -n openshift-gitops
 oc apply -f boostrap/cluster-rolebinding.yaml -n openshift-gitops
 oc apply -f boostrap/applicationset.yaml -n openshift-gitops
 ```
+
+
+sed '/\[server {\]/a try_files $uri $uri/ /index.html;' input

@@ -18,3 +18,4 @@ kustomize/cluster-overlays/hub/crossplane-provider-config/terraform-provider-con
 terraform/aro/crossplane-provider-config.tf
 terraform/aro/terraform.tfstate.backup
 terraform/aro/terraform.tfstate.backup
+terraform/aro/pull-secret.json
