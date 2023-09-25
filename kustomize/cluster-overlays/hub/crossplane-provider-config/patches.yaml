@@ -19,7 +19,7 @@ spec:
         name: pull-secret                
       patchTemplate: |
         {{- $pullsecret:= (index (index . 1).data ".dockerconfigjson") | b64dec }}
-        {{- $pullsecretjson:="{\"pullsecret\":\""$pullsecret"\"}" }}
+        {{- $pullsecretjson:=$pullsecret | printf "{\"pullsecret\":\"%s\"}" }}
         data:
           .dockerconfigjson: {{ (index (index . 1).data ".dockerconfigjson") }}
           pullsecret: {{ $pullsecretjson | b64enc }}
