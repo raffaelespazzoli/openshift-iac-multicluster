@@ -8,4 +8,5 @@ spec:
   servicePrincipalSecret:
     secretName: azure-sp
     key: creds 
-
+  ingressVisibility: "Public"
+  apiVisibility: "Public"
