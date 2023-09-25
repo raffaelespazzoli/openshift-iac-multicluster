@@ -65,7 +65,7 @@ spec:
             matchControllerRef: true
           virtualNetworkNameSelector:
             matchControllerRef: true
-          privateLinkServiceNetworkPoliciesEnabled: false  
+          #privateLinkServiceNetworkPoliciesEnabled: false  
     patches:
       - type: FromCompositeFieldPath
         fromFieldPath: "spec.controlPlaneSubnet"
