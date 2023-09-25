@@ -133,6 +133,10 @@ spec:
             value: ""
           - key: worker_subnet_id
             value: ""
+          - key: api_server_visibility
+            value: ""
+          - key: ingress_profile_name
+            value: ""            
           varFiles:  
           - format: JSON
             secretKeyRef:
@@ -185,7 +189,14 @@ spec:
       fromFieldPath: "status.subnets.workerNodeSubnetId"
       toFieldPath: "spec.forProvider.vars[4].value"
       policy:
-        fromFieldPath: Required   
+        fromFieldPath: Required
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.apiServerVisibility"
+      toFieldPath: "spec.forProvider.vars[5].value"
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.ingressVisibility"
+      toFieldPath: "spec.forProvider.vars[6].value"           
            
     readinessChecks:	
       - matchCondition:	
