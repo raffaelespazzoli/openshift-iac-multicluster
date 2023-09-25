@@ -18,10 +18,9 @@ spec:
         namespace: openshift-config
         name: pull-secret                
       patchTemplate: |
+        {{- $pullsecret:= (index (index . 1).data ".dockerconfigjson") | b64dec }}
+        {{- $pullsecretjson:="{\"pullsecret\":\""$pullsecret"\"}" }}
         data:
           .dockerconfigjson: {{ (index (index . 1).data ".dockerconfigjson") }}
-          pullsecret: |
-            {
-              "pullsecret": "{{ (index (index . 1).data ".dockerconfigjson") }}"
-            }
+          pullsecret: {{ $pullsecretjson | b64enc }}
       patchType: application/merge-patch+json
