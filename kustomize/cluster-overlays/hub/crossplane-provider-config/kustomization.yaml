@@ -7,4 +7,7 @@ resources:
   - ./terraform-provider-config.yaml
   - ./aws-provider-store-config.yaml
   - ./azure-provider-store-config.yaml
-  - ./terraform-provider-store-config.yaml  
+  - ./terraform-provider-store-config.yaml
+  - ./patches-rbac.yaml
+  - ./pull-secret.yaml
+  - ./patches.yaml 
