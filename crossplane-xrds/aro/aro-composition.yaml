@@ -7,17 +7,24 @@ spec:
     apiVersion: crossplane.redhat-cop.com/v1alpha1
     kind: xAro
   patchSets:
-  - name: resourceGroup
-    patches:
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.resourceGroup"
-      toFieldPath: "spec.forProvider.resourceGroupName"
   - name: location
     patches:
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.location"
       toFieldPath: "spec.forProvider.location"      
   resources:
+  - name: resource-group
+    base: 
+      apiVersion: azure.upbound.io/v1beta1
+      kind: ResourceGroup
+      metadata:
+        name: resource-group
+      spec:
+        forProvider:
+          location: replace
+    patches:      
+      - type: PatchSet
+        patchSetName: location    
   - name: vnet
     base:
       apiVersion: network.azure.upbound.io/v1beta1
@@ -29,15 +36,14 @@ spec:
           addressSpace:
             - replace
           location: replace
-          resourceGroupName: replace
+          resourceGroupNameSelector:
+            matchControllerRef: true
     patches:
       - type: FromCompositeFieldPath
         fromFieldPath: "spec.subnet"
         toFieldPath: "spec.forProvider.addressSpace[0]"
       - type: PatchSet
         patchSetName: location
-      - type: PatchSet
-        patchSetName: resourceGroup
     readinessChecks:	
       - matchCondition:	
           status: 'True'	
@@ -55,15 +61,15 @@ spec:
         forProvider:
           addressPrefixes:
             - replace
-          resourceGroupName: replace
+          resourceGroupNameSelector:
+            matchControllerRef: true
           virtualNetworkNameSelector:
             matchControllerRef: true
+          privateLinkServiceNetworkPoliciesEnabled: false  
     patches:
       - type: FromCompositeFieldPath
         fromFieldPath: "spec.controlPlaneSubnet"
         toFieldPath: "spec.forProvider.addressPrefixes[0]"
-      - type: PatchSet
-        patchSetName: resourceGroup
       - type: ToCompositeFieldPath
         fromFieldPath: status.atProvider.id
         toFieldPath: "status.subnets.controlPlaneSubnetId"
@@ -86,15 +92,14 @@ spec:
         forProvider:
           addressPrefixes:
             - replace
-          resourceGroupName: replace
+          resourceGroupNameSelector:
+            matchControllerRef: true
           virtualNetworkNameSelector:
             matchControllerRef: true
     patches:
       - type: FromCompositeFieldPath
         fromFieldPath: "spec.workerNodeSubnet"
         toFieldPath: "spec.forProvider.addressPrefixes[0]"
-      - type: PatchSet
-        patchSetName: resourceGroup
       - type: ToCompositeFieldPath
         fromFieldPath: status.atProvider.id
         toFieldPath: "status.subnets.workerNodeSubnetId"
@@ -104,231 +109,7 @@ spec:
       - matchCondition:	
           status: 'True'	
           type: Ready	
-        type: MatchCondition                          
-  - name: firewall-subnet
-    base:
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: Subnet
-      metadata:
-        name: firewall-subnet
-        labels:
-          firewall-subnet: ""
-        annotations:
-          crossplane.io/external-name: AzureFirewallSubnet   
-      spec:
-        forProvider:
-          addressPrefixes:
-            - replace
-          resourceGroupName: replace
-          virtualNetworkNameSelector:
-            matchControllerRef: true
-    patches:
-      - type: FromCompositeFieldPath
-        fromFieldPath: "spec.firewallSubnet"
-        toFieldPath: "spec.forProvider.addressPrefixes[0]"
-      - type: PatchSet
-        patchSetName: resourceGroup
-      - type: ToCompositeFieldPath
-        fromFieldPath: "status.atProvider.id"
-        toFieldPath: "status.subnets.firewallSubnetId"
-        policy:
-          fromFieldPath: Optional
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition                  
-  - name: firewall-public-ip
-    base: 
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: PublicIP
-      metadata:
-        name: firewall-ip   
-      spec:
-        forProvider:
-          location: replace
-          resourceGroupName: replace   
-          sku: Standard
-          allocationMethod: Static
-    patches:
-      - type: PatchSet
-        patchSetName: location
-      - type: PatchSet
-        patchSetName: resourceGroup
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition        
-  - name: firewall
-    base:
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: Firewall
-      metadata:
-        name: firewall  
-      spec:
-        forProvider:
-          ipConfiguration:
-            - name: fw-config
-              publicIpAddressIdSelector:
-                matchControllerRef: true
-              subnetIdSelector:
-                matchLabels: 
-                  firewall-subnet: ""
-          location: replace
-          resourceGroupName: replace
-          skuTier: Standard
-          skuName: AZFW_VNet          
-    patches:
-      - type: PatchSet
-        patchSetName: location
-      - type: PatchSet
-        patchSetName: resourceGroup
-      - type: ToCompositeFieldPath
-        fromFieldPath: status.atProvider.ipConfiguration[0].privateIpAddress
-        toFieldPath: status.firewall.privateIpAddress
-        policy:
-          fromFieldPath: Optional
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition                  
-  - name: firewall-rule-collection
-    base:
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: FirewallNetworkRuleCollection
-      metadata:
-        name: firewall-rule-collection
-      spec:
-        forProvider:
-          action: Allow
-          azureFirewallNameSelector: 
-            matchControllerRef: true
-          priority: 100
-          resourceGroupName: replace
-          rule:
-            - destinationAddresses:
-                - "*"
-              destinationPorts:
-                - 1-65535
-              name: allow-all
-              protocols:
-                - Any
-              sourceAddresses:
-                - "*"
-    patches:
-      - type: PatchSet
-        patchSetName: resourceGroup
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition        
-  - name: route-table
-    base:    
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: RouteTable
-      metadata:
-        name: route-table   
-      spec:
-        forProvider:
-          location: replace
-          resourceGroupName: replace
-    patches:
-      - type: PatchSet
-        patchSetName: location
-      - type: PatchSet
-        patchSetName: resourceGroup
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition        
-  - name: egress-route
-    base:   
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: Route
-      metadata:
-        name: egress-route
-      spec:
-        forProvider:
-          addressPrefix: 0.0.0.0/0
-          nextHopType: VirtualAppliance
-          nextHopInIpAddress: replace
-          resourceGroupName: replace
-          routeTableNameSelector: 
-            matchControllerRef: true
-    patches:
-      - type: PatchSet
-        patchSetName: resourceGroup
-      - type: FromCompositeFieldPath
-        fromFieldPath: "status.firewall.privateIpAddress"
-        toFieldPath: "spec.forProvider.nextHopInIpAddress"
-        policy:
-          fromFieldPath: Required
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition                          
-  - name: vnet-route
-    base:
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: Route
-      metadata:
-        name: vnet-route  
-      spec:
-        forProvider:
-          addressPrefix: 10.0.0.0/16
-          nextHopType: VirtualNetworkGateway
-          resourceGroupName: replace
-          routeTableNameSelector: 
-            matchControllerRef: true
-    patches:
-      - type: PatchSet
-        patchSetName: resourceGroup
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition        
-  - name: control-plane-subnet-route-table-association
-    base:
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: SubnetRouteTableAssociation
-      metadata:
-        name: control-plane-subnet-association
-      spec:
-        forProvider:
-          routeTableIdSelector: 
-            matchControllerRef: true
-          subnetIdSelector:
-            matchLabels: 
-              control-plane-subnet: ""
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition              
-  - name: worker-node-subnet-route-table-association
-    base:
-      apiVersion: network.azure.upbound.io/v1beta1
-      kind: SubnetRouteTableAssociation
-      metadata:
-        name: worker-nodes-subnet-association
-      spec:
-        forProvider:
-          routeTableIdSelector: 
-            matchControllerRef: true
-          subnetIdSelector:
-            matchLabels: 
-              worker-node-subnet: ""
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition              
+        type: MatchCondition
   - name: aro
     base:
       apiVersion: tf.upbound.io/v1beta1
@@ -364,7 +145,13 @@ spec:
               key: creds
               name: azure-secret
               namespace: crossplane-system
-            source: SecretKey                              
+            source: SecretKey
+          - format: JSON
+            secretKeyRef:
+              key: pullsecret
+              name: pullsecret
+              namespace: crossplane-system
+            source: SecretKey                                          
     patches:          
 
     - type: FromCompositeFieldPath

@@ -32,7 +32,7 @@ variable "fips_validated_modules" {
   default = "Disabled"
 }
 
-variable "pull_secret" {
+variable "pullSecret" {
   type = string
   sensitive = true
   nullable = true

@@ -51,7 +51,7 @@ resource "azapi_resource" "aro_cluster" {
         domain               = "${var.domain != "" ? var.domain : random_string.domain.result}"
         fipsValidatedModules = var.fips_validated_modules
         resourceGroupId      = local.resource_group_id
-        pullSecret           = var.pull_secret
+        pullSecret           = var.pullSecret
       }
       networkProfile = {
         podCidr              = var.pod_cidr

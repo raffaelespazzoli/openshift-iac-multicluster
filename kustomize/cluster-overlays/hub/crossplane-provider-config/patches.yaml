@@ -1,0 +1,27 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: pull-secret
+spec:
+  serviceAccountRef:
+    name: default
+  patches:
+    pull-secret-patch:
+      targetObjectRef:
+        apiVersion: v1
+        kind: Secret
+        namespace: crossplane-system
+        name: pullsecret
+      sourceObjectRefs:
+      - apiVersion: v1
+        kind: Secret
+        namespace: openshift-config
+        name: pull-secret                
+      patchTemplate: |
+        data:
+          .dockerconfigjson: {{ (index (index . 1).data ".dockerconfigjson") }}
+          pullsecret: |
+            {
+              "pullsecret": "{{ (index (index . 1).data ".dockerconfigjson") }}"
+            }
+      patchType: application/merge-patch+json

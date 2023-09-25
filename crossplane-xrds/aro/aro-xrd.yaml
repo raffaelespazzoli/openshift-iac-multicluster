@@ -69,7 +69,10 @@ spec:
                     type: string 
                 required:
                 - secretName
-                - key                       
+                - key
+              pullSecret:
+                description: pullsecret for the new cluster
+                type: string                         
             required: 
               - location 
               - resourceGroup                    

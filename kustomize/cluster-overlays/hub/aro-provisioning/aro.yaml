@@ -3,7 +3,7 @@ kind: Aro
 metadata: 
   name: aro-decl
 spec:
-  resourceGroup: openenv-ql2j5
+  resourceGroup: openenv-zb7zb
   location: eastus
   servicePrincipalSecret:
     secretName: azure-sp
