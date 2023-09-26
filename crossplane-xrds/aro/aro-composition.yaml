@@ -24,7 +24,12 @@ spec:
           location: replace
     patches:      
       - type: PatchSet
-        patchSetName: location    
+        patchSetName: location
+      - type: ToCompositeFieldPath
+        fromFieldPath: metadata.annotations['crossplane.io/external-name']
+        toFieldPath: "status.resourceGroup.name"
+        policy:
+          fromFieldPath: Optional            
   - name: vnet
     base:
       apiVersion: network.azure.upbound.io/v1beta1
@@ -176,10 +181,12 @@ spec:
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.location"
       toFieldPath: "spec.forProvider.vars[1].value"
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.resourceGroup"
-      toFieldPath: "spec.forProvider.vars[2].value"
 
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.resourceGroup.name"
+      toFieldPath: "spec.forProvider.vars[2].value"
+      policy:
+        fromFieldPath: Required
     - type: FromCompositeFieldPath
       fromFieldPath: "status.subnets.controlPlaneSubnetId"
       toFieldPath: "spec.forProvider.vars[3].value"

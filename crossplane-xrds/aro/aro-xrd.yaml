@@ -26,9 +26,6 @@ spec:
               location:
                 description: "Azure region"
                 type: string
-              resourceGroup:
-                description: "Azure resource group in which all of the Azure resources will be created."
-                type: string
               subnet:
                 description: "the CIDR for the vnet used by ARO"
                 type: string
