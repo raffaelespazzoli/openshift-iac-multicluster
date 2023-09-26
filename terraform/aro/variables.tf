@@ -125,14 +125,10 @@ variable "worker_node_count" {
   default = 3
 }
 
-
-
 variable "api_server_visibility" {
   type = string
   default = "Private"
 }
-
-
 
 variable "ingress_profile_name" {
   type = string
