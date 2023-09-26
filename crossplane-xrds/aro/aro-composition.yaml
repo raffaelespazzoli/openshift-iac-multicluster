@@ -68,7 +68,7 @@ spec:
       spec:
         forProvider:
           principalId: "f1dd0a37-89c6-4e07-bcd1-ffd3d43d8875"
-          roleDefinitionName: Contributor
+          roleDefinitionName: "Network Contributor"
           scope: ""
     patches:
     - type: FromCompositeFieldPath
