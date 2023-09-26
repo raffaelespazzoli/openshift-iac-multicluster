@@ -49,11 +49,38 @@ spec:
         toFieldPath: "spec.forProvider.addressSpace[0]"
       - type: PatchSet
         patchSetName: location
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.vnet.id"
+        policy:
+          fromFieldPath: Optional        
     readinessChecks:	
       - matchCondition:	
           status: 'True'	
           type: Ready	
-        type: MatchCondition                             
+        type: MatchCondition
+  - name: role-assignment
+    base: 
+      apiVersion: authorization.azure.upbound.io/v1beta1
+      kind: RoleAssignment
+      metadata:
+        name: contributor-role-assignment
+      spec:
+        forProvider:
+          principalId: "f1dd0a37-89c6-4e07-bcd1-ffd3d43d8875"
+          roleDefinitionName: Contributor
+          scope: ""
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.vnet.id"
+      toFieldPath: "spec.forProvider.scope"
+      policy:
+        fromFieldPath: Required
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition                                                   
   - name: control-plane-subnet
     base:
       apiVersion: network.azure.upbound.io/v1beta1

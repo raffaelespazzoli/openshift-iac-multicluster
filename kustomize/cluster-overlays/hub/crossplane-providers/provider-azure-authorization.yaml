@@ -1,0 +1,6 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-azure-authorization
+spec:
+  package: xpkg.upbound.io/upbound/provider-azure-authorization:v0.36.0

@@ -38,6 +38,16 @@ data "azurerm_resource_group" "resource_group" {
   name                = var.resource_group_name
 }
 
+# data "azuread_service_principal" "aro_resource_provisioner" {
+#     display_name            = "Azure Red Hat OpenShift RP"
+# }
+
+# resource "azurerm_role_assignment" "vnet" {
+#     scope                   = azurerm_virtual_network.main.id
+#     role_definition_name    = "Network Contributor"
+#     principal_id            = data.azuread_service_principal.aro_resource_provisioner.object_id
+# }
+
 resource "azapi_resource" "aro_cluster" {
   name      = var.name
   location  = var.location
