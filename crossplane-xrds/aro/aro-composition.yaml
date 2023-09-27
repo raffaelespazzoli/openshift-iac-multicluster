@@ -67,7 +67,7 @@ spec:
         name: contributor-role-assignment
       spec:
         forProvider:
-          principalId: "f1dd0a37-89c6-4e07-bcd1-ffd3d43d8875"
+          principalId: "ebeeb6e8-af58-4204-9e58-efca7922a3cc"
           roleDefinitionName: "Network Contributor"
           scope: ""
     patches:
