@@ -103,4 +103,21 @@ resource "azapi_resource" "aro_cluster" {
         tags
     ]
   }
+
+  timeouts {
+    create = "120m"
+    update = "60m"
+    delete = "56m"
+  }
+}
+
+resource "azapi_resource" "admin_secret" {
+  type = "Microsoft.RedHatOpenShift/openshiftclusters/secret@2023-07-01-preview"
+  name = "admin_secret"
+  parent_id = azapi_resource.aro_cluster.id
+  body = jsonencode({
+    properties = {
+      secretResources = "string"
+    }
+  })
 }
