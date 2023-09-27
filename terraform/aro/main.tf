@@ -105,9 +105,9 @@ resource "azapi_resource" "aro_cluster" {
   }
 
   timeouts {
-    create = "120m"
-    update = "60m"
-    delete = "56m"
+    create = "90m"
+    update = "30m"
+    delete = "60m"
   }
 }
 
