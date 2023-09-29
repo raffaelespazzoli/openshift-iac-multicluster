@@ -12,3 +12,4 @@ spec:
       source: Filesystem
       fs:
         path: /vault/secrets/token
+        

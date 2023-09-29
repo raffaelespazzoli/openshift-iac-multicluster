@@ -13,5 +13,8 @@ spec:
           path: /vault/secrets/token
     server: https://vault.vault.svc:8200
     mountPath: crossplane-secrets/
-    version: v2     
+    version: v2
+    caBundle:
+      fs:
+        path: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt     
   defaultScope: ""
