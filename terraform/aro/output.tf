@@ -1,11 +1,11 @@
 output "apiURL" {
   value = azapi_resource.aro_cluster.body
-  sensitive = false
+  sensitive = true
 }
 
 output "consoleURL" {
   value = azapi_resource.aro_cluster.response_export_values
-  sensitive = false
+  sensitive = true
 }
 
 output "adminUsername" {
