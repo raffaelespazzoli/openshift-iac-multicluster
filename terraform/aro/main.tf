@@ -102,11 +102,18 @@ resource "azapi_resource" "aro_cluster" {
   }
 }
 
-resource "azapi_resource" "admin_secret" {
+resource "azapi_resource_action" "kubeconfig" {
   type = "Microsoft.RedHatOpenShift/openshiftclusters/secret@2023-07-01-preview"
-  name = "admin_secret"
-  parent_id = azapi_resource.aro_cluster.id
+  resource_id = azapi_resource.aro_cluster.id
   action      = "listAdminCredentials"
+  method      = "POST"  
+  response_export_values = ["*"]
+}
+
+resource "azapi_resource_action" "admin_credentials" {
+  type = "Microsoft.RedHatOpenShift/openshiftclusters/secret@2023-07-01-preview"
+  resource_id = azapi_resource.aro_cluster.id
+  action      = "listCredentials"
   method      = "POST"  
   response_export_values = ["*"]
 }

@@ -9,16 +9,16 @@ output "consoleURL" {
 }
 
 output "kubeconfig" {
-  value = base64decode(jsondecode(azapi_resource_action.admin_secret.output).kubeconfig)
+  value = base64decode(jsondecode(azapi_resource_action.kubeconfig.output).kubeconfig)
   sensitive = true
 }
 
 output "adminUsername" {
-  value = "username"
+  value = jsondecode(azapi_resource_action.admin_credentials.output).kubeadminUsername
   sensitive = true
 }
 
 output "adminPassword" {
-  value = "password"
+  value = jsondecode(azapi_resource_action.admin_credentials.output).kubeadminPassword
   sensitive = true
 }
