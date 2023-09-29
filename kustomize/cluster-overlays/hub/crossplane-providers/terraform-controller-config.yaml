@@ -5,7 +5,6 @@ metadata:
   labels:
     app: crossplane-provider-terraform
 spec:
-  image: crossplane/provider-terraform-controller:v0.3.0
   args:
     - -d
     - --enable-external-secret-stores
