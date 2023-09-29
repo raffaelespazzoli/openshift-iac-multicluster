@@ -17,5 +17,5 @@ spec:
     caBundle:
       fs:
         path: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
-      source: fs       
+      source: Filesystem       
   defaultScope: ""
