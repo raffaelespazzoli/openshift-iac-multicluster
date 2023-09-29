@@ -44,7 +44,7 @@ resource "azapi_resource" "aro_cluster" {
   parent_id = data.azurerm_resource_group.resource_group.id
   type      = "Microsoft.RedHatOpenShift/openShiftClusters@2022-04-01"
   tags      = var.tags
-  
+
   body = jsonencode({
     properties = {
       clusterProfile = {
@@ -87,6 +87,7 @@ resource "azapi_resource" "aro_cluster" {
       ]
     }
   })
+
 
   lifecycle {
     ignore_changes = [

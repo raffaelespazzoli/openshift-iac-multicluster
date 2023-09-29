@@ -149,6 +149,10 @@ spec:
       metadata:
         name: aro
       spec:
+        publishConnectionDetailsTo:
+          name: aro-tf
+          configRef:
+            name: vault 
         forProvider:
           # Use any module source supported by terraform init -from-module.
           source: Remote
