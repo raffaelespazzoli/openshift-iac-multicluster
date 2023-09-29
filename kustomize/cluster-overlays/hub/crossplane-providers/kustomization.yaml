@@ -10,3 +10,4 @@ resources:
   - ./controller-config.yaml
   - ./store-config.yaml
   - ./vault-config.yaml
+  - ./terraform-controller-config.yaml
