@@ -5,4 +5,4 @@ metadata:
 spec:
   package: xpkg.upbound.io/upbound/provider-terraform:v0.10.0
   controllerConfigRef:
-    name: vault-config  
+    name: terraform-config  
