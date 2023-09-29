@@ -1,10 +1,15 @@
 output "apiURL" {
-  value = azapi_resource.aro_cluster.body
+  value = jsondecode(azapi_resource.aro_cluster.body).apiserverProfile.url
   sensitive = true
 }
 
 output "consoleURL" {
-  value = azapi_resource.aro_cluster.response_export_values
+  value = jsondecode(azapi_resource.aro_cluster.body).consoleProfile.url
+  sensitive = true
+}
+
+output "kubeconfig" {
+  value = base64decode(jsondecode(azapi_resource_action.admin_secret.output).kubeconfig)
   sensitive = true
 }
 

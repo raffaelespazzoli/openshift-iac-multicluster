@@ -106,9 +106,7 @@ resource "azapi_resource" "admin_secret" {
   type = "Microsoft.RedHatOpenShift/openshiftclusters/secret@2023-07-01-preview"
   name = "admin_secret"
   parent_id = azapi_resource.aro_cluster.id
-  body = jsonencode({
-    properties = {
-      secretResources = "string"
-    }
-  })
+  action      = "listAdminCredentials"
+  method      = "POST"  
+  response_export_values = ["*"]
 }

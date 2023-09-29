@@ -21,3 +21,4 @@ terraform/aro/terraform.tfstate.backup
 terraform/aro/pull-secret.json
 terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.74.0/linux_amd64/terraform-provider-azurerm_v3.74.0_x5
 terraform/aro/.terraform.tfstate.lock.info
+terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.75.0/linux_amd64/terraform-provider-azurerm_v3.75.0_x5
