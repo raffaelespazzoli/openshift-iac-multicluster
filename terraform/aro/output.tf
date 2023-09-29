@@ -1,10 +1,10 @@
 output "apiURL" {
-  value = jsondecode(azapi_resource.aro_cluster.body).apiserverProfile.url
+  value = jsondecode(azapi_resource.aro_cluster.body).properties.apiserverProfile.url
   sensitive = true
 }
 
 output "consoleURL" {
-  value = jsondecode(azapi_resource.aro_cluster.body).consoleProfile.url
+  value = jsondecode(azapi_resource.aro_cluster.body).properties.consoleProfile.url
   sensitive = true
 }
 
