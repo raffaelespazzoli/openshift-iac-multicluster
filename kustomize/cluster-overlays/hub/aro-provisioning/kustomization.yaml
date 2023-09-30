@@ -5,6 +5,7 @@ namespace: aro-decl
 resources:
 - ./namespace.yaml
 - ./aro.yaml
+- ./auto-import-secret.yaml
 
 helmGlobals:
   chartHome: ../../../../helm/charts
