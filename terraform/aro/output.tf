@@ -3,15 +3,15 @@ output "properties" {
   sensitive = true
 }
 
-# output "apiURL" {
-#   value = jsondecode(azapi_resource.aro_cluster.body).properties.apiserverProfile.url
-#   sensitive = true
-# }
+output "apiURL" {
+  value = jsondecode(azapi_resource.aro_cluster.output).properties.apiserverProfile.url
+  sensitive = true
+}
 
-# output "consoleURL" {
-#   value = jsondecode(azapi_resource.aro_cluster.body).properties.consoleProfile.url
-#   sensitive = true
-# }
+output "consoleURL" {
+  value = jsondecode(azapi_resource.aro_cluster.output).properties.consoleProfile.url
+  sensitive = true
+}
 
 output "kubeconfig" {
   value = base64decode(jsondecode(azapi_resource_action.kubeconfig.output).kubeconfig)
