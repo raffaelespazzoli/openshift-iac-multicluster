@@ -2,8 +2,9 @@ apiVersion: cluster.open-cluster-management.io/v1
 kind: ManagedCluster
 metadata:
   labels:
-    cloud: BareMetal
-    vendor: OpenShift
+    {{- with .Values.labels }}
+    .
+    {{- end }}
     name: {{ .Release.Name }}
     cluster.open-cluster-management.io/clusterset: 'default'
     {{- include "cluster-registration.labels" . | nindent 4 }}

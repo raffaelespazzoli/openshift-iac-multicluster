@@ -38,4 +38,7 @@ helmCharts:
     namespace: pool4
     valuesInline: 
       clusterSet: default
-      repoURL: https://github.com/raffaelespazzoli/openshift-iac-multicluster.git          
+      repoURL: https://github.com/raffaelespazzoli/openshift-iac-multicluster.git
+      labels:
+        cloud: BareMetal
+        vendor: OpenShift                

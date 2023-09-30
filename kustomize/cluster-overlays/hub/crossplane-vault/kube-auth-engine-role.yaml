@@ -13,6 +13,6 @@
           targetNamespaces:
             targetNamespaceSelector:
               matchLabels:
-                kubernetes.io/metadata.name: crossplane-system
+                crossplane-secrets: ""
           targetServiceAccounts:
           - "*"
