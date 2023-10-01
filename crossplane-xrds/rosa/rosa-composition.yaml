@@ -335,12 +335,12 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition
-  - name: aro
+  - name: rosa
     base:
       apiVersion: tf.upbound.io/v1beta1
       kind: Workspace
       metadata:
-        name: aro
+        name: rosa
       spec:
         forProvider:
           # Use any module source supported by terraform init -from-module.
