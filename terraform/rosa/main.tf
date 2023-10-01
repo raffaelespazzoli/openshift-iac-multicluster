@@ -25,11 +25,6 @@ terraform {
       source  = "terraform-redhat/rhcs"
     }
   }
-  backend "kubernetes" {
-    secret_suffix    = "state"
-    in_cluster_config = true
-    namespace = "crossplane-system"
-  }    
 }
 
 provider "rhcs" {
