@@ -52,12 +52,12 @@ spec:
                 type: object
                 description: "a reference to a configmap containing json-formatted file with the availability zones"
                 properties:
-                  secretName:
+                  configMapName:
                     type: string
                   key:
                     type: string 
                 required:
-                - secretName
+                - configMapName
                 - key                                                    
             required: 
               - region
