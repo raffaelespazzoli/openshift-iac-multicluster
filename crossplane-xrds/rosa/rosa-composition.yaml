@@ -356,8 +356,6 @@ spec:
             value: ""         
           - key: region
             value: ""
-          - key: availability_zones
-            value: ""
           varFiles:  
           - secretKeyRef:
               key: key
@@ -370,7 +368,13 @@ spec:
               name: name
               namespace: namespace
             source: SecretKey
-            format: JSON                
+            format: JSON
+          - configMapKeyRef:
+              key: key
+              name: name
+              namespace: namespace
+            source: ConfigMapKey
+            format: JSON                            
     patches: 
 
     - type: CombineFromComposite
@@ -425,7 +429,19 @@ spec:
 
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
-      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.namespace"      
+      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.namespace"    
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.availabilityZones.configMapName"
+      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.name"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.availabilityZones.key"
+      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.key"
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
+      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.namespace"         
 
 
     readinessChecks:	

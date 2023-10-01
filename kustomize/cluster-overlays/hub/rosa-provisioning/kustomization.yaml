@@ -6,6 +6,15 @@ resources:
 - ./namespace.yaml
 - ./rosa.yaml
 
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: availabilityZones
+  files:
+    - availabilityZones=availabilityZones.json
+
+
 # helmGlobals:
 #   chartHome: ../../../../helm/charts
 

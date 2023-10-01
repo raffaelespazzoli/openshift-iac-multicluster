@@ -26,11 +26,6 @@ spec:
               region:
                 description: "AWS region"
                 type: string
-              availabilityZones:
-                description: "availability zones in which the cluster will be installed"
-                type: array
-                items:
-                  type: string
               OCMTokenSecret:
                 type: object
                 description: "a reference to a secret containing json-formatted file with the ocm secret"
@@ -52,7 +47,18 @@ spec:
                     type: string 
                 required:
                 - secretName
-                - key                                    
+                - key
+              availabilityZones:
+                type: object
+                description: "a reference to a configmap containing json-formatted file with the availability zones"
+                properties:
+                  secretName:
+                    type: string
+                  key:
+                    type: string 
+                required:
+                - secretName
+                - key                                                    
             required: 
               - region
               - availabilityZones
