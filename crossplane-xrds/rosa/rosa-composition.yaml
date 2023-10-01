@@ -433,15 +433,15 @@ spec:
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.availabilityZones.configMapName"
-      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.name"
+      toFieldPath: "spec.forProvider.varFiles[2].configMapKeyRef.name"
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.availabilityZones.key"
-      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.key"
+      toFieldPath: "spec.forProvider.varFiles[2].configMapKeyRef.key"
 
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
-      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.namespace"         
+      toFieldPath: "spec.forProvider.varFiles[2].configMapKeyRef.namespace"         
 
 
     readinessChecks:	
