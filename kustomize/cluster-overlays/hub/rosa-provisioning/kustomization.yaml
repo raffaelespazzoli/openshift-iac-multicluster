@@ -10,7 +10,7 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-- name: availabilityZones
+- name: availability-zones
   files:
     - availabilityZones=availabilityZones.json
 

@@ -5,7 +5,7 @@ metadata:
 spec:
   region: us-east-1
   availabilityZones:
-    configMapName: availabilityZones
+    configMapName: availability-zones
     key: availabilityZones
   OCMTokenSecret:
     secretName: ocm-token
