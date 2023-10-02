@@ -3,8 +3,8 @@ kind: Kustomization
 namespace: crossplane-system
 resources:
   - ./provider-azure-azure.yaml
-  - ./provider-azure-network.yaml
-  - ./provider-azure-authorization.yaml  
+  #- ./provider-azure-network.yaml
+  #- ./provider-azure-authorization.yaml  
   - ./terraform-provider.yaml
   - ./provider-aws-ec2.yaml
   - ./controller-config.yaml
