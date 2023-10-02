@@ -1,8 +1,3 @@
-output "properties" {
-  value = jsondecode(azapi_resource.aro_cluster.body).properties
-  sensitive = true
-}
-
 output "apiURL" {
   value = jsondecode(azapi_resource.aro_cluster.output).properties.apiserverProfile.url
   sensitive = true

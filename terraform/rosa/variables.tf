@@ -28,8 +28,8 @@ variable "tags" {
   default     = null
 }
 
-variable "aws_subnet_ids" {
-  type    = list(string)
+variable "aws_subnet_id" {
+  type    = string
 }
 
 variable "admin_username" {

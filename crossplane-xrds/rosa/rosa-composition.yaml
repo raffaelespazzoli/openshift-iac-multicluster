@@ -101,6 +101,11 @@ spec:
         toFieldPath: spec.forProvider.tags.Name    
       - type: PatchSet
         patchSetName: region
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnet.privateSubnetID"
+        policy:
+          fromFieldPath: Optional        
     readinessChecks:	
       - matchCondition:	
           status: 'True'	
@@ -356,10 +361,12 @@ spec:
             value: ""
           - key: account_role_prefix
             value: ""
-          - key: name
+          - key: cluster_name
             value: ""         
-          - key: region
+          - key: cloud_region
             value: ""
+          - key: aws_subnet_id
+            value: ""            
           varFiles:  
           - secretKeyRef:
               key: key
@@ -399,7 +406,13 @@ spec:
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.region"
-      toFieldPath: "spec.forProvider.vars[3].value"                 
+      toFieldPath: "spec.forProvider.vars[3].value" 
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.privateSubnetID"
+      toFieldPath: "spec.forProvider.vars[4].value"
+      policy:
+        fromFieldPath: Required                      
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.adminSecret.secretName"

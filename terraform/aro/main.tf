@@ -79,7 +79,9 @@ resource "azapi_resource" "aro_cluster" {
   lifecycle {
     ignore_changes = [
         tags,
-        body
+        body,
+        response_export_values,
+        output
     ]
   }
 
