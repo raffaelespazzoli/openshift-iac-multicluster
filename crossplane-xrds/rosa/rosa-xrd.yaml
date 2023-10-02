@@ -50,5 +50,4 @@ spec:
                 - key                                                    
             required: 
               - region
-              - availabilityZones
-              - OCMTokenSecret                
+              - availabilityZones                
