@@ -342,6 +342,10 @@ spec:
       metadata:
         name: rosa
       spec:
+        publishConnectionDetailsTo:
+          name: rosa-tf
+          configRef:
+            name: vault      
         forProvider:
           # Use any module source supported by terraform init -from-module.
           source: Remote
