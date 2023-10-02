@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: crossplane-system
 resources:
-  - ./provider-azure-azure.yaml
+  #- ./provider-azure-azure.yaml
   #- ./provider-azure-network.yaml
   #- ./provider-azure-authorization.yaml  
   - ./terraform-provider.yaml
