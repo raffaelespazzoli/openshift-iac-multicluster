@@ -14,15 +14,6 @@ configMapGenerator:
   files:
     - availabilityZones=availabilityZones.json
 
-secretGenerator:
-- name: cluster-admin
-  literals:
-  - username="admin"
-  - password="admin"
-  files:
-  - admin-json=admin-secret.json    
-
-
 # helmGlobals:
 #   chartHome: ../../../../helm/charts
 
