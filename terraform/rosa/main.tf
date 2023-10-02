@@ -14,24 +14,6 @@
 # limitations under the License.
 #
 
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.20.0"
-    }
-    rhcs = {
-      version = ">= 1.1.0"
-      source  = "terraform-redhat/rhcs"
-    }
-  }
-}
-
-provider "rhcs" {
-  token = var.token
-  url   = var.url
-}
-
 locals {
   sts_roles = {
     role_arn         = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.account_role_prefix}-Installer-Role",

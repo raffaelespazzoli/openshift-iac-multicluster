@@ -182,12 +182,6 @@ spec:
             source: SecretKey
           - format: JSON
             secretKeyRef:
-              key: creds
-              name: azure-secret
-              namespace: crossplane-system
-            source: SecretKey
-          - format: JSON
-            secretKeyRef:
               key: pullsecret
               name: pullsecret
               namespace: crossplane-system
