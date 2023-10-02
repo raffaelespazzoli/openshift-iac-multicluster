@@ -3,6 +3,6 @@ kind: Provider
 metadata:
   name: provider-azure-azure
 spec:
-  package: xpkg.upbound.io/upbound/provider-azure-azure:v0.37.1
+  package: xpkg.upbound.io/upbound/provider-azure-azure:v0.37.0
   controllerConfigRef:
     name: vault-config  
