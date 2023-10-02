@@ -363,12 +363,6 @@ spec:
               namespace: namespace
             source: SecretKey
             format: JSON
-          - secretKeyRef:
-              key: key
-              name: name
-              namespace: namespace
-            source: SecretKey
-            format: JSON
           - configMapKeyRef:
               key: key
               name: name
@@ -404,40 +398,28 @@ spec:
       toFieldPath: "spec.forProvider.vars[3].value"                 
 
     - type: FromCompositeFieldPath
-      fromFieldPath: "spec.OCMSecret.secretName"
+      fromFieldPath: "spec.adminSecret.secretName"
       toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.name"
 
     - type: FromCompositeFieldPath
-      fromFieldPath: "spec.OCMSecret.key"
+      fromFieldPath: "spec.adminSecret.key"
       toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.key"
 
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
-      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.adminSecret.secretName"
-      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.name"
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.adminSecret.key"
-      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.key"
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
-      toFieldPath: "spec.forProvider.varFiles[1].secretKeyRef.namespace"    
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"    
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.availabilityZones.configMapName"
-      toFieldPath: "spec.forProvider.varFiles[2].configMapKeyRef.name"
+      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.name"
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.availabilityZones.key"
-      toFieldPath: "spec.forProvider.varFiles[2].configMapKeyRef.key"
+      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.key"
 
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
-      toFieldPath: "spec.forProvider.varFiles[2].configMapKeyRef.namespace"         
+      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.namespace"         
 
 
     readinessChecks:	

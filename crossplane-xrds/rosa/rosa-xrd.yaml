@@ -26,17 +26,6 @@ spec:
               region:
                 description: "AWS region"
                 type: string
-              OCMTokenSecret:
-                type: object
-                description: "a reference to a secret containing json-formatted file with the ocm secret"
-                properties:
-                  secretName:
-                    type: string
-                  key:
-                    type: string 
-                required:
-                - secretName
-                - key
               adminSecret:
                 type: object
                 description: "a reference to a secret containing json-formatted file with the admin secret keys: username, password"
