@@ -23,3 +23,4 @@ terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.74.
 terraform/aro/.terraform.tfstate.lock.info
 terraform/aro/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.75.0/linux_amd64/terraform-provider-azurerm_v3.75.0_x5
 kustomize/cluster-overlays/hub/rosa-provisioning/admin-secret.json
+terraform/aro/azure-credentials.json

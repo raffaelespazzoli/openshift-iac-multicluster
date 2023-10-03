@@ -80,8 +80,7 @@ resource "azapi_resource" "aro_cluster" {
     ignore_changes = [
         tags,
         body,
-        response_export_values,
-        output
+        response_export_values
     ]
   }
 
