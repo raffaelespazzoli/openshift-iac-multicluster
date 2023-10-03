@@ -103,7 +103,7 @@ spec:
         patchSetName: region
       - type: ToCompositeFieldPath
         fromFieldPath: status.atProvider.id
-        toFieldPath: "status.subnet.privateSubnetID"
+        toFieldPath: "status.subnets.privateSubnetID"
         policy:
           fromFieldPath: Optional        
     readinessChecks:	
