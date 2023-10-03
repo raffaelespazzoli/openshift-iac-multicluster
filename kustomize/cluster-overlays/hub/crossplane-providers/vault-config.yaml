@@ -4,6 +4,10 @@ metadata:
   name: vault
 spec:
   server: https://vault.vault.svc:8200
+  caBundle:
+    source: Filesystem
+    fs:
+      path: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt 
   mountPath: crossplane-secrets/
   version: v2
   auth:
