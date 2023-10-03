@@ -14,7 +14,7 @@ spec:
         namespace: crossplane-system
         name: azure-secret
         key: creds
-    - filename: aws-credentials.json
+    - filename: aws-credentials
       source: Secret
       secretRef:
         namespace: crossplane-system
@@ -58,6 +58,10 @@ spec:
       token = file("ocm-token.json")
       url   = "https://api.openshift.com"
     }
+
+    provider "aws" {
+      shared_credentials_files = ["aws-credentials"]
+    }    
 
     provider "azurerm" {
       features {}
