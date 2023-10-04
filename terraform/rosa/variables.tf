@@ -28,6 +28,12 @@ variable "tags" {
   default     = null
 }
 
+variable "path" {
+  description = "(Optional) The arn path for the account/operator roles as well as their policies."
+  type        = string
+  default     = null
+}
+
 variable "aws_subnet_id" {
   type    = string
 }
@@ -38,4 +44,14 @@ variable "admin_username" {
 
 variable "admin_password" {
   type = string
+}
+
+variable "ocm_environment" {
+  type    = string
+  default = "production"
+}
+
+variable "openshift_version" {
+  type = string
+  default = ""
 }
