@@ -37,20 +37,12 @@ spec:
                 required:
                 - secretName
                 - key
-              availabilityZones:
-                type: object
-                description: "a reference to a configmap containing json-formatted file with the availability zones"
-                properties:
-                  configMapName:
-                    type: string
-                  key:
-                    type: string 
-                required:
-                - configMapName
-                - key                                                    
+              availabilityZone:
+                type: string
+                description: "the AZ in which the cluster will run, only one AZ for this example"                                                    
             required: 
               - region
-              - availabilityZones
+              - availabilityZone
           status:
             description: A Status represents the observed state
             properties:

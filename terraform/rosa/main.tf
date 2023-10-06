@@ -56,7 +56,7 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
   name               = var.cluster_name
   cloud_region       = var.cloud_region
   aws_account_id     = data.aws_caller_identity.current.account_id
-  availability_zones = var.availability_zones
+  availability_zones = [var.availability_zone]
   properties = {
     rosa_creator_arn = data.aws_caller_identity.current.arn
   }
@@ -71,7 +71,6 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
     password = var.admin_password
     username = var.admin_username
   }
-
 }
 
 resource "rhcs_cluster_wait" "rosa_cluster" {

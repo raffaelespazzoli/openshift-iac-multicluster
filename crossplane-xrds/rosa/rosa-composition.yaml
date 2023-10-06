@@ -7,6 +7,11 @@ spec:
     apiVersion: crossplane.redhat-cop.com/v1alpha1
     kind: xRosa
   patchSets:
+  - name: availabilityZone
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.availabilityZone"
+      toFieldPath: "spec.forProvider.availabilityZone"  
   - name: region
     patches:
     - type: FromCompositeFieldPath
@@ -58,6 +63,7 @@ spec:
             Name: replace          
           vpcIdSelector:
             matchControllerRef: true
+          availabilityZone: replace  
     patches:
       - type: CombineFromComposite
         combine:
@@ -69,6 +75,8 @@ spec:
         toFieldPath: spec.forProvider.tags.Name    
       - type: PatchSet
         patchSetName: region
+      - type: PatchSet
+        patchSetName: availabilityZone        
     readinessChecks:	
       - matchCondition:	
           status: 'True'	
@@ -90,6 +98,7 @@ spec:
             Name: replace          
           vpcIdSelector:
             matchControllerRef: true
+          availabilityZone: replace  
     patches:
       - type: CombineFromComposite
         combine:
@@ -105,7 +114,9 @@ spec:
         fromFieldPath: status.atProvider.id
         toFieldPath: "status.subnets.privateSubnetID"
         policy:
-          fromFieldPath: Optional        
+          fromFieldPath: Optional
+      - type: PatchSet
+        patchSetName: availabilityZone                  
     readinessChecks:	
       - matchCondition:	
           status: 'True'	
@@ -366,19 +377,15 @@ spec:
           - key: cloud_region
             value: ""
           - key: aws_subnet_id
-            value: ""            
+            value: ""  
+          - key: availability_zone
+            value: ""                       
           varFiles:  
           - secretKeyRef:
               key: key
               name: name
               namespace: namespace
             source: SecretKey
-            format: JSON
-          - configMapKeyRef:
-              key: key
-              name: name
-              namespace: namespace
-            source: ConfigMapKey
             format: JSON                            
     patches: 
 
@@ -412,7 +419,11 @@ spec:
       fromFieldPath: "status.subnets.privateSubnetID"
       toFieldPath: "spec.forProvider.vars[4].value"
       policy:
-        fromFieldPath: Required                      
+        fromFieldPath: Required
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "spec.availabilityZone"
+      toFieldPath: "spec.forProvider.vars[5].value"                               
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.adminSecret.secretName"
@@ -424,20 +435,7 @@ spec:
 
     - type: FromCompositeFieldPath
       fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
-      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"    
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.availabilityZones.configMapName"
-      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.name"
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.availabilityZones.key"
-      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.key"
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "metadata.labels['crossplane.io/claim-namespace']"
-      toFieldPath: "spec.forProvider.varFiles[1].configMapKeyRef.namespace"         
-
+      toFieldPath: "spec.forProvider.varFiles[0].secretKeyRef.namespace"            
 
     readinessChecks:	
       - matchCondition:	

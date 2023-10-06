@@ -17,9 +17,8 @@ variable "cloud_region" {
   default = "us-east-2"
 }
 
-variable "availability_zones" {
-  type    = list(string)
-  default = ["us-east-2a"]
+variable "availability_zone" {
+  type    = string
 }
 
 variable "tags" {

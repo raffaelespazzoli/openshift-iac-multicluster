@@ -4,9 +4,7 @@ metadata:
   name: rosa-decl
 spec:
   region: us-east-1
-  availabilityZones:
-    configMapName: availability-zones
-    key: availabilityZones
+  availabilityZone: us-east-1a
   adminSecret:
     secretName: cluster-admin
     key: admin-json   
