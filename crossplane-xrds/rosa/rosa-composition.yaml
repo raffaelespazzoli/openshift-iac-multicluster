@@ -133,7 +133,7 @@ spec:
             Name: replace          
           subnetIdSelector:
             matchLabels:
-              public-subnet: ""
+              public-subnet: "a"
           allocationIdSelector:
             matchControllerRef: true              
     patches:
@@ -243,65 +243,7 @@ spec:
             matchControllerRef: true
           routeTableIdSelector:
             matchLabels:
-              public: ""
-
-  - name: public-route-table-association
-    base: 
-      apiVersion: ec2.aws.upbound.io/v1beta1
-      kind: RouteTableAssociation
-      metadata:
-        name: public-route-table-association
-      spec:
-        forProvider:
-          region: replace
-          tags:
-            Name: replace          
-          routeTableIdSelector:
-            matchLabels:
-              public: ""
-          subnetIdSelector:
-            matchLabels:
-              public-subnet: ""
-    patches:
-      - type: PatchSet
-        patchSetName: name-tag
-      - type: PatchSet
-        patchSetName: region
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition
-
-       
-
-  - name: private-route-table-association
-    base: 
-      apiVersion: ec2.aws.upbound.io/v1beta1
-      kind: RouteTableAssociation
-      metadata:
-        name: private-route-table-association
-      spec:
-        forProvider:
-          region: replace
-          tags:
-            Name: replace          
-          routeTableIdSelector:
-            matchLabels:
-              private: ""
-          subnetIdSelector:
-            matchLabels:
-              private-subnet: ""
-    patches:
-      - type: PatchSet
-        patchSetName: name-tag
-      - type: PatchSet
-        patchSetName: region
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition              
+              public: ""              
 
 # zone a
 
@@ -312,7 +254,7 @@ spec:
       metadata:
         name: public-a
         labels:
-          public-subnet: ""
+          public-subnet: "a"
       spec:
         forProvider:
           cidrBlock: 10.0.1.0/24
@@ -339,6 +281,35 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition
+
+  - name: public-route-table-association-a
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: public-route-table-association-a
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              public: ""
+          subnetIdSelector:
+            matchLabels:
+              public-subnet: "a"
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+
   - name: private-subnet-a
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
@@ -346,7 +317,7 @@ spec:
       metadata:
         name: private-a
         labels:
-          private-subnet: ""
+          private-subnet: "a"
       spec:
         forProvider:
           cidrBlock: 10.0.4.0/24
@@ -374,6 +345,34 @@ spec:
           type: Ready	
         type: MatchCondition
 
+  - name: private-route-table-association-a
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: private-route-table-association-a
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              private: ""
+          subnetIdSelector:
+            matchLabels:
+              private-subnet: "a"
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition        
+
 # zone b
 
   - name: public-subnet-b
@@ -383,7 +382,7 @@ spec:
       metadata:
         name: public-b
         labels:
-          public-subnet: ""
+          public-subnet: "b"
       spec:
         forProvider:
           cidrBlock: 10.0.2.0/24
@@ -410,6 +409,35 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition
+
+  - name: public-route-table-association-b
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: public-route-table-association-b
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              public: ""
+          subnetIdSelector:
+            matchLabels:
+              public-subnet: "b"
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+
   - name: private-subnet-b
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
@@ -417,7 +445,7 @@ spec:
       metadata:
         name: private-b
         labels:
-          private-subnet: ""
+          private-subnet: "b"
       spec:
         forProvider:
           cidrBlock: 10.0.5.0/24
@@ -445,6 +473,34 @@ spec:
           type: Ready	
         type: MatchCondition
 
+  - name: private-route-table-association-b
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: private-route-table-association-b
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              private: ""
+          subnetIdSelector:
+            matchLabels:
+              private-subnet: "b"
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition        
+
 #zone c
 
   - name: public-subnet-c
@@ -454,7 +510,7 @@ spec:
       metadata:
         name: public-c
         labels:
-          public-subnet: ""
+          public-subnet: "c"
       spec:
         forProvider:
           cidrBlock: 10.0.3.0/24
@@ -482,6 +538,34 @@ spec:
           type: Ready	
         type: MatchCondition
 
+  - name: public-route-table-association-c
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: public-route-table-association-c
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              public: ""
+          subnetIdSelector:
+            matchLabels:
+              public-subnet: "c"
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition        
+
   - name: private-subnet-c
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
@@ -489,7 +573,7 @@ spec:
       metadata:
         name: private-c
         labels:
-          private-subnet: ""
+          private-subnet: "c"
       spec:
         forProvider:
           cidrBlock: 10.0.6.0/24
@@ -515,7 +599,35 @@ spec:
       - matchCondition:	
           status: 'True'	
           type: Ready	
-        type: MatchCondition        
+        type: MatchCondition     
+
+  - name: private-route-table-association-c
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: private-route-table-association-c
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace          
+          routeTableIdSelector:
+            matchLabels:
+              private: ""
+          subnetIdSelector:
+            matchLabels:
+              private-subnet: "c"
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition           
 
   - name: rosa
     base:
