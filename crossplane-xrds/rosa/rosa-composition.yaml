@@ -16,7 +16,7 @@ spec:
         strategy: string
         string:
           fmt: "%sa"
-      toFieldPath: availabilityZone
+      toFieldPath: spec.forProvider.availabilityZone
   - name: availability_zone_b
     patches:
     - type: CombineFromComposite
@@ -26,7 +26,7 @@ spec:
         strategy: string
         string:
           fmt: "%sb"
-      toFieldPath: availabilityZone
+      toFieldPath: spec.forProvider.availabilityZone
   - name: availability_zone_c
     patches:
     - type: CombineFromComposite
@@ -36,7 +36,7 @@ spec:
         strategy: string
         string:
           fmt: "%sc"
-      toFieldPath: availabilityZone              
+      toFieldPath: spec.forProvider.availabilityZone              
   - name: region
     patches:
     - type: FromCompositeFieldPath
@@ -119,6 +119,7 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition
+
   - name: nat-gateway
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
