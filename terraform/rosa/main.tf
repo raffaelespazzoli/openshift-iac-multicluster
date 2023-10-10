@@ -72,6 +72,7 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
     username = var.admin_username
   }
   private = false
+  multi_az = true
 }
 
 resource "rhcs_cluster_wait" "rosa_cluster" {
