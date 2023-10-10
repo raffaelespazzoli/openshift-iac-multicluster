@@ -71,7 +71,7 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
     password = var.admin_password
     username = var.admin_username
   }
-  count = 3
+  replicas = 3
   private = false
   multi_az = true
 }
