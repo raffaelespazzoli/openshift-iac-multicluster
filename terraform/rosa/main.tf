@@ -18,23 +18,23 @@ data "rhcs_policies" "all_policies" {}
 
 data "rhcs_versions" "all" {}
 
-# module "create_account_roles" {
-#   source  = "terraform-redhat/rosa-sts/aws"
-#   version = "0.0.15"
+module "create_account_roles" {
+  source  = "terraform-redhat/rosa-sts/aws"
+  version = "0.0.15"
 
-#   create_operator_roles = false
-#   create_oidc_provider  = false
-#   create_account_roles  = true
+  create_operator_roles = false
+  create_oidc_provider  = false
+  create_account_roles  = true
 
-#   account_role_prefix    = var.account_role_prefix
-#   ocm_environment        = var.ocm_environment
-#   rosa_openshift_version = var.openshift_version
-#   account_role_policies  = data.rhcs_policies.all_policies.account_role_policies
-#   operator_role_policies = data.rhcs_policies.all_policies.operator_role_policies
-#   all_versions           = data.rhcs_versions.all
-#   path                   = var.path
-#   tags                   = var.tags
-# }
+  account_role_prefix    = var.account_role_prefix
+  ocm_environment        = var.ocm_environment
+  rosa_openshift_version = var.openshift_version
+  account_role_policies  = data.rhcs_policies.all_policies.account_role_policies
+  operator_role_policies = data.rhcs_policies.all_policies.operator_role_policies
+  all_versions           = data.rhcs_versions.all
+  path                   = var.path
+  tags                   = var.tags
+}
 
 data "aws_caller_identity" "current" {
 }
@@ -85,17 +85,17 @@ data "rhcs_rosa_operator_roles" "operator_roles" {
   account_role_prefix  = var.account_role_prefix
 }
 
-# module "operator_roles" {
-#   source  = "terraform-redhat/rosa-sts/aws"
-#   version = "0.0.15"
+module "operator_roles" {
+  source  = "terraform-redhat/rosa-sts/aws"
+  version = "0.0.15"
 
-#   create_operator_roles = true
-#   create_oidc_provider  = true
-#   create_account_roles  = false
+  create_operator_roles = true
+  create_oidc_provider  = true
+  create_account_roles  = false
 
-#   cluster_id                  = rhcs_cluster_rosa_classic.rosa_sts_cluster.id
-#   rh_oidc_provider_thumbprint = rhcs_cluster_rosa_classic.rosa_sts_cluster.sts.thumbprint
-#   rh_oidc_provider_url        = rhcs_cluster_rosa_classic.rosa_sts_cluster.sts.oidc_endpoint_url
-#   operator_roles_properties   = data.rhcs_rosa_operator_roles.operator_roles.operator_iam_roles
-#   tags                        = var.tags
-# }
+  cluster_id                  = rhcs_cluster_rosa_classic.rosa_sts_cluster.id
+  rh_oidc_provider_thumbprint = rhcs_cluster_rosa_classic.rosa_sts_cluster.sts.thumbprint
+  rh_oidc_provider_url        = rhcs_cluster_rosa_classic.rosa_sts_cluster.sts.oidc_endpoint_url
+  operator_roles_properties   = data.rhcs_rosa_operator_roles.operator_roles.operator_iam_roles
+  tags                        = var.tags
+}

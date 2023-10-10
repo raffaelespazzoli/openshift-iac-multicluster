@@ -37,3 +37,4 @@ kustomize/cluster-overlays/hub/crossplane-providers/ocm-token
 terraform/rosa/terraform.tfstate
 terraform/rosa/ocm-token
 terraform/rosa/terraform.tfstate.backup
+terraform/rosa/.terraform
