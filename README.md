@@ -1,6 +1,14 @@
-# openshift-iac-multicluster
+# ARO - ROSA - Declarative
 
+We assume you have a running cluster and credentials for ARO and ROSA.
 
+## Creating the credentials
+
+Run the following to create the secrets needed for the ARO and ROSA credentials
+
+```sh
+
+```
 
 
 
@@ -16,5 +24,4 @@ oc apply -f boostrap/cluster-rolebinding.yaml -n openshift-gitops
 oc apply -f boostrap/applicationset.yaml -n openshift-gitops
 ```
 
-
-sed '/\[server {\]/a try_files $uri $uri/ /index.html;' input
+After the the configurations are deployed, the provisioning of ARO and ROSA clusters will start automatically.

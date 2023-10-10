@@ -32,14 +32,8 @@ terraform/rosa/var.json
 terraform/rosa/availabilityZones.json
 terraform/rosa/cluster-admin.json
 terraform/rosa/vars.json
-terraform/rosa/.terraform/modules/modules.json
-terraform/rosa/.terraform/providers/registry.terraform.io/hashicorp/aws/4.67.0/linux_amd64/terraform-provider-aws_v4.67.0_x5
-terraform/rosa/.terraform/providers/registry.terraform.io/hashicorp/null/3.2.1/linux_amd64/terraform-provider-null_v3.2.1_x5
-terraform/rosa/.terraform/providers/registry.terraform.io/hashicorp/random/3.5.1/linux_amd64/terraform-provider-random_v3.5.1_x5
-terraform/rosa/.terraform/providers/registry.terraform.io/terraform-redhat/rhcs/1.3.0/linux_amd64/CHANGELOG.md
-terraform/rosa/.terraform/providers/registry.terraform.io/terraform-redhat/rhcs/1.3.0/linux_amd64/LICENSE
-terraform/rosa/.terraform/providers/registry.terraform.io/terraform-redhat/rhcs/1.3.0/linux_amd64/README.md
-terraform/rosa/.terraform/providers/registry.terraform.io/terraform-redhat/rhcs/1.3.0/linux_amd64/terraform-provider-rhcs_v1.3.0
 terraform/rosa/.terraform.lock.hcl
 kustomize/cluster-overlays/hub/crossplane-providers/ocm-token
 terraform/rosa/terraform.tfstate
+terraform/rosa/ocm-token
+terraform/rosa/terraform.tfstate.backup

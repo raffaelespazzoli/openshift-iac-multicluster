@@ -9,12 +9,10 @@ variable "account_role_prefix" {
 
 variable "cluster_name" {
   type    = string
-  default = "my-cluster"
 }
 
 variable "cloud_region" {
   type    = string
-  default = "us-east-2"
 }
 
 variable "availability_zone" {
@@ -39,10 +37,12 @@ variable "aws_subnet_id" {
 
 variable "admin_username" {
   type = string
+  sensitive = true
 }
 
 variable "admin_password" {
   type = string
+  sensitive = true
 }
 
 variable "ocm_environment" {
