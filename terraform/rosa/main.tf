@@ -62,7 +62,7 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
   }
   aws_private_link = false
   machine_cidr = "10.0.0.0/16"
-  aws_subnet_ids = [var.aws_subnet_id_a1,var.aws_subnet_id_a2,ar.aws_subnet_id_b1,var.aws_subnet_id_b2,ar.aws_subnet_id_c1,var.aws_subnet_id_c2]
+  aws_subnet_ids = [var.aws_subnet_id_a1,var.aws_subnet_id_a2,var.aws_subnet_id_b1,var.aws_subnet_id_b2,var.aws_subnet_id_c1,var.aws_subnet_id_c2]
   sts = local.sts_roles
   # disable_waiting_in_destroy = false
   # destroy_timeout in minutes
