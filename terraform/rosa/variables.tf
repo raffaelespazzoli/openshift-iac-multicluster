@@ -15,7 +15,15 @@ variable "cloud_region" {
   type    = string
 }
 
-variable "availability_zone" {
+variable "availability_zone_a" {
+  type    = string
+}
+
+variable "availability_zone_b" {
+  type    = string
+}
+
+variable "availability_zone_c" {
   type    = string
 }
 
@@ -31,7 +39,27 @@ variable "path" {
   default     = null
 }
 
-variable "aws_subnet_id" {
+variable "aws_subnet_id_a1" {
+  type    = string
+}
+
+variable "aws_subnet_id_a2" {
+  type    = string
+}
+
+variable "aws_subnet_id_b1" {
+  type    = string
+}
+
+variable "aws_subnet_id_b2" {
+  type    = string
+}
+
+variable "aws_subnet_id_c1" {
+  type    = string
+}
+
+variable "aws_subnet_id_c2" {
   type    = string
 }
 

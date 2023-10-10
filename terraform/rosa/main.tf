@@ -56,13 +56,13 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
   name               = var.cluster_name
   cloud_region       = var.cloud_region
   aws_account_id     = data.aws_caller_identity.current.account_id
-  availability_zones = [var.availability_zone]
+  availability_zones = [var.availability_zone_a,var.availability_zone_b,var.availability_zone_c]
   properties = {
     rosa_creator_arn = data.aws_caller_identity.current.arn
   }
   aws_private_link = false
   machine_cidr = "10.0.0.0/16"
-  aws_subnet_ids = [var.aws_subnet_id]
+  aws_subnet_ids = [var.aws_subnet_id_a1,var.aws_subnet_id_a2,ar.aws_subnet_id_b1,var.aws_subnet_id_b2,ar.aws_subnet_id_c1,var.aws_subnet_id_c2]
   sts = local.sts_roles
   # disable_waiting_in_destroy = false
   # destroy_timeout in minutes

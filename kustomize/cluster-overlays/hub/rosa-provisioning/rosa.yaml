@@ -3,8 +3,7 @@ kind: Rosa
 metadata: 
   name: rosa-decl
 spec:
-  region: us-east-1
-  availabilityZone: us-east-1a
+  region: us-east-2
   adminSecret:
     secretName: cluster-admin
     key: admin-json   

@@ -7,11 +7,36 @@ spec:
     apiVersion: crossplane.redhat-cop.com/v1alpha1
     kind: xRosa
   patchSets:
-  - name: availabilityZone
+  - name: availability_zone_a
     patches:
-    - type: FromCompositeFieldPath
-      fromFieldPath: "spec.availabilityZone"
-      toFieldPath: "spec.forProvider.availabilityZone"  
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: spec.region
+        strategy: string
+        string:
+          fmt: "%sa"
+      toFieldPath: availabilityZone
+  - name: availability_zone_b
+    patches:
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: spec.region
+        strategy: string
+        string:
+          fmt: "%sb"
+      toFieldPath: availabilityZone
+  - name: availability_zone_c
+    patches:
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: spec.region
+        strategy: string
+        string:
+          fmt: "%sc"
+      toFieldPath: availabilityZone              
   - name: region
     patches:
     - type: FromCompositeFieldPath
@@ -28,7 +53,7 @@ spec:
       apiVersion: ec2.aws.upbound.io/v1beta1
       kind: VPC
       metadata:
-        name: rosa-vpc
+        name: vpc
       spec:
         forProvider:
           cidrBlock: 10.0.0.0/16
@@ -47,112 +72,13 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition
-  - name: public-egress-subnet
-    base: 
-      apiVersion: ec2.aws.upbound.io/v1beta1
-      kind: Subnet
-      metadata:
-        name: rosa-public-egress
-        labels:
-          public-subnet: ""
-      spec:
-        forProvider:
-          cidrBlock: 10.0.128.0/17
-          region: replace
-          tags:
-            Name: replace          
-          vpcIdSelector:
-            matchControllerRef: true
-          availabilityZone: replace  
-    patches:
-      - type: CombineFromComposite
-        combine:
-          variables:
-            - fromFieldPath: metadata.name
-          strategy: string
-          string:
-            fmt: "%s-public-egress"
-        toFieldPath: spec.forProvider.tags.Name    
-      - type: PatchSet
-        patchSetName: region
-      - type: PatchSet
-        patchSetName: availabilityZone        
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition
-  - name: private-internal-subnet
-    base: 
-      apiVersion: ec2.aws.upbound.io/v1beta1
-      kind: Subnet
-      metadata:
-        name: rosa-private-internal
-        labels:
-          private-subnet: ""
-      spec:
-        forProvider:
-          cidrBlock: 10.0.0.0/17
-          region: replace
-          tags:
-            Name: replace          
-          vpcIdSelector:
-            matchControllerRef: true
-          availabilityZone: replace  
-    patches:
-      - type: CombineFromComposite
-        combine:
-          variables:
-            - fromFieldPath: metadata.name
-          strategy: string
-          string:
-            fmt: "%s-private-internal"
-        toFieldPath: spec.forProvider.tags.Name    
-      - type: PatchSet
-        patchSetName: region
-      - type: ToCompositeFieldPath
-        fromFieldPath: status.atProvider.id
-        toFieldPath: "status.subnets.privateSubnetID"
-        policy:
-          fromFieldPath: Optional
-      - type: PatchSet
-        patchSetName: availabilityZone                  
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition
+
   - name: internet-gateway
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
       kind: InternetGateway
       metadata:
-        name: rosa-internet-gateway
-      spec:
-        forProvider:
-          region: replace
-          tags:
-            Name: replace
-          vpcIdSelector:
-            matchControllerRef: true
-    patches:
-      - type: PatchSet
-        patchSetName: name-tag
-      - type: PatchSet
-        patchSetName: region
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition
-  - name: public-route-table
-    base: 
-      apiVersion: ec2.aws.upbound.io/v1beta1
-      kind: RouteTable
-      metadata:
-        name: public-rosa-route-table
-        labels:
-          public-route-table: ""        
+        name: internet-gateway
       spec:
         forProvider:
           region: replace
@@ -170,66 +96,13 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition        
-  - name: egress-route
-    base: 
-      apiVersion: ec2.aws.upbound.io/v1beta1
-      kind: Route
-      metadata:
-        name: rosa-egress-route
-      spec:
-        forProvider:
-          destinationCidrBlock: 0.0.0.0/0
-          gatewayIdSelector:
-            matchControllerRef: true
-          region: replace
-          tags:
-            Name: replace          
-          routeTableIdSelector:
-            matchLabels:
-              public-route-table: ""              
-    patches:
-      - type: PatchSet
-        patchSetName: name-tag
-      - type: PatchSet
-        patchSetName: region
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition
-  - name: public-route-table-association
-    base: 
-      apiVersion: ec2.aws.upbound.io/v1beta1
-      kind: RouteTableAssociation
-      metadata:
-        name: public-rosa-route-table-association
-      spec:
-        forProvider:
-          region: replace
-          tags:
-            Name: replace          
-          routeTableIdSelector:
-            matchLabels:
-              public-route-table: ""
-          subnetIdSelector:
-            matchLabels:
-              public-subnet: ""
-    patches:
-      - type: PatchSet
-        patchSetName: name-tag
-      - type: PatchSet
-        patchSetName: region
-    readinessChecks:	
-      - matchCondition:	
-          status: 'True'	
-          type: Ready	
-        type: MatchCondition
+
   - name: elastic-ip
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
       kind: EIP
       metadata:
-        name: rosa-elastic-ip
+        name: elastic-ip
       spec:
         forProvider:
           tags:
@@ -251,7 +124,7 @@ spec:
       apiVersion: ec2.aws.upbound.io/v1beta1
       kind: NATGateway
       metadata:
-        name: rosa-nat-gateway
+        name: nat-gateway
       spec:
         forProvider:
           region: replace
@@ -272,14 +145,69 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition
+
+  - name: public-route-table
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTable
+      metadata:
+        name: public-route-table
+        labels:
+          public: ""        
+      spec:
+        forProvider:
+          region: replace
+          tags:
+            Name: replace
+          vpcIdSelector:
+            matchControllerRef: true            
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+
+  - name: public-route
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Route
+      metadata:
+        name: public-route
+      spec:
+        forProvider:
+          destinationCidrBlock: 0.0.0.0/0
+          region: replace
+          tags:
+            Name: replace
+          gatewayIdSelector:
+            matchControllerRef: true
+          routeTableIdSelector:
+            matchLabels:
+              public: ""                        
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition    
+
   - name: private-route-table
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
       kind: RouteTable
       metadata:
-        name: private-rosa-route-table
+        name: private-route-table
         labels:
-          private-route-table: ""        
+          private: ""        
       spec:
         forProvider:
           region: replace
@@ -296,24 +224,43 @@ spec:
       - matchCondition:	
           status: 'True'	
           type: Ready	
-        type: MatchCondition        
-  - name: nat-egress-route
+        type: MatchCondition             
+
+  - name: private-route
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
       kind: Route
       metadata:
-        name: rosa-nat-egress-route
+        name: private-route
       spec:
         forProvider:
           destinationCidrBlock: 0.0.0.0/0
+          region: replace
+          tags:
+            Name: replace
           natGatewayIdSelector:
             matchControllerRef: true
+          routeTableIdSelector:
+            matchLabels:
+              public: ""
+
+  - name: public-route-table-association
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTableAssociation
+      metadata:
+        name: public-route-table-association
+      spec:
+        forProvider:
           region: replace
           tags:
             Name: replace          
           routeTableIdSelector:
             matchLabels:
-              private-route-table: ""
+              public: ""
+          subnetIdSelector:
+            matchLabels:
+              public-subnet: ""
     patches:
       - type: PatchSet
         patchSetName: name-tag
@@ -324,12 +271,15 @@ spec:
           status: 'True'	
           type: Ready	
         type: MatchCondition
+
+       
+
   - name: private-route-table-association
     base: 
       apiVersion: ec2.aws.upbound.io/v1beta1
       kind: RouteTableAssociation
       metadata:
-        name: private-rosa-route-table-association
+        name: private-route-table-association
       spec:
         forProvider:
           region: replace
@@ -337,7 +287,7 @@ spec:
             Name: replace          
           routeTableIdSelector:
             matchLabels:
-              private-route-table: ""
+              private: ""
           subnetIdSelector:
             matchLabels:
               private-subnet: ""
@@ -350,7 +300,222 @@ spec:
       - matchCondition:	
           status: 'True'	
           type: Ready	
+        type: MatchCondition              
+
+# zone a
+
+  - name: public-subnet-a
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: public-a
+        labels:
+          public-subnet: ""
+      spec:
+        forProvider:
+          cidrBlock: 10.0.1.0/24
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+          availabilityZone: replace  
+    patches:
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.aza.publicSubnetID"
+        policy:
+          fromFieldPath: Optional    
+      - type: PatchSet
+        patchSetName: region
+      - type: PatchSet
+        patchSetName: availability_zone_a
+      - type: PatchSet
+        patchSetName: name-tag   
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
         type: MatchCondition
+  - name: private-subnet-a
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: private-a
+        labels:
+          private-subnet: ""
+      spec:
+        forProvider:
+          cidrBlock: 10.0.4.0/24
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+          availabilityZone: replace  
+    patches:
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.aza.privateSubnetID"
+        policy:
+          fromFieldPath: Optional
+      - type: PatchSet
+        patchSetName: region
+      - type: PatchSet
+        patchSetName: availability_zone_a
+      - type: PatchSet
+        patchSetName: name-tag                  
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+
+# zone b
+
+  - name: public-subnet-b
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: public-b
+        labels:
+          public-subnet: ""
+      spec:
+        forProvider:
+          cidrBlock: 10.0.2.0/24
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+          availabilityZone: replace  
+    patches:
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.azb.publicSubnetID"
+        policy:
+          fromFieldPath: Optional    
+      - type: PatchSet
+        patchSetName: region
+      - type: PatchSet
+        patchSetName: availability_zone_b
+      - type: PatchSet
+        patchSetName: name-tag   
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+  - name: private-subnet-b
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: private-b
+        labels:
+          private-subnet: ""
+      spec:
+        forProvider:
+          cidrBlock: 10.0.5.0/24
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+          availabilityZone: replace  
+    patches:
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.azb.privateSubnetID"
+        policy:
+          fromFieldPath: Optional
+      - type: PatchSet
+        patchSetName: region
+      - type: PatchSet
+        patchSetName: availability_zone_b
+      - type: PatchSet
+        patchSetName: name-tag                  
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+
+#zone c
+
+  - name: public-subnet-c
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: public-c
+        labels:
+          public-subnet: ""
+      spec:
+        forProvider:
+          cidrBlock: 10.0.3.0/24
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+          availabilityZone: replace  
+    patches:
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.azc.publicSubnetID"
+        policy:
+          fromFieldPath: Optional    
+      - type: PatchSet
+        patchSetName: region
+      - type: PatchSet
+        patchSetName: availability_zone_c
+      - type: PatchSet
+        patchSetName: name-tag   
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition
+
+  - name: private-subnet-c
+    base: 
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: Subnet
+      metadata:
+        name: private-c
+        labels:
+          private-subnet: ""
+      spec:
+        forProvider:
+          cidrBlock: 10.0.6.0/24
+          region: replace
+          tags:
+            Name: replace          
+          vpcIdSelector:
+            matchControllerRef: true
+          availabilityZone: replace  
+    patches:
+      - type: ToCompositeFieldPath
+        fromFieldPath: status.atProvider.id
+        toFieldPath: "status.subnets.azc.privateSubnetID"
+        policy:
+          fromFieldPath: Optional
+      - type: PatchSet
+        patchSetName: region
+      - type: PatchSet
+        patchSetName: availability_zone_c
+      - type: PatchSet
+        patchSetName: name-tag                  
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition        
+
   - name: rosa
     base:
       apiVersion: tf.upbound.io/v1beta1
@@ -376,10 +541,24 @@ spec:
             value: ""         
           - key: cloud_region
             value: ""
-          - key: aws_subnet_id
-            value: ""  
-          - key: availability_zone
-            value: ""                       
+          - key: aws_subnet_id_a1
+            value: ""
+          - key: aws_subnet_id_a2
+            value: ""
+          - key: aws_subnet_id_b1
+            value: ""
+          - key: aws_subnet_id_b2
+            value: ""
+          - key: aws_subnet_id_c1
+            value: ""
+          - key: aws_subnet_id_c2
+            value: ""
+          - key: availability_zone_a
+            value: ""
+          - key: availability_zone_b
+            value: ""
+          - key: availability_zone_c
+            value: ""                                               
           varFiles:  
           - secretKeyRef:
               key: key
@@ -416,10 +595,67 @@ spec:
       toFieldPath: "spec.forProvider.vars[3].value" 
 
     - type: FromCompositeFieldPath
-      fromFieldPath: "status.subnets.privateSubnetID"
+      fromFieldPath: "status.subnets.aza.privateSubnetID"
       toFieldPath: "spec.forProvider.vars[4].value"
       policy:
         fromFieldPath: Required
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.aza.publicSubnetID"
+      toFieldPath: "spec.forProvider.vars[5].value"
+      policy:
+        fromFieldPath: Required
+        
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.azb.privateSubnetID"
+      toFieldPath: "spec.forProvider.vars[5].value"
+      policy:
+        fromFieldPath: Required
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.azb.publicSubnetID"
+      toFieldPath: "spec.forProvider.vars[6].value"
+      policy:
+        fromFieldPath: Required
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.azc.privateSubnetID"
+      toFieldPath: "spec.forProvider.vars[7].value"
+      policy:
+        fromFieldPath: Required
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.azc.publicSubnetID"
+      toFieldPath: "spec.forProvider.vars[8].value"
+      policy:
+        fromFieldPath: Required                        
+
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: spec.region
+        strategy: string
+        string:
+          fmt: "%sa"
+      toFieldPath: spec.forProvider.vars[10].value
+
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: spec.region
+        strategy: string
+        string:
+          fmt: "%sb"
+      toFieldPath: spec.forProvider.vars[11].value 
+
+    - type: CombineFromComposite
+      combine:
+        variables:
+          - fromFieldPath: spec.region
+        strategy: string
+        string:
+          fmt: "%sc"
+      toFieldPath: spec.forProvider.vars[12].value           
 
     - type: FromCompositeFieldPath
       fromFieldPath: "spec.availabilityZone"
