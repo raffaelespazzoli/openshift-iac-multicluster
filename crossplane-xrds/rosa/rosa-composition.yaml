@@ -243,7 +243,17 @@ spec:
             matchControllerRef: true
           routeTableIdSelector:
             matchLabels:
-              public: ""              
+              public: ""
+    patches:
+      - type: PatchSet
+        patchSetName: name-tag
+      - type: PatchSet
+        patchSetName: region
+    readinessChecks:	
+      - matchCondition:	
+          status: 'True'	
+          type: Ready	
+        type: MatchCondition                             
 
 # zone a
 
