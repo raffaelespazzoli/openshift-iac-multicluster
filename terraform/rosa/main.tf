@@ -18,23 +18,23 @@ data "rhcs_policies" "all_policies" {}
 
 data "rhcs_versions" "all" {}
 
-module "create_account_roles" {
-  source  = "terraform-redhat/rosa-sts/aws"
-  version = "0.0.14"
+# module "create_account_roles" {
+#   source  = "terraform-redhat/rosa-sts/aws"
+#   version = "0.0.14"
 
-  create_operator_roles = false
-  create_oidc_provider  = false
-  create_account_roles  = true
+#   create_operator_roles = false
+#   create_oidc_provider  = false
+#   create_account_roles  = true
 
-  account_role_prefix    = var.account_role_prefix
-  ocm_environment        = var.ocm_environment
-  rosa_openshift_version = var.openshift_version
-  account_role_policies  = data.rhcs_policies.all_policies.account_role_policies
-  operator_role_policies = data.rhcs_policies.all_policies.operator_role_policies
-  all_versions           = data.rhcs_versions.all
-  path                   = var.path
-  tags                   = var.tags
-}
+#   account_role_prefix    = var.account_role_prefix
+#   ocm_environment        = var.ocm_environment
+#   rosa_openshift_version = var.openshift_version
+#   account_role_policies  = data.rhcs_policies.all_policies.account_role_policies
+#   operator_role_policies = data.rhcs_policies.all_policies.operator_role_policies
+#   all_versions           = data.rhcs_versions.all
+#   path                   = var.path
+#   tags                   = var.tags
+# }
 
 data "aws_caller_identity" "current" {
 }
@@ -60,7 +60,7 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
   properties = {
     rosa_creator_arn = data.aws_caller_identity.current.arn
   }
-  aws_private_link = true
+  aws_private_link = false
   machine_cidr = "10.0.0.0/16"
   aws_subnet_ids = [var.aws_subnet_id]
   sts = local.sts_roles
@@ -71,6 +71,7 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
     password = var.admin_password
     username = var.admin_username
   }
+  private = false
 }
 
 resource "rhcs_cluster_wait" "rosa_cluster" {
