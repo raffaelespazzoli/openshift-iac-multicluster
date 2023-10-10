@@ -609,25 +609,25 @@ spec:
         
     - type: FromCompositeFieldPath
       fromFieldPath: "status.subnets.azb.privateSubnetID"
-      toFieldPath: "spec.forProvider.vars[5].value"
-      policy:
-        fromFieldPath: Required
-
-    - type: FromCompositeFieldPath
-      fromFieldPath: "status.subnets.azb.publicSubnetID"
       toFieldPath: "spec.forProvider.vars[6].value"
       policy:
         fromFieldPath: Required
 
     - type: FromCompositeFieldPath
-      fromFieldPath: "status.subnets.azc.privateSubnetID"
+      fromFieldPath: "status.subnets.azb.publicSubnetID"
       toFieldPath: "spec.forProvider.vars[7].value"
       policy:
         fromFieldPath: Required
 
     - type: FromCompositeFieldPath
-      fromFieldPath: "status.subnets.azc.publicSubnetID"
+      fromFieldPath: "status.subnets.azc.privateSubnetID"
       toFieldPath: "spec.forProvider.vars[8].value"
+      policy:
+        fromFieldPath: Required
+
+    - type: FromCompositeFieldPath
+      fromFieldPath: "status.subnets.azc.publicSubnetID"
+      toFieldPath: "spec.forProvider.vars[9].value"
       policy:
         fromFieldPath: Required                        
 
