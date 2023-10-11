@@ -11,7 +11,7 @@ spec:
     port: 8080
     targetPort: 80
   selector:
-    app: httpbin
+    app: httpbin-ap
 ---
 apiVersion: apps/v1
 kind: Deployment
