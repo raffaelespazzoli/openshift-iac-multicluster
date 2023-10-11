@@ -24,8 +24,10 @@ output "domain" {
 
 output "username" {
   value = rhcs_cluster_rosa_classic.rosa_sts_cluster.admin_credentials.username
+  sensitive = true
 }
 
 output "password" {
   value = rhcs_cluster_rosa_classic.rosa_sts_cluster.admin_credentials.password
+  sensitive = true
 }
