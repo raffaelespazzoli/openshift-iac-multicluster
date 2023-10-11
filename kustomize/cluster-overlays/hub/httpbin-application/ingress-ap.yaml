@@ -5,6 +5,7 @@ metadata:
   annotations:
     k8gb.io/strategy: "failover"
     k8gb.io/dns-ttl-seconds: "10"
+    k8gb.io/primary-geotag: "hub"
 spec:
   rules:
   - host: httpbin-ap.apps.global.practice.redhat.com
