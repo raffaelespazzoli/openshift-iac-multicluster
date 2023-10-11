@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: httpbin
 resources:
   - httpbin.yaml
-  - glsb.yaml
+  - ingress.yaml
   - namespace.yaml
   - rbac.yaml
 
