@@ -4,6 +4,7 @@ metadata:
   name: k8gb
   annotations:
     k8gb.io/strategy: "roundRobin"
+    k8gb.io/dns-ttl-seconds: "10"
 spec:
   rules:
   - host: httpbin.apps.global.practice.redhat.com
