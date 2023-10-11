@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: httpbin
+  name: httpbin-bg
   annotations:
     k8gb.io/strategy: "roundRobin"
     k8gb.io/dns-ttl-seconds: "10"
 spec:
   rules:
-  - host: httpbin.apps.global.practice.redhat.com
+  - host: httpbin-bg.apps.global.practice.redhat.com
     http: # This section mirrors the same structure as that of an Ingress resource and will be used verbatim when creating the corresponding Ingress resource that will match the GSLB host
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: httpbin
+            name: httpbin-bg
             port:
-              name: http            
+              name: http

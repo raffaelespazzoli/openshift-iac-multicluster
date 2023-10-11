@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin-bg
+  labels:
+    app: httpbin-bg
+    service: httpbin-bg
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 80
+  selector:
+    app: httpbin-bg
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpbin-bg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpbin-bg
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: httpbin-bg
+        version: v1
+    spec:
+      containers:
+      - image: quay.io/raffaelespazzoli/httpbin:latest
+        imagePullPolicy: IfNotPresent
+        name: httpbin
+        ports:
+        - containerPort: 80

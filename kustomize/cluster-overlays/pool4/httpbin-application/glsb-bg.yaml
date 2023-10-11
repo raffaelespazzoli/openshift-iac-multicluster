@@ -1,0 +1,24 @@
+apiVersion: k8gb.absa.oss/v1beta1
+kind: Gslb
+metadata:
+  name: httpbin-bg
+spec:
+  ingress:
+    rules:
+    - host: httpbin-bg.apps.global.practice.redhat.com # This is the GSLB enabled host that clients would use
+      http: # This section mirrors the same structure as that of an Ingress resource and will be used verbatim when creating the corresponding Ingress resource that will match the GSLB host
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: httpbin-bg
+              port:
+                name: http
+  strategy: 
+    type: roundRobin # Use a round robin load balancing strategy, when deciding which downstream clusters to route clients too
+    dnsTtlSeconds: 5
+    weight:
+      hub: 100
+      pool4: 0    
+    
