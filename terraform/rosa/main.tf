@@ -36,6 +36,12 @@ module "create_account_roles" {
   tags                   = var.tags
 }
 
+# Sleep after creating account roles
+resource "time_sleep" "wait_12_seconds" {
+  depends_on = [module.create_account_roles]
+  create_duration = "12s"
+}
+
 data "aws_caller_identity" "current" {
 }
 
@@ -74,6 +80,7 @@ resource "rhcs_cluster_rosa_classic" "rosa_sts_cluster" {
   replicas = 3
   private = false
   multi_az = true
+  depends_on = [time_sleep.wait_12_seconds]
 }
 
 resource "rhcs_cluster_wait" "rosa_cluster" {
