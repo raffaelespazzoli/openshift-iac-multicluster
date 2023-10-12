@@ -8,6 +8,7 @@ resources:
 - ./auto-import-secret.yaml
 - ./creds-renew-job.yaml
 - ./rosa-creds-secret.yaml
+- ./rbac.yaml
 
 helmGlobals:
   chartHome: ../../../../helm/charts
