@@ -16,13 +16,13 @@ spec:
                 name: rosa-creds
             env:
             - name: KUBECONFIG
-              value: "./tmp/kubeconfig"           
+              value: "/tmp/kubeconfig"           
             command: 
             - /bin/bash
             - -c
             - | 
               oc login --insecure-skip-tls-verify=true -u ${username} -p ${password} ${apiurl}
-              export kubeconfig=$(cat ./tmp/kubeconfig | base64 -w0)
-              oc patch secret auto-import-secret -p '{"data":{"kubeconfig":"'"${kubeconfig}"'"}}'
+              export kubeconfig=$(cat /tmp/kubeconfig | base64 -w0)
+              oc patch secret auto-import-secret -p '{"data":{"kubeconfig":"'"${kubeconfig}"'"}}' -n rosa-decl
               sleep infinity
           restartPolicy: OnFailure
