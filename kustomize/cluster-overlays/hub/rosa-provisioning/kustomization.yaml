@@ -5,3 +5,20 @@ namespace: rosa-decl
 resources:
 - ./namespace.yaml
 - ./rosa.yaml
+- ./auto-import-secret.yaml
+- ./creds-renew-job.yaml
+- ./rosa-creds-secrets.yaml
+
+# helmGlobals:
+#   chartHome: ../../../../helm/charts
+
+# helmCharts:
+#   - name: cluster-registration
+#     releaseName: rosa-decl
+#     namespace: rosa-decl
+#     valuesInline: 
+#       clusterSet: default
+#       repoURL: https://github.com/raffaelespazzoli/openshift-iac-multicluster.git
+#       labels:
+#         cloud: Rosa
+#         vendor: OpenShift     
