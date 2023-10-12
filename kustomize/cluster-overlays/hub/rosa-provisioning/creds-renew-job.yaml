@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: creds-renew
-            image: openshift4/ose-cli
+            image: registry.redhat.io/openshift4/ose-cli:latest
             envFrom:
             - secretRef:
                 name: rosa-creds       
