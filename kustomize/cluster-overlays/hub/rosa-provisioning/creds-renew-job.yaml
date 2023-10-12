@@ -18,7 +18,7 @@ spec:
             - /bin/bash
             - -c
             - | 
-              oc login --insecure-skip-tls-verify=true -u ${username} -p {password} ${apiurl}
+              oc login --insecure-skip-tls-verify=true -u ${username} -p ${password} ${apiurl}
               export kubeconfig=$(cat ~/.kube/config | base64 -w0)
               oc patch secret auto-import-secret -p '{"data":{"kubeconfig":"'"${kubeconfig}"'"}}'
               sleep infinity
